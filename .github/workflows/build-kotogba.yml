@@ -28,7 +28,7 @@ jobs:
           set -euxo pipefail
           echo "DEVKITPRO=$DEVKITPRO"
           echo "DEVKITARM=$DEVKITARM"
-          arm-none-eabi-g++ --version | head -n 1
+          $DEVKITARM/bin/arm-none-eabi-g++ --version | head -n 1
           make --version | head -n 1
 
       - name: Fetch exact GBARunner3 source
