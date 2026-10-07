@@ -94,6 +94,37 @@ jobs:
             'container=devkitpro/devkitarm:20241104' \
             > out/BUILD_BASE_V02.txt
 
+      - name: Save V0.2 source checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/source/patch_files
+          cp tools/apply_kotogba_v02.py out/source/
+          cp -r patch_files/code out/source/patch_files/
+          cp .github/workflows/build-kotogba.yml out/source/
+          sha256sum \
+            out/source/apply_kotogba_v02.py \
+            out/source/patch_files/code/core/arm9/source/Application/KotoGbaLauncherService.cpp \
+            out/source/patch_files/code/core/arm9/source/Application/KotoGbaLauncherService.h \
+            out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.cpp \
+            out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.h \
+            > out/source/SHA256_SOURCE.txt
+
+      - name: Build NitroFS launcher probe for emulator only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p upstream/code/bootstrap/nitrofiles/_gba/kotogba/games/RPG
+          printf 'probe' > "upstream/code/bootstrap/nitrofiles/_gba/kotogba/games/Pocket Monsters - FireRed (Japan) (Rev 1).gba"
+          printf 'probe' > "upstream/code/bootstrap/nitrofiles/_gba/kotogba/games/Mother 3 (Japan).gba"
+          printf 'probe' > "upstream/code/bootstrap/nitrofiles/_gba/kotogba/games/Dragon Quest Monsters - Caravan Heart.gba"
+          printf 'probe' > "upstream/code/bootstrap/nitrofiles/_gba/kotogba/games/RPG/Golden Sun (Japan).gba"
+          make -C upstream/code clean
+          make -C upstream/code GBAR3_ISNITRO=1
+          test -s upstream/code/bootstrap/GBARunner3.nds
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_2_NITRO_PROBE.nds
+          sha256sum out/kotoGba_GBARunner3_V0_2_NITRO_PROBE.nds > out/SHA256_NITRO_PROBE.txt
+
       - name: Upload kotoGba V0.2 build
         uses: actions/upload-artifact@v4
         with:
