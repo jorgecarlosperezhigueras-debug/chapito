@@ -57,6 +57,14 @@ jobs:
           set -euo pipefail
           make -C upstream/code clean
 
+      - name: Restore exact pinned source before patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C upstream reset --hard ecaa817815d9761745606592f04affe5ee9c3731
+          git -C upstream submodule update --init --recursive --checkout
+          test "$(git -C upstream rev-parse HEAD)" = "ecaa817815d9761745606592f04affe5ee9c3731"
+
       - name: Apply exact kotoGba V0.2 launcher patch
         shell: bash
         run: |
