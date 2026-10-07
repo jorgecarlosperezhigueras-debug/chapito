@@ -1,4 +1,4 @@
-name: Build kotoGba GBARunner3 V0
+name: Build kotoGba GBARunner3 V0.2
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: kotogba-gbarunner3-v0
+  group: kotogba-gbarunner3-v02
   cancel-in-progress: true
 
 jobs:
@@ -57,36 +57,39 @@ jobs:
           set -euo pipefail
           make -C upstream/code clean
 
-      - name: Apply exact kotoGba V0.1 patch
+      - name: Apply exact kotoGba V0.2 launcher patch
         shell: bash
         run: |
           set -euo pipefail
-          python3 tools/apply_kotogba_v0.py upstream
+          python3 tools/apply_kotogba_v02.py upstream
+          grep -F 'gKotoGbaLauncherService.SelectRom' upstream/code/core/arm9/source/main.cpp
           grep -F 'gKotoGbaUiService.Initialize();' upstream/code/core/arm9/source/main.cpp
           grep -F 'kotoGba V0: capture disabled; VRAM C belongs to SUB_BG.' upstream/code/core/arm9/source/Emulator/VBlankIrq.s
-          test -f upstream/code/core/arm9/source/Application/KotoGbaUiService.cpp
-          test -f upstream/code/core/arm9/source/Application/KotoGbaUiService.h
+          grep -F 'GAME_TITLE     := kotoGba' upstream/code/bootstrap/Makefile
+          test -f upstream/code/core/arm9/source/Application/KotoGbaLauncherService.cpp
+          test -f upstream/code/core/arm9/source/Application/KotoGbaLauncherService.h
 
-      - name: Build kotoGba GBARunner3 V0
+      - name: Build kotoGba GBARunner3 V0.2
         shell: bash
         run: |
           set -euo pipefail
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0.nds
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_2.nds
           mkdir -p out/_gba/kotogba
           cp sd/_gba/kotogba/home.raw16 out/_gba/kotogba/home.raw16
-          sha256sum out/kotoGba_GBARunner3_V0.nds out/_gba/kotogba/home.raw16 > out/SHA256_KOTOGBA.txt
+          sha256sum out/kotoGba_GBARunner3_V0_2.nds out/_gba/kotogba/home.raw16 > out/SHA256_KOTOGBA_V02.txt
           printf '%s\n' \
             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731' \
             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e' \
+            'feature=V0.2 ROM launcher' \
             'container=devkitpro/devkitarm:20241104' \
-            > out/BUILD_BASE.txt
+            > out/BUILD_BASE_V02.txt
 
-      - name: Upload kotoGba build
+      - name: Upload kotoGba V0.2 build
         uses: actions/upload-artifact@v4
         with:
-          name: kotoGba_GBARunner3_V0
+          name: kotoGba_GBARunner3_V0_2
           path: out
           retention-days: 7
           if-no-files-found: error
