@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: kotogba-gbarunner3-v03-launcher-probe3
+  group: kotogba-gbarunner3-v03-hwdiag1
   cancel-in-progress: true
 
 jobs:
@@ -117,19 +117,23 @@ jobs:
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.h \
             > out/source/SHA256_SOURCE.txt
 
-      - name: Build storage-free V0.3 launcher probe for emulator only
+      - name: Build one-shot hardware diagnostic
         shell: bash
         run: |
           set -euo pipefail
           make -C upstream/code clean
-          sed -i 's/-DARM9 #-DGBAR3_IRQ_YIELDING/-DARM9 -DKOTOGBA_LAUNCHER_PROBE #-DGBAR3_IRQ_YIELDING/' upstream/code/core/arm9/Makefile
-          sed -i 's/-DARM9 -DLIBTWL_ARM9/-DARM9 -DLIBTWL_ARM9 -DKOTOGBA_LAUNCHER_PROBE/' upstream/code/bootstrap/arm9/Makefile
-          grep -F -- '-DKOTOGBA_LAUNCHER_PROBE' upstream/code/core/arm9/Makefile
-          grep -F -- '-DKOTOGBA_LAUNCHER_PROBE' upstream/code/bootstrap/arm9/Makefile
+          python3 tools/make_kotogba_hw_diag.py upstream
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_3_LAUNCHER_PROBE.nds
-          sha256sum out/kotoGba_GBARunner3_V0_3_LAUNCHER_PROBE.nds > out/SHA256_LAUNCHER_PROBE_V03.txt
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_HW_DIAG.nds
+          sha256sum out/kotoGba_HW_DIAG.nds > out/SHA256_HW_DIAG.txt
+          printf '%s\n' \
+            'LOWER SCREEN DIAGNOSTIC:' \
+            'BLUE   = bootstrap reached core jump; core did not reach mount stage' \
+            'ORANGE = core entered; filesystem mount is hanging' \
+            'RED    = filesystem mount returned failure' \
+            'GREEN  = filesystem mount succeeded' \
+            > out/HW_DIAG_LEGEND.txt
 
       - name: Upload kotoGba V0.3 build
         uses: actions/upload-artifact@v4
