@@ -210,5 +210,6 @@ for name in SERVICE_BLOB_SHA:
 
 print("PATCH_V03_OK")
 print(f"BASE={TARGET_COMMIT}")
-print("CAMBIOS=main.cpp,VBlankIrq.s,bootstrap/Makefile,KotoGbaUiService.*,KotoGbaLauncherService.*")\nprint("PACKAGE_ALIAS=<GAMECODE>_<REV_HEX>.koto")
+print("CAMBIOS=main.cpp,VBlankIrq.s,bootstrap/Makefile,KotoGbaUiService.*,KotoGbaLauncherService.*")
+print("PACKAGE_ALIAS=<GAMECODE>_<REV_HEX>.koto")
 print("LAUNCHER=direct launch -> ROM browser; argv launch -> direct ROM")
