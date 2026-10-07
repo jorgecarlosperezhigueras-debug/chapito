@@ -8,6 +8,7 @@ TARGET_COMMIT = "ecaa817815d9761745606592f04affe5ee9c3731"
 MAIN_BLOB_SHA = "2aff810d2c3e8b04e451493ce169233673463c30"
 VBLANK_BLOB_SHA = "98c00868a6d4e863d3d4e4becad46ac583dae129"
 BOOTSTRAP_MAKEFILE_BLOB_SHA = "7a48f9d40305d473ad108b4e82ed11024418befd"
+BOOTSTRAP_MAIN_BLOB_SHA = "92d196ccf69b8d397f6697725d440576f51f10ef"
 
 SERVICE_BLOB_SHA = {
     "KotoGbaUiService.cpp": "aa82ffc625b672ca2d78e23b6f66fb109360a919",
@@ -21,6 +22,7 @@ HERE = Path(__file__).resolve().parents[1]
 MAIN = ROOT / "code/core/arm9/source/main.cpp"
 VBLANK = ROOT / "code/core/arm9/source/Emulator/VBlankIrq.s"
 BOOTSTRAP_MAKEFILE = ROOT / "code/bootstrap/Makefile"
+BOOTSTRAP_MAIN = ROOT / "code/bootstrap/arm9/source/main.cpp"
 APP = ROOT / "code/core/arm9/source/Application"
 PATCH_APP = HERE / "patch_files/code/core/arm9/source/Application"
 
@@ -32,7 +34,7 @@ def require_file(path: Path) -> None:
     if not path.exists():
         raise SystemExit(f"No encuentro {path}; no escribo nada.")
 
-for path in (MAIN, VBLANK, BOOTSTRAP_MAKEFILE):
+for path in (MAIN, VBLANK, BOOTSTRAP_MAKEFILE, BOOTSTRAP_MAIN):
     require_file(path)
 
 if git_blob_sha(MAIN.read_bytes()) != MAIN_BLOB_SHA:
@@ -41,6 +43,8 @@ if git_blob_sha(VBLANK.read_bytes()) != VBLANK_BLOB_SHA:
     raise SystemExit("VBlankIrq.s no coincide con ecaa817; no escribo nada.")
 if git_blob_sha(BOOTSTRAP_MAKEFILE.read_bytes()) != BOOTSTRAP_MAKEFILE_BLOB_SHA:
     raise SystemExit("bootstrap/Makefile no coincide con ecaa817; no escribo nada.")
+if git_blob_sha(BOOTSTRAP_MAIN.read_bytes()) != BOOTSTRAP_MAIN_BLOB_SHA:
+    raise SystemExit("bootstrap/arm9/source/main.cpp no coincide con ecaa817; no escribo nada.")
 
 for name, expected in SERVICE_BLOB_SHA.items():
     src = PATCH_APP / name
@@ -219,6 +223,19 @@ if entry_old not in vblank_src or skip_old not in vblank_src:
     raise SystemExit("VBlankIrq.s no contiene las anclas esperadas; no escribo nada.")
 vblank_src = vblank_src.replace(entry_old, entry_new, 1).replace(skip_old, skip_new, 1)
 
+bootstrap_main_src = BOOTSTRAP_MAIN.read_text(encoding="utf-8")
+bootstrap_ipc_old = """    initIpc();
+    tryInitDldi();
+"""
+bootstrap_ipc_new = """    initIpc();
+#ifndef KOTOGBA_LAUNCHER_PROBE
+    tryInitDldi();
+#endif
+"""
+if bootstrap_ipc_old not in bootstrap_main_src:
+    raise SystemExit("bootstrap ARM9 no contiene la inicializacion DLDI esperada; no escribo nada.")
+bootstrap_main_src = bootstrap_main_src.replace(bootstrap_ipc_old, bootstrap_ipc_new, 1)
+
 makefile_src = BOOTSTRAP_MAKEFILE.read_text(encoding="utf-8")
 old_meta = """GAME_TITLE     := GBARunner 3
 GAME_SUBTITLE1 := By Gericom
@@ -240,6 +257,7 @@ checks = [
     (main_src.count("gKotoGbaUiService.Initialize();") == 1, "UI init"),
     (vblank_src.count("kotoGba V0: capture disabled; VRAM C belongs to SUB_BG.") == 1, "VBlank"),
     ("GAME_TITLE     := kotoGba" in makefile_src, "NDS title"),
+    (bootstrap_main_src.count("#ifndef KOTOGBA_LAUNCHER_PROBE") == 1, "bootstrap probe guard"),
 ]
 for ok, label in checks:
     if not ok:
@@ -248,12 +266,13 @@ for ok, label in checks:
 MAIN.write_text(main_src, encoding="utf-8")
 VBLANK.write_text(vblank_src, encoding="utf-8")
 BOOTSTRAP_MAKEFILE.write_text(makefile_src, encoding="utf-8")
+BOOTSTRAP_MAIN.write_text(bootstrap_main_src, encoding="utf-8")
 APP.mkdir(parents=True, exist_ok=True)
 for name in SERVICE_BLOB_SHA:
     shutil.copy2(PATCH_APP / name, APP / name)
 
 print("PATCH_V03_OK")
 print(f"BASE={TARGET_COMMIT}")
-print("CAMBIOS=main.cpp,VBlankIrq.s,bootstrap/Makefile,KotoGbaUiService.*,KotoGbaLauncherService.*")
+print("CAMBIOS=main.cpp,VBlankIrq.s,bootstrap/Makefile,bootstrap/arm9/main.cpp,KotoGbaUiService.*,KotoGbaLauncherService.*")
 print("PACKAGE_ALIAS=<GAMECODE>_<REV_HEX>.koto")
 print("LAUNCHER=direct launch -> ROM browser; argv launch -> direct ROM")
