@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: kotogba-gbarunner3-v03-hwdiag1
+  group: kotogba-gbarunner3-v03-hwdiag2
   cancel-in-progress: true
 
 jobs:
@@ -117,23 +117,31 @@ jobs:
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.h \
             > out/source/SHA256_SOURCE.txt
 
-      - name: Build one-shot hardware diagnostic
+      - name: Build second-stage hardware diagnostic
         shell: bash
         run: |
           set -euo pipefail
           make -C upstream/code clean
-          python3 tools/make_kotogba_hw_diag.py upstream
+          git -C upstream reset --hard ecaa817815d9761745606592f04affe5ee9c3731
+          git -C upstream submodule update --init --recursive --checkout
+          python3 tools/apply_kotogba_v03.py upstream
+          python3 tools/make_kotogba_hw_diag2.py upstream
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_HW_DIAG.nds
-          sha256sum out/kotoGba_HW_DIAG.nds > out/SHA256_HW_DIAG.txt
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_HW_DIAG2.nds
+          sha256sum out/kotoGba_HW_DIAG2.nds > out/SHA256_HW_DIAG2.txt
           printf '%s\n' \
-            'LOWER SCREEN DIAGNOSTIC:' \
-            'BLUE   = bootstrap reached core jump; core did not reach mount stage' \
-            'ORANGE = core entered; filesystem mount is hanging' \
-            'RED    = filesystem mount returned failure' \
-            'GREEN  = filesystem mount succeeded' \
-            > out/HW_DIAG_LEGEND.txt
+            'LOWER SCREEN DIAGNOSTIC 2:' \
+            'CYAN    = loading global settings' \
+            'BLUE    = settings returned; before direct-launch branch' \
+            'YELLOW  = direct-launch branch; waiting for splash animation' \
+            'MAGENTA = splash wait returned' \
+            'WHITE   = about to enter ROM selector' \
+            'ORANGE  = ROM selector entered; before bottom-backlight IPC' \
+            'PURPLE  = backlight IPC returned; choosing initial folder' \
+            'TEAL    = initial folder chosen; reading directory' \
+            'LAUNCHER UI = directory read returned and selector rendered' \
+            > out/HW_DIAG2_LEGEND.txt
 
       - name: Upload kotoGba V0.3 build
         uses: actions/upload-artifact@v4
