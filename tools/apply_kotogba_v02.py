@@ -9,11 +9,11 @@ MAIN_BLOB_SHA = "2aff810d2c3e8b04e451493ce169233673463c30"
 VBLANK_BLOB_SHA = "98c00868a6d4e863d3d4e4becad46ac583dae129"
 BOOTSTRAP_MAKEFILE_BLOB_SHA = "7a48f9d40305d473ad108b4e82ed11024418befd"
 
-SERVICE_SHA256 = {
-    "KotoGbaUiService.cpp": "0f14583d238b680f4bf0471ad49b0729d9ad5079e567714a3c660090e3a2ffa3",
-    "KotoGbaUiService.h": "5b7adc6e54c2cc22e2c70d2a2a493dd8898f565fdb10f4d87fbf78dba5a672",
-    "KotoGbaLauncherService.cpp": "68ae28d56cf594f278226f21c4cc70a486957c793448800717ca37930e85c319",
-    "KotoGbaLauncherService.h": "fcfeee789c91b922c755f329ce9da7e2afb0df3631d7c0d431b93534ab741548",
+SERVICE_BLOB_SHA = {
+    "KotoGbaUiService.cpp": "aa82ffc625b672ca2d78e23b6f66fb109360a919",
+    "KotoGbaUiService.h": "75fbc437801bdc315c2a9e584afe3f28acb97b14",
+    "KotoGbaLauncherService.cpp": "5862c944c1d60d61b90ad8139486f985e9f37c6b",
+    "KotoGbaLauncherService.h": "f46c3993067c9f22cb251d7972a29a6066fd6e69",
 }
 
 ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
@@ -42,11 +42,11 @@ if git_blob_sha(VBLANK.read_bytes()) != VBLANK_BLOB_SHA:
 if git_blob_sha(BOOTSTRAP_MAKEFILE.read_bytes()) != BOOTSTRAP_MAKEFILE_BLOB_SHA:
     raise SystemExit("bootstrap/Makefile no coincide con ecaa817; no escribo nada.")
 
-for name, expected in SERVICE_SHA256.items():
+for name, expected in SERVICE_BLOB_SHA.items():
     src = PATCH_APP / name
     require_file(src)
-    if hashlib.sha256(src.read_bytes()).hexdigest() != expected:
-        raise SystemExit(f"{name} no coincide con su SHA-256 esperado; no escribo nada.")
+    if git_blob_sha(src.read_bytes()) != expected:
+        raise SystemExit(f"{name} no coincide con el blob versionado esperado; no escribo nada.")
 
 main_src = MAIN.read_text(encoding="utf-8")
 include_anchor = '#include "Application/GbaBorderService.h"\n'
@@ -201,7 +201,7 @@ MAIN.write_text(main_src, encoding="utf-8")
 VBLANK.write_text(vblank_src, encoding="utf-8")
 BOOTSTRAP_MAKEFILE.write_text(makefile_src, encoding="utf-8")
 APP.mkdir(parents=True, exist_ok=True)
-for name in SERVICE_SHA256:
+for name in SERVICE_BLOB_SHA:
     shutil.copy2(PATCH_APP / name, APP / name)
 
 print("PATCH_V02_OK")
