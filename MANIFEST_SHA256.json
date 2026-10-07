@@ -1,0 +1,32 @@
+[
+  {
+    "path": ".github/workflows/build-kotogba.yml",
+    "bytes": 5650,
+    "sha256": "6d13206a6fe65e613deb31ee9a79afb3f59968bdf03989ba5804a661a45dd02d"
+  },
+  {
+    "path": "README.md",
+    "bytes": 365,
+    "sha256": "b2321b6dc85c68cb8ace0b5674101ca83456a1b8e447653d089cf0ba4e00405f"
+  },
+  {
+    "path": "assets/home.raw16.gz.b64",
+    "bytes": 4077,
+    "sha256": "4e8788a774a7f55c50e94f34032b196ff0510d43b6c6b4a391e50652af54a60e"
+  },
+  {
+    "path": "patch_files/code/core/arm9/source/Application/KotoGbaUiService.cpp",
+    "bytes": 2618,
+    "sha256": "0f14583d238b680f4bf0471ad49b0729d9ad5079e567714a3c660090e3a2ffa3"
+  },
+  {
+    "path": "patch_files/code/core/arm9/source/Application/KotoGbaUiService.h",
+    "bytes": 324,
+    "sha256": "5b7adc6e54c2cc22e2c70d2a2a2a493dd8898f565fdb10f4d87fbf78dba5a672"
+  },
+  {
+    "path": "tools/apply_kotogba_v0.py",
+    "bytes": 5842,
+    "sha256": "28bd3e92bd159cbebbdbb997a05fb77b73b23cb090ff9f0a8248cc0b79fca4f8"
+  }
+]
