@@ -29,6 +29,12 @@ El archivo `.koto` es un contenedor ZIP con:
 - `resources.json`
 - `recognizers.json`
 
+El checkpoint V0.4 es autónomo y reproducible: el paquete validado está versionado en el repositorio, no depende de descargas temporales y su SHA-256 es:
+
+```text
+a7c725161f3f033d52b2e2e90becc3f295fc90e8bd8b48acb202323054219328
+```
+
 La ROM no se incluye en el repositorio ni en los artefactos. El usuario debe colocar su copia legal en una de las rutas examinadas por el selector, preferiblemente:
 
 ```text
