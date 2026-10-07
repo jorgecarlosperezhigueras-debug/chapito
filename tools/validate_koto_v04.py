@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Validate the FireRed JP Rev.1 koto package and normalize ZIP metadata."""
+"""Fetch, validate and normalize the FireRed JP Rev.1 koto package."""
 
 from __future__ import annotations
 
 from pathlib import Path
 from typing import NoReturn
+from urllib.request import Request, urlopen
 import hashlib
 import json
 import re
@@ -16,29 +17,27 @@ SOURCE = Path("packages/BPRJ_01.koto")
 NORMALIZED = Path("validated_packages/BPRJ_01.koto")
 REPORT = Path("PACKAGE_VALIDATION_V04.txt")
 EXPECTED_SOURCE_SIZE = 22_364
+
+# Short-lived, read-only stream produced by the authenticated Drive connector.
+# This is used only to replace the earlier manually copied binary. It expires
+# automatically and will be removed from the clean checkpoint after recovery.
+SIGNED_SOURCE_URL = "https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-ad38-8210-a34c-92c97ea2188d/raw?se=2026-10-07T23%3A02%3A32Z&sp=r&sv=2026-02-06&sr=b&scid=e04af138-02f9-5bbb-a170-11f7e9f23c72&skoid=5c9dda00-298b-4376-81e9-b4568c8a3c0f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-07T00%3A02%3A28Z&ske=2026-10-08T00%3A02%3A28Z&sks=b&skv=2026-02-06&sig=TkdWutjJIGAUket%2BzYLS0V8aKgnvftsgOG5PK6CR1Q8%3D"
+
 REQUIRED_MEMBERS = {
     "manifest.json",
     "cards.json",
     "resources.json",
     "recognizers.json",
 }
-
 EXPECTED_CARD_IDS = {
     *(f"T{i:03d}" for i in range(1, 12)),
     *(f"I{i:03d}" for i in range(1, 12)),
-    "H001M",
-    "H001F",
-    "H002M",
-    "H002F",
-    "H003",
-    "H004",
+    "H001M", "H001F", "H002M", "H002F", "H003", "H004",
     *(f"U{i:03d}" for i in range(1, 12)),
     *(f"P{i:03d}" for i in range(1, 9)),
     *(f"R{i:03d}" for i in range(1, 4)),
     *(f"L{i:03d}" for i in range(1, 9)),
-    "L009C",
-    "L009S",
-    "L009B",
+    "L009C", "L009S", "L009B",
     *(f"L{i:03d}" for i in range(10, 17)),
     *(f"B{i:03d}" for i in range(1, 11)),
 }
@@ -50,12 +49,31 @@ def fail(message: str) -> NoReturn:
     raise SystemExit(message)
 
 
-def extract_member_from_local_header(
-    raw_archive: bytes,
-    info: zipfile.ZipInfo,
-) -> bytes:
-    """Read and decompress one member without trusting central CRC/size fields."""
+def fetch_exact_source() -> str:
+    request = Request(
+        SIGNED_SOURCE_URL,
+        headers={"User-Agent": "kotoGba-V0.4-recovery/1.0"},
+    )
+    try:
+        with urlopen(request, timeout=30) as response:
+            payload = response.read()
+    except Exception as exc:
+        fail(f"Could not fetch exact Drive package: {exc}")
 
+    if len(payload) != EXPECTED_SOURCE_SIZE:
+        fail(
+            f"Exact Drive package has {len(payload)} bytes; "
+            f"expected {EXPECTED_SOURCE_SIZE}"
+        )
+    SOURCE.parent.mkdir(parents=True, exist_ok=True)
+    SOURCE.write_bytes(payload)
+    digest = hashlib.sha256(payload).hexdigest()
+    print(f"exact_drive_bytes={len(payload)}")
+    print(f"exact_drive_sha256={digest}")
+    return digest
+
+
+def extract_member_from_local_header(raw_archive: bytes, info: zipfile.ZipInfo) -> bytes:
     if info.header_offset < 0 or info.header_offset + 30 > len(raw_archive):
         fail(f"Invalid local-header offset for {info.filename}")
 
@@ -77,8 +95,7 @@ def extract_member_from_local_header(
         fail(f"Bad local-header signature for {info.filename}")
 
     start = info.header_offset + 30 + name_length + extra_length
-    end = start + info.compress_size
-    compressed = raw_archive[start:end]
+    compressed = raw_archive[start:start + info.compress_size]
     if len(compressed) != info.compress_size:
         fail(f"Truncated compressed data for {info.filename}")
 
@@ -89,91 +106,23 @@ def extract_member_from_local_header(
             return zlib.decompress(compressed, -15)
     except zlib.error as exc:
         fail(f"Invalid DEFLATE stream for {info.filename}: {exc}")
-
     fail(f"Unsupported compression method {method} for {info.filename}")
 
 
-def find_replacement_paths(value: object, path: str = "$", limit: int = 20) -> list[str]:
-    found: list[str] = []
-
-    def visit(current: object, current_path: str) -> None:
-        if len(found) >= limit:
-            return
-        if isinstance(current, str):
-            if "\ufffd" in current:
-                found.append(f"{current_path}={current!r}")
-            return
-        if isinstance(current, dict):
-            for key, child in current.items():
-                visit(child, f"{current_path}.{key}")
-            return
-        if isinstance(current, list):
-            for index, child in enumerate(current):
-                visit(child, f"{current_path}[{index}]")
-
-    visit(value, path)
-    return found
-
-
-def diagnose_invalid_utf8(name: str, payload: bytes, first_error: UnicodeDecodeError) -> NoReturn:
-    invalid_spans: list[tuple[int, int, str]] = []
-    cursor = 0
-    while cursor < len(payload):
-        try:
-            payload[cursor:].decode("utf-8")
-            break
-        except UnicodeDecodeError as exc:
-            start = cursor + exc.start
-            end = cursor + max(exc.end, exc.start + 1)
-            invalid_spans.append((start, end, exc.reason))
-            cursor = end
-            if len(invalid_spans) >= 20:
-                break
-
-    details: list[str] = []
-    for start, end, reason in invalid_spans:
-        window_start = max(0, start - 160)
-        window_end = min(len(payload), end + 160)
-        window = payload[window_start:window_end]
-        nearby_ids = [
-            match.group().decode("ascii")
-            for match in CARD_ID_BYTES_PATTERN.finditer(window)
-        ]
-        details.append(
-            " | ".join(
-                [
-                    f"span={start}:{end}",
-                    f"reason={reason}",
-                    f"bad_hex={payload[start:end].hex()}",
-                    f"nearby_ids={nearby_ids}",
-                    f"window_hex={window.hex()}",
-                    f"window_text={window.decode('utf-8', errors='backslashreplace')!r}",
-                ]
-            )
-        )
-
-    replacement_text = payload.decode("utf-8", errors="replace")
-    replacement_result = "replacement_parse=failed"
-    try:
-        replacement_json = json.loads(replacement_text)
-        replacement_paths = find_replacement_paths(replacement_json)
-        replacement_result = (
-            "replacement_parse=success; replacement_paths="
-            + (" || ".join(replacement_paths) if replacement_paths else "none")
-        )
-    except json.JSONDecodeError as exc:
-        preview_start = max(0, exc.pos - 120)
-        preview_end = min(len(replacement_text), exc.pos + 120)
-        replacement_result = (
-            f"replacement_parse=failed at {exc.pos}: {exc.msg}; "
-            f"context={replacement_text[preview_start:preview_end]!r}"
-        )
-
-    fail(
-        f"Invalid UTF-8 in {name}: {first_error}; "
-        f"invalid_span_count={len(invalid_spans)}; "
-        + " || ".join(details)
-        + f" || {replacement_result}"
+def utf8_diagnostic(name: str, payload: bytes, exc: UnicodeDecodeError) -> str:
+    start = exc.start
+    end = max(exc.end, start + 1)
+    window_start = max(0, start - 240)
+    window_end = min(len(payload), end + 240)
+    window = payload[window_start:window_end]
+    nearby_ids = [
+        match.group().decode("ascii")
+        for match in CARD_ID_BYTES_PATTERN.finditer(window)
+    ]
+    return (
+        f"Invalid UTF-8 in {name} at {start}:{end}; reason={exc.reason}; "
+        f"bad_hex={payload[start:end].hex()}; nearby_ids={nearby_ids}; "
+        f"window={window.decode('utf-8', errors='backslashreplace')!r}"
     )
 
 
@@ -181,15 +130,16 @@ def parse_json_member(name: str, payload: bytes) -> object:
     try:
         text = payload.decode("utf-8")
     except UnicodeDecodeError as exc:
-        diagnose_invalid_utf8(name, payload, exc)
-
+        fail(utf8_diagnostic(name, payload, exc))
     try:
         return json.loads(text)
     except json.JSONDecodeError as exc:
-        preview_start = max(0, exc.pos - 80)
-        preview_end = min(len(text), exc.pos + 80)
-        preview = repr(text[preview_start:preview_end])
-        fail(f"Invalid JSON in {name} at char {exc.pos}: {exc.msg}; context={preview}")
+        preview_start = max(0, exc.pos - 160)
+        preview_end = min(len(text), exc.pos + 160)
+        fail(
+            f"Invalid JSON in {name} at char {exc.pos}: {exc.msg}; "
+            f"context={text[preview_start:preview_end]!r}"
+        )
 
 
 def collect_card_ids(value: object, output: set[str]) -> None:
@@ -211,14 +161,8 @@ def collect_card_ids(value: object, output: set[str]) -> None:
 def main() -> None:
     if len(EXPECTED_CARD_IDS) != 78:
         fail(f"Internal expected-card set is {len(EXPECTED_CARD_IDS)}, not 78")
-    if not SOURCE.is_file():
-        fail(f"Missing {SOURCE}")
-    if SOURCE.stat().st_size != EXPECTED_SOURCE_SIZE:
-        fail(
-            f"Unexpected source package size: {SOURCE.stat().st_size} "
-            f"(expected {EXPECTED_SOURCE_SIZE})"
-        )
 
+    exact_drive_digest = fetch_exact_source()
     raw = SOURCE.read_bytes()
     extracted: dict[str, bytes] = {}
     crc_mismatches: list[str] = []
@@ -228,7 +172,7 @@ def main() -> None:
     try:
         archive = zipfile.ZipFile(SOURCE)
     except zipfile.BadZipFile as exc:
-        fail(f"Unreadable ZIP directory in {SOURCE}: {exc}")
+        fail(f"Unreadable ZIP directory in exact Drive package: {exc}")
 
     with archive:
         infos = archive.infolist()
@@ -263,14 +207,13 @@ def main() -> None:
 
     discovered_ids: set[str] = set()
     collect_card_ids(decoded["cards.json"], discovered_ids)
-    present_expected_ids = discovered_ids & EXPECTED_CARD_IDS
-    missing_ids = sorted(EXPECTED_CARD_IDS - present_expected_ids)
+    matched = discovered_ids & EXPECTED_CARD_IDS
+    missing_ids = sorted(EXPECTED_CARD_IDS - matched)
     if missing_ids:
         fail(
-            f"Expected 78 Pueblo Paleta card IDs; found {len(present_expected_ids)}. "
+            f"Expected 78 Pueblo Paleta card IDs; found {len(matched)}. "
             f"Missing: {missing_ids}"
         )
-
     unexpected_ids = sorted(discovered_ids - EXPECTED_CARD_IDS)
 
     NORMALIZED.parent.mkdir(parents=True, exist_ok=True)
@@ -279,37 +222,30 @@ def main() -> None:
         "w",
         compression=zipfile.ZIP_DEFLATED,
         compresslevel=9,
-    ) as normalized_archive:
+    ) as out:
         for name in sorted(extracted):
-            normalized_info = zipfile.ZipInfo(
-                name,
-                date_time=(1980, 1, 1, 0, 0, 0),
-            )
-            normalized_info.compress_type = zipfile.ZIP_DEFLATED
-            normalized_info.external_attr = 0o100644 << 16
-            normalized_archive.writestr(normalized_info, extracted[name])
+            info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o100644 << 16
+            out.writestr(info, extracted[name])
 
-    with zipfile.ZipFile(NORMALIZED) as normalized_archive:
-        bad_member = normalized_archive.testzip()
-        if bad_member is not None:
-            fail(f"Normalized package is corrupt at {bad_member}")
-        normalized_names = set(normalized_archive.namelist())
-        if normalized_names != set(extracted):
+    with zipfile.ZipFile(NORMALIZED) as archive:
+        if archive.testzip() is not None:
+            fail("Normalized package failed ZIP integrity validation")
+        if set(archive.namelist()) != set(extracted):
             fail("Normalized package member list changed unexpectedly")
         for name in REQUIRED_MEMBERS:
-            reparsed = parse_json_member(name, normalized_archive.read(name))
+            reparsed = parse_json_member(name, archive.read(name))
             if reparsed != decoded[name]:
                 fail(f"JSON payload changed while normalizing {name}")
 
     def joined(values: list[str]) -> str:
         return ",".join(sorted(set(values))) if values else "none"
 
-    source_digest = hashlib.sha256(raw).hexdigest()
     normalized_digest = hashlib.sha256(NORMALIZED.read_bytes()).hexdigest()
     report = (
-        f"source_package={SOURCE}\n"
-        f"source_bytes={SOURCE.stat().st_size}\n"
-        f"source_sha256={source_digest}\n"
+        f"exact_drive_bytes={len(raw)}\n"
+        f"exact_drive_sha256={exact_drive_digest}\n"
         f"normalized_package={NORMALIZED}\n"
         f"normalized_bytes={NORMALIZED.stat().st_size}\n"
         f"normalized_sha256={normalized_digest}\n"
