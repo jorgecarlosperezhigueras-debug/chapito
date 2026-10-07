@@ -1,0 +1,99 @@
+name: Build kotoGba EWRAM hardware fix
+
+on:
+  push:
+    branches: [ kotogba-ewram-fix-test ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitarm:20241104
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch pinned GBARunner3
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/Gericom/GBARunner3.git upstream
+          git -C upstream checkout ecaa817815d9761745606592f04affe5ee9c3731
+          git -C upstream submodule update --init --recursive
+
+      - name: Apply kotoGba V0.3
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/apply_kotogba_v03.py upstream
+
+      - name: Apply EWRAM execution fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          launcher = Path("upstream/code/core/arm9/source/Application/KotoGbaLauncherService.cpp")
+          s = launcher.read_text(encoding="utf-8")
+          old = '#define KOTOGBA_EWRAM_CODE      [[gnu::noinline]]'
+          new = '#define KOTOGBA_EWRAM_CODE      [[gnu::section(".ewram"), gnu::noinline]]'
+          if old not in s:
+              raise SystemExit("launcher macro anchor missing")
+          launcher.write_text(s.replace(old, new, 1), encoding="utf-8")
+
+          main = Path("upstream/code/core/arm9/source/main.cpp")
+          s = main.read_text(encoding="utf-8")
+
+          old = "    const char* romPath = nullptr;\n"
+          new = """    const char* romPath = nullptr;
+
+              // kotoGba launcher/package code lives in host EWRAM at 0x02040000.
+              // GBARunner3 normally marks this range data-only.
+              mpu_setRegionInstructionAccessPermission(
+                  MPU_REGION_1, MPU_ACCESS_PERMISSION_PRIV_READ_WRITE);
+          """
+          if old not in s:
+              raise SystemExit("EWRAM enable anchor missing")
+          s = s.replace(old, new, 1)
+
+          old = "    gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);\n"
+          new = """    gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);
+
+              // Restore normal GBARunner3 protection before emulation.
+              mpu_setRegionInstructionAccessPermission(
+                  MPU_REGION_1, MPU_ACCESS_PERMISSION_NONE);
+          """
+          if old not in s:
+              raise SystemExit("EWRAM restore anchor missing")
+          s = s.replace(old, new, 1)
+          main.write_text(s, encoding="utf-8")
+          PY
+
+          grep -F 'gnu::section(".ewram")' upstream/code/core/arm9/source/Application/KotoGbaLauncherService.cpp
+          grep -F 'MPU_REGION_1, MPU_ACCESS_PERMISSION_PRIV_READ_WRITE' upstream/code/core/arm9/source/main.cpp
+          grep -F 'MPU_REGION_1, MPU_ACCESS_PERMISSION_NONE' upstream/code/core/arm9/source/main.cpp
+
+      - name: Build
+        shell: bash
+        run: |
+          set -euo pipefail
+          make -C upstream/code
+          test -s upstream/code/bootstrap/GBARunner3.nds
+          mkdir -p out
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_EWRAM_FIX.nds
+          sha256sum out/kotoGba_EWRAM_FIX.nds > out/SHA256.txt
+          arm-none-eabi-nm -n upstream/code/core/arm9/arm9.elf | grep -E 'KotoGbaLauncherService|SelectRom' > out/LAUNCHER_SYMBOLS.txt || true
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: kotoGba_EWRAM_FIX
+          path: out
+          retention-days: 7
+          if-no-files-found: error
