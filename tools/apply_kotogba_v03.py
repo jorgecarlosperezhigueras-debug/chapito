@@ -66,9 +66,6 @@ old_runtime = """    patch_resetSwiPatches();
     applyBiosVmPatches();
     const char* romPath = argc > 1 ? argv[1] : DEFAULT_ROM_FILE_PATH;
     loadGbaRom(romPath);
-    // kotoGba V0.3: resolve the canonical .koto package from the loaded ROM
-    // header as well, so direct argv launching and launcher selection behave alike.
-    gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);
     char* romExtension = strrchr(romPath, '.');
     if (romExtension)
     {
@@ -117,6 +114,9 @@ new_runtime = """    patch_resetSwiPatches();
     }
 
     loadGbaRom(romPath);
+    // kotoGba V0.3: resolve the canonical .koto package from the loaded ROM
+    // header as well, so direct argv launching and launcher selection behave alike.
+    gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);
     char* romExtension = strrchr(romPath, '.');
     if (romExtension)
     {
