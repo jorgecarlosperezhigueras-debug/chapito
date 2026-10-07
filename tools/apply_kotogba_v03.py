@@ -13,7 +13,7 @@ BOOTSTRAP_MAIN_BLOB_SHA = "92d196ccf69b8d397f6697725d440576f51f10ef"
 SERVICE_BLOB_SHA = {
     "KotoGbaUiService.cpp": "aa82ffc625b672ca2d78e23b6f66fb109360a919",
     "KotoGbaUiService.h": "75fbc437801bdc315c2a9e584afe3f28acb97b14",
-    "KotoGbaLauncherService.cpp": "eee0df2f756c16bcf1c897cae911f5ef6098e765",
+    "KotoGbaLauncherService.cpp": "f99edaa7bd8b8d8955b881d4fd049ba16d166efc",
     "KotoGbaLauncherService.h": "770103bb8ee997406ba2b71439ea266c370f8aa7",
 }
 
@@ -143,6 +143,12 @@ new_runtime = """    // kotoGba launcher: choose the ROM immediately after stora
     char selectedRomPath[256] { };
     const char* romPath = nullptr;
 
+    // kotoGba launcher/package code is linked into host EWRAM (0x02040000).
+    // GBARunner3 normally marks main memory as data-only for instruction fetches.
+    // Allow execution only while the launcher/package resolver is active.
+    mpu_setRegionInstructionAccessPermission(
+        MPU_REGION_1, MPU_ACCESS_PERMISSION_PRIV_READ_WRITE);
+
     // Some DS frontends pass their own extra arguments. Only treat argv[1]
     // as a direct game path when it is actually a .gba file; otherwise show
     // the kotoGba launcher.
@@ -180,6 +186,10 @@ new_runtime = """    // kotoGba launcher: choose the ROM immediately after stora
     // Resolve the canonical .koto package from the loaded ROM header so direct
     // argv launching and launcher selection behave identically.
     gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);
+
+    // Restore GBARunner3's normal protection before entering emulation.
+    mpu_setRegionInstructionAccessPermission(
+        MPU_REGION_1, MPU_ACCESS_PERMISSION_NONE);
 
     char savePath[512] { };
     strncpy(savePath, romPath, sizeof(savePath) - 1);
@@ -272,6 +282,8 @@ checks = [
     (main_src.count("gKotoGbaLauncherService.SelectRom") == 1, "selector"),
     (main_src.count("gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);") == 1, "package association"),
     (main_src.count("gKotoGbaUiService.Initialize();") == 1, "UI init"),
+    (main_src.count("MPU_REGION_1, MPU_ACCESS_PERMISSION_PRIV_READ_WRITE") == 1, "EWRAM execution enable"),
+    (main_src.count("MPU_REGION_1, MPU_ACCESS_PERMISSION_NONE") == 1, "EWRAM execution restore"),
     (vblank_src.count("kotoGba V0: capture disabled; VRAM C belongs to SUB_BG.") == 1, "VBlank"),
     ("GAME_TITLE     := kotoGba" in makefile_src, "NDS title"),
     (bootstrap_main_src.count("#ifndef KOTOGBA_LAUNCHER_PROBE") == 1, "bootstrap probe guard"),
