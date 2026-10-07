@@ -26,6 +26,8 @@
 #define KOTOGBA_COLOR_MUTED     (0x8000u | 20u | (20u << 5) | (20u << 10))
 #define KOTOGBA_COLOR_RED       (0x8000u | 31u)
 
+#define KOTOGBA_EWRAM_CODE      [[gnu::section(".ewram"), gnu::noinline]]
+
 struct KotoGbaLauncherEntry
 {
     char name[KOTOGBA_NAME_BYTES];
@@ -63,6 +65,7 @@ KotoGbaLauncherService gKotoGbaLauncherService;
 [[gnu::section(".ewram.bss")]]
 static KotoGbaLauncherEntry sEntries[KOTOGBA_MAX_ENTRIES];
 
+KOTOGBA_EWRAM_CODE
 static int AsciiLower(int c)
 {
     if (c >= 'A' && c <= 'Z')
@@ -70,6 +73,7 @@ static int AsciiLower(int c)
     return c;
 }
 
+KOTOGBA_EWRAM_CODE
 static char DisplayChar(char c)
 {
     if (c >= 'a' && c <= 'z')
@@ -79,6 +83,7 @@ static char DisplayChar(char c)
     return c;
 }
 
+KOTOGBA_EWRAM_CODE
 static int CompareNames(const char* a, const char* b)
 {
     while (*a && *b)
@@ -93,6 +98,7 @@ static int CompareNames(const char* a, const char* b)
     return (unsigned char)*a - (unsigned char)*b;
 }
 
+KOTOGBA_EWRAM_CODE
 static bool IsGbaFile(const char* name)
 {
     const size_t len = strlen(name);
@@ -106,6 +112,7 @@ static bool IsGbaFile(const char* name)
         AsciiLower((unsigned char)ext[3]) == 'a';
 }
 
+KOTOGBA_EWRAM_CODE
 static void CopyName(char* destination, size_t destinationSize, const char* source)
 {
     size_t length = strlen(source);
@@ -115,6 +122,7 @@ static void CopyName(char* destination, size_t destinationSize, const char* sour
     destination[length] = '\0';
 }
 
+KOTOGBA_EWRAM_CODE
 static void SortEntries(int count)
 {
     for (int i = 1; i < count; ++i)
@@ -136,6 +144,7 @@ static void SortEntries(int count)
     }
 }
 
+KOTOGBA_EWRAM_CODE
 static int ReadDirectory(const char* path)
 {
     DIR directory { };
@@ -168,6 +177,7 @@ static int ReadDirectory(const char* path)
     return count;
 }
 
+KOTOGBA_EWRAM_CODE
 static bool DirectoryExists(const char* path)
 {
     DIR directory { };
@@ -178,6 +188,7 @@ static bool DirectoryExists(const char* path)
     return true;
 }
 
+KOTOGBA_EWRAM_CODE
 static void ChooseInitialPath(char* path, size_t pathSize)
 {
     static const char* candidates[] =
@@ -200,6 +211,7 @@ static void ChooseInitialPath(char* path, size_t pathSize)
     CopyName(path, pathSize, "/");
 }
 
+KOTOGBA_EWRAM_CODE
 static bool BuildChildPath(const char* parent, const char* name, char* output, size_t outputSize)
 {
     const size_t parentLength = strlen(parent);
@@ -218,6 +230,7 @@ static bool BuildChildPath(const char* parent, const char* name, char* output, s
     return true;
 }
 
+KOTOGBA_EWRAM_CODE
 static void GoToParent(char* path)
 {
     if (!strcmp(path, "/"))
@@ -234,12 +247,14 @@ static void GoToParent(char* path)
     *lastSlash = '\0';
 }
 
+KOTOGBA_EWRAM_CODE
 static void WaitForNextFrame()
 {
     while (KOTOGBA_REG_VCOUNT >= 192);
     while (KOTOGBA_REG_VCOUNT < 192);
 }
 
+KOTOGBA_EWRAM_CODE
 static u16 ReadPressedKeys()
 {
     static u16 previous = 0;
@@ -249,6 +264,7 @@ static u16 ReadPressedKeys()
     return pressed;
 }
 
+KOTOGBA_EWRAM_CODE
 static void FillRect(int x, int y, int width, int height, u16 color)
 {
     vu16* framebuffer = GFX_BG_SUB;
@@ -266,6 +282,7 @@ static void FillRect(int x, int y, int width, int height, u16 color)
     }
 }
 
+KOTOGBA_EWRAM_CODE
 static const u8* FindGlyph(char character)
 {
     character = DisplayChar(character);
@@ -286,6 +303,7 @@ static const u8* FindGlyph(char character)
     return nullptr;
 }
 
+KOTOGBA_EWRAM_CODE
 static void DrawChar(int x, int y, char character, u16 color, int scale)
 {
     const u8* rows = FindGlyph(character);
@@ -303,6 +321,7 @@ static void DrawChar(int x, int y, char character, u16 color, int scale)
     }
 }
 
+KOTOGBA_EWRAM_CODE
 static void DrawText(int x, int y, const char* text, u16 color, int scale, int maxCharacters)
 {
     const int advance = 4 * scale;
@@ -316,6 +335,7 @@ static void DrawText(int x, int y, const char* text, u16 color, int scale, int m
     }
 }
 
+KOTOGBA_EWRAM_CODE
 static void DrawLogo()
 {
     const char* title = "KOTOGBA";
@@ -332,6 +352,7 @@ static void DrawLogo()
     }
 }
 
+KOTOGBA_EWRAM_CODE
 static const char* TailOfPath(const char* path, int maxCharacters)
 {
     const size_t length = strlen(path);
@@ -340,6 +361,7 @@ static const char* TailOfPath(const char* path, int maxCharacters)
     return path + length - maxCharacters;
 }
 
+KOTOGBA_EWRAM_CODE
 static void RenderLauncher(const char* path, int count, int selected)
 {
     FillRect(0, 0, 256, 192, KOTOGBA_COLOR_BG);
@@ -391,6 +413,7 @@ static void RenderLauncher(const char* path, int count, int selected)
     DrawText(8, 181, "A JUGAR   B ATRAS", KOTOGBA_COLOR_MUTED, 1, 40);
 }
 
+KOTOGBA_EWRAM_CODE
 bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
 {
     if (!outputPath || outputPathSize < 8)
