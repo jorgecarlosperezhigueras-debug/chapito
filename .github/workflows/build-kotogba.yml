@@ -2,7 +2,7 @@ name: Build kotoGba GBARunner3 V0.4
 
 on:
   push:
-    branches: [ main, kotogba-v0.4-package ]
+    branches: [main, kotogba-v0.4-package]
   workflow_dispatch:
 
 permissions:
@@ -22,157 +22,14 @@ jobs:
       - name: Checkout kotoGba build bundle
         uses: actions/checkout@v4
 
-      - name: Validate and normalize FireRed JP Rev1 koto package
+      - name: Validate and normalize FireRed JP Rev1 package
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          import hashlib
-          import json
-          import re
-          import struct
-          import zipfile
-          import zlib
-
-          source = Path("packages/BPRJ_01.koto")
-          normalized_dir = Path("validated_packages")
-          normalized_dir.mkdir(parents=True, exist_ok=True)
-          normalized = normalized_dir / "BPRJ_01.koto"
-
-          if not source.is_file():
-              raise SystemExit("Missing packages/BPRJ_01.koto")
-          if source.stat().st_size != 22364:
-              raise SystemExit(f"Unexpected source package size: {source.stat().st_size}")
-
-          required = {"manifest.json", "cards.json", "resources.json", "recognizers.json"}
-          raw = source.read_bytes()
-          extracted = {}
-          repaired_crc = []
-
-          def read_member_ignoring_stored_crc(info):
-              header = struct.unpack_from("<IHHHHHIIIHH", raw, info.header_offset)
-              signature = header[0]
-              method = header[3]
-              name_length = header[9]
-              extra_length = header[10]
-              if signature != 0x04034B50:
-                  raise SystemExit(f"Bad local-header signature for {info.filename}")
-              start = info.header_offset + 30 + name_length + extra_length
-              compressed = raw[start:start + info.compress_size]
-              if len(compressed) != info.compress_size:
-                  raise SystemExit(f"Truncated compressed data for {info.filename}")
-              if method == zipfile.ZIP_STORED:
-                  data = compressed
-              elif method == zipfile.ZIP_DEFLATED:
-                  data = zlib.decompress(compressed, -15)
-              else:
-                  raise SystemExit(f"Unsupported compression method {method} for {info.filename}")
-              if len(data) != info.file_size:
-                  raise SystemExit(
-                      f"Unexpected uncompressed size for {info.filename}: "
-                      f"{len(data)} != {info.file_size}"
-                  )
-              return data
-
-          with zipfile.ZipFile(source) as archive:
-              infos = archive.infolist()
-              names = {info.filename for info in infos}
-              missing = required - names
-              if missing:
-                  raise SystemExit(f"Missing package members: {sorted(missing)}")
-              for info in infos:
-                  try:
-                      data = archive.read(info)
-                  except zipfile.BadZipFile:
-                      data = read_member_ignoring_stored_crc(info)
-                      repaired_crc.append(info.filename)
-                  actual_crc = zlib.crc32(data) & 0xFFFFFFFF
-                  if actual_crc != info.CRC and info.filename not in repaired_crc:
-                      repaired_crc.append(info.filename)
-                  extracted[info.filename] = data
-
-          decoded = {}
-          for name in required:
-              try:
-                  decoded[name] = json.loads(extracted[name].decode("utf-8"))
-              except Exception as exc:
-                  raise SystemExit(f"Invalid UTF-8 JSON in {name}: {exc}") from exc
-
-          expected_ids = {
-              *(f"T{i:03d}" for i in range(1, 12)),
-              *(f"I{i:03d}" for i in range(1, 12)),
-              "H001M", "H001F", "H002M", "H002F", "H003", "H004",
-              *(f"U{i:03d}" for i in range(1, 12)),
-              *(f"P{i:03d}" for i in range(1, 9)),
-              *(f"R{i:03d}" for i in range(1, 4)),
-              *(f"L{i:03d}" for i in range(1, 9)),
-              "L009C", "L009S", "L009B",
-              *(f"L{i:03d}" for i in range(10, 17)),
-              *(f"B{i:03d}" for i in range(1, 11)),
-          }
-          id_pattern = re.compile(r"^[TIHUPRLB][0-9]{3}[A-Z]?$")
-          discovered_ids = set()
-
-          def walk(value):
-              if isinstance(value, dict):
-                  for key, child in value.items():
-                      if isinstance(key, str) and id_pattern.fullmatch(key):
-                          discovered_ids.add(key)
-                      if key in {"id", "card_id", "cardId"} and isinstance(child, str):
-                          if id_pattern.fullmatch(child):
-                              discovered_ids.add(child)
-                      walk(child)
-              elif isinstance(value, list):
-                  for child in value:
-                      walk(child)
-
-          walk(decoded["cards.json"])
-          matched = discovered_ids & expected_ids
-          missing_ids = sorted(expected_ids - matched)
-          if missing_ids:
-              raise SystemExit(
-                  f"Expected 78 Pueblo Paleta card IDs; found {len(matched)}. "
-                  f"Missing: {missing_ids}"
-              )
-          if len(expected_ids) != 78:
-              raise SystemExit(f"Internal expected-card set is {len(expected_ids)}, not 78")
-
-          # Repack deterministically. The JSON payloads are preserved byte-for-byte;
-          # only ZIP metadata/CRC fields are normalized when necessary.
-          with zipfile.ZipFile(normalized, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as out:
-              for name in sorted(extracted):
-                  info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
-                  info.compress_type = zipfile.ZIP_DEFLATED
-                  info.external_attr = 0o100644 << 16
-                  out.writestr(info, extracted[name])
-
-          with zipfile.ZipFile(normalized) as archive:
-              bad_member = archive.testzip()
-              if bad_member is not None:
-                  raise SystemExit(f"Normalized package is corrupt at {bad_member}")
-              if set(archive.namelist()) != set(extracted):
-                  raise SystemExit("Normalized package member list changed unexpectedly")
-
-          source_digest = hashlib.sha256(raw).hexdigest()
-          normalized_digest = hashlib.sha256(normalized.read_bytes()).hexdigest()
-          repaired_text = ",".join(sorted(set(repaired_crc))) if repaired_crc else "none"
-          report = (
-              "source_package=packages/BPRJ_01.koto\n"
-              f"source_bytes={source.stat().st_size}\n"
-              f"source_sha256={source_digest}\n"
-              f"normalized_package={normalized}\n"
-              f"normalized_bytes={normalized.stat().st_size}\n"
-              f"normalized_sha256={normalized_digest}\n"
-              f"normalized_crc_members={repaired_text}\n"
-              "cards=78\n"
-              "game_code=BPRJ\n"
-              "revision=01\n"
-              "status=PASS\n"
-          )
-          Path("PACKAGE_VALIDATION_V04.txt").write_text(report, encoding="utf-8")
-          print(report, end="")
-          PY
+          python3 tools/validate_koto_v04.py
+          grep -F 'cards=78' PACKAGE_VALIDATION_V04.txt
+          grep -F 'json_payloads_preserved=yes' PACKAGE_VALIDATION_V04.txt
+          grep -F 'status=PASS' PACKAGE_VALIDATION_V04.txt
 
       - name: Fetch exact GBARunner3 source
         shell: bash
@@ -194,7 +51,7 @@ jobs:
           cp upstream/code/bootstrap/GBARunner3.nds out/GBARunner3_ecaa817_clean.nds
           sha256sum out/GBARunner3_ecaa817_clean.nds > out/SHA256_CLEAN.txt
 
-      - name: Prepare and verify kotoGba assets and package
+      - name: Prepare and verify kotoGba assets
         shell: bash
         run: |
           set -euo pipefail
@@ -254,7 +111,7 @@ jobs:
             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731' \
             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e' \
             'runtime=hardware-approved kotoGba V0.3 EWRAM execution fix' \
-            'feature=V0.4 real FireRed JP Rev1 package bundled with 78 learning cards' \
+            'feature=V0.4 FireRed JP Rev1 package with 78 learning cards' \
             'package_path=/_gba/kotogba/packages/BPRJ_01.koto' \
             'rom_path=/_gba/kotogba/games/Pocket Monsters - FireRed (Japan) (Rev 1).gba' \
             'rom_included=no' \
@@ -265,8 +122,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p out/source/patch_files out/source/packages
-          cp tools/apply_kotogba_v03.py out/source/
+          mkdir -p out/source/patch_files out/source/packages out/source/tools
+          cp tools/apply_kotogba_v03.py out/source/tools/
+          cp tools/validate_koto_v04.py out/source/tools/
           cp -r patch_files/code out/source/patch_files/
           cp validated_packages/BPRJ_01.koto out/source/packages/BPRJ_01.koto
           cp packages/BPRJ_01.koto out/source/packages/BPRJ_01_SOURCE_ARCHIVE.koto
@@ -278,7 +136,8 @@ jobs:
             'The user-owned .gba ROM is intentionally not included.' \
             > out/source/PACKAGE_NAMING.txt
           sha256sum \
-            out/source/apply_kotogba_v03.py \
+            out/source/tools/apply_kotogba_v03.py \
+            out/source/tools/validate_koto_v04.py \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaLauncherService.cpp \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaLauncherService.h \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.cpp \
@@ -311,7 +170,7 @@ jobs:
           cmp validated_packages/BPRJ_01.koto out/_gba/kotogba/packages/BPRJ_01.koto
           python3 - <<'PY'
           import zipfile
-          path = "out/_gba/kotogba/packages/BPRJ_01.koto"
+          path = 'out/_gba/kotogba/packages/BPRJ_01.koto'
           with zipfile.ZipFile(path) as archive:
               assert archive.testzip() is None
           PY
