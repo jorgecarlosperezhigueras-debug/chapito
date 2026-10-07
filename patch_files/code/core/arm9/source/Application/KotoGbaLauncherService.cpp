@@ -27,7 +27,7 @@
 #define KOTOGBA_COLOR_MUTED     (0x8000u | 20u | (20u << 5) | (20u << 10))
 #define KOTOGBA_COLOR_RED       (0x8000u | 31u)
 
-#define KOTOGBA_EWRAM_CODE      [[gnu::section(".ewram"), gnu::noinline]]
+#define KOTOGBA_EWRAM_CODE      [[gnu::noinline]]
 
 struct KotoGbaLauncherEntry
 {
