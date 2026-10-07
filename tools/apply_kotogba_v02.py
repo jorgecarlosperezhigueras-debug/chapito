@@ -12,7 +12,7 @@ BOOTSTRAP_MAKEFILE_BLOB_SHA = "7a48f9d40305d473ad108b4e82ed11024418befd"
 SERVICE_BLOB_SHA = {
     "KotoGbaUiService.cpp": "aa82ffc625b672ca2d78e23b6f66fb109360a919",
     "KotoGbaUiService.h": "75fbc437801bdc315c2a9e584afe3f28acb97b14",
-    "KotoGbaLauncherService.cpp": "55c78beabbc717d963ff9a44b68b13b12116a731",
+    "KotoGbaLauncherService.cpp": "3ed051c483debc6a9e96a3e6bfe58269e91dfa88",
     "KotoGbaLauncherService.h": "f46c3993067c9f22cb251d7972a29a6066fd6e69",
 }
 
