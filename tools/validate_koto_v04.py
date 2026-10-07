@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
-"""Validate the FireRed JP Rev.1 koto package and normalize ZIP metadata.
-
-The source prototype contains valid compressed JSON payloads but may carry stale
-CRC/uncompressed-size fields in the ZIP directory. This script never edits the
-JSON payloads: it extracts the actual DEFLATE streams, validates their semantic
-contents, and writes a deterministic ZIP with corrected metadata.
-"""
+"""Validate the FireRed JP Rev.1 koto package and normalize ZIP metadata."""
 
 from __future__ import annotations
 
 from pathlib import Path
+from typing import NoReturn
 import hashlib
 import json
 import re
@@ -48,9 +43,10 @@ EXPECTED_CARD_IDS = {
     *(f"B{i:03d}" for i in range(1, 11)),
 }
 CARD_ID_PATTERN = re.compile(r"^[TIHUPRLB][0-9]{3}[A-Z]?$")
+CARD_ID_BYTES_PATTERN = re.compile(rb"[TIHUPRLB][0-9]{3}[A-Z]?")
 
 
-def fail(message: str) -> "NoReturn":  # type: ignore[name-defined]
+def fail(message: str) -> NoReturn:
     raise SystemExit(message)
 
 
@@ -97,11 +93,95 @@ def extract_member_from_local_header(
     fail(f"Unsupported compression method {method} for {info.filename}")
 
 
+def find_replacement_paths(value: object, path: str = "$", limit: int = 20) -> list[str]:
+    found: list[str] = []
+
+    def visit(current: object, current_path: str) -> None:
+        if len(found) >= limit:
+            return
+        if isinstance(current, str):
+            if "\ufffd" in current:
+                found.append(f"{current_path}={current!r}")
+            return
+        if isinstance(current, dict):
+            for key, child in current.items():
+                visit(child, f"{current_path}.{key}")
+            return
+        if isinstance(current, list):
+            for index, child in enumerate(current):
+                visit(child, f"{current_path}[{index}]")
+
+    visit(value, path)
+    return found
+
+
+def diagnose_invalid_utf8(name: str, payload: bytes, first_error: UnicodeDecodeError) -> NoReturn:
+    invalid_spans: list[tuple[int, int, str]] = []
+    cursor = 0
+    while cursor < len(payload):
+        try:
+            payload[cursor:].decode("utf-8")
+            break
+        except UnicodeDecodeError as exc:
+            start = cursor + exc.start
+            end = cursor + max(exc.end, exc.start + 1)
+            invalid_spans.append((start, end, exc.reason))
+            cursor = end
+            if len(invalid_spans) >= 20:
+                break
+
+    details: list[str] = []
+    for start, end, reason in invalid_spans:
+        window_start = max(0, start - 160)
+        window_end = min(len(payload), end + 160)
+        window = payload[window_start:window_end]
+        nearby_ids = [
+            match.group().decode("ascii")
+            for match in CARD_ID_BYTES_PATTERN.finditer(window)
+        ]
+        details.append(
+            " | ".join(
+                [
+                    f"span={start}:{end}",
+                    f"reason={reason}",
+                    f"bad_hex={payload[start:end].hex()}",
+                    f"nearby_ids={nearby_ids}",
+                    f"window_hex={window.hex()}",
+                    f"window_text={window.decode('utf-8', errors='backslashreplace')!r}",
+                ]
+            )
+        )
+
+    replacement_text = payload.decode("utf-8", errors="replace")
+    replacement_result = "replacement_parse=failed"
+    try:
+        replacement_json = json.loads(replacement_text)
+        replacement_paths = find_replacement_paths(replacement_json)
+        replacement_result = (
+            "replacement_parse=success; replacement_paths="
+            + (" || ".join(replacement_paths) if replacement_paths else "none")
+        )
+    except json.JSONDecodeError as exc:
+        preview_start = max(0, exc.pos - 120)
+        preview_end = min(len(replacement_text), exc.pos + 120)
+        replacement_result = (
+            f"replacement_parse=failed at {exc.pos}: {exc.msg}; "
+            f"context={replacement_text[preview_start:preview_end]!r}"
+        )
+
+    fail(
+        f"Invalid UTF-8 in {name}: {first_error}; "
+        f"invalid_span_count={len(invalid_spans)}; "
+        + " || ".join(details)
+        + f" || {replacement_result}"
+    )
+
+
 def parse_json_member(name: str, payload: bytes) -> object:
     try:
         text = payload.decode("utf-8")
     except UnicodeDecodeError as exc:
-        fail(f"Invalid UTF-8 in {name}: {exc}")
+        diagnose_invalid_utf8(name, payload, exc)
 
     try:
         return json.loads(text)
