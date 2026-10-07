@@ -25,7 +25,7 @@ APP = ROOT / "code/core/arm9/source/Application"
 PATCH_APP = HERE / "patch_files/code/core/arm9/source/Application"
 
 def git_blob_sha(data: bytes) -> str:
-    header = b"blob " + str(len(data)).encode("ascii") + b"\\0"
+    header = b"blob " + str(len(data)).encode("ascii") + b"\0"
     return hashlib.sha1(header + data).hexdigest()
 
 def require_file(path: Path) -> None:
@@ -49,14 +49,14 @@ for name, expected in SERVICE_SHA256.items():
         raise SystemExit(f"{name} no coincide con su SHA-256 esperado; no escribo nada.")
 
 main_src = MAIN.read_text(encoding="utf-8")
-include_anchor = '#include "Application/GbaBorderService.h"\\n'
+include_anchor = '#include "Application/GbaBorderService.h"\n'
 if include_anchor not in main_src:
     raise SystemExit("No encuentro el ancla GbaBorderService.h; no escribo nada.")
 main_src = main_src.replace(
     include_anchor,
     include_anchor
-    + '#include "Application/KotoGbaLauncherService.h"\\n'
-    + '#include "Application/KotoGbaUiService.h"\\n',
+    + '#include "Application/KotoGbaLauncherService.h"\n'
+    + '#include "Application/KotoGbaUiService.h"\n',
     1,
 )
 
