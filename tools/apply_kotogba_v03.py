@@ -12,7 +12,7 @@ BOOTSTRAP_MAKEFILE_BLOB_SHA = "7a48f9d40305d473ad108b4e82ed11024418befd"
 SERVICE_BLOB_SHA = {
     "KotoGbaUiService.cpp": "aa82ffc625b672ca2d78e23b6f66fb109360a919",
     "KotoGbaUiService.h": "75fbc437801bdc315c2a9e584afe3f28acb97b14",
-    "KotoGbaLauncherService.cpp": "4204d6eb8211359d54b1f56d5168304f8c1199f8",
+    "KotoGbaLauncherService.cpp": "f99edaa7bd8b8d8955b881d4fd049ba16d166efc",
     "KotoGbaLauncherService.h": "770103bb8ee997406ba2b71439ea266c370f8aa7",
 }
 
@@ -60,6 +60,49 @@ main_src = main_src.replace(
     1,
 )
 
+mount_old = """    bool mountResult;
+    if (shouldMountDsiSd(argc, argv))
+        mountResult = mountDsiSd();
+    else
+        mountResult = mountDldi();
+
+    if (!mountResult)
+    {
+        GFX_PLTT_BG_MAIN[0] = 0x1F << 10;
+        while (1);
+    }
+"""
+mount_new = """#ifdef KOTOGBA_LAUNCHER_PROBE
+    // Emulator-only UI probe: bypass storage mounting so the real launcher
+    // can be rendered with synthetic entries without DLDI.
+    bool mountResult = true;
+#else
+    bool mountResult;
+    if (shouldMountDsiSd(argc, argv))
+        mountResult = mountDsiSd();
+    else
+        mountResult = mountDldi();
+#endif
+
+    if (!mountResult)
+    {
+        GFX_PLTT_BG_MAIN[0] = 0x1F << 10;
+        while (1);
+    }
+"""
+if mount_old not in main_src:
+    raise SystemExit("main.cpp no contiene el bloque de montaje esperado; no escribo nada.")
+main_src = main_src.replace(mount_old, mount_new, 1)
+
+settings_old = "    gAppSettingsService.TryLoadAppSettings(SETTINGS_FILE_PATH);\n"
+settings_new = """#ifndef KOTOGBA_LAUNCHER_PROBE
+    gAppSettingsService.TryLoadAppSettings(SETTINGS_FILE_PATH);
+#endif
+"""
+if settings_old not in main_src:
+    raise SystemExit("main.cpp no contiene la carga de settings esperada; no escribo nada.")
+main_src = main_src.replace(settings_old, settings_new, 1)
+
 old_runtime = """    patch_resetSwiPatches();
     loadGbaBios();
     relocateGbaBios();
@@ -91,14 +134,8 @@ old_runtime = """    patch_resetSwiPatches();
     }
 """
 
-new_runtime = """    patch_resetSwiPatches();
-    loadGbaBios();
-    relocateGbaBios();
-    applyBiosVmPatches();
-
-    // kotoGba V0.2: when launched directly, choose a .gba from the SD card.
-    // Preserve argv launching so TWiLight Menu++ or another frontend can still
-    // pass a ROM directly.
+new_runtime = """    // kotoGba launcher: choose the ROM immediately after storage is mounted.
+    // argv launching remains supported for TWiLight Menu++ and other frontends.
     char selectedRomPath[256] { };
     const char* romPath = argc > 1 ? argv[1] : nullptr;
     if (!romPath)
@@ -113,11 +150,19 @@ new_runtime = """    patch_resetSwiPatches();
         romPath = selectedRomPath;
     }
 
+    patch_resetSwiPatches();
+    loadGbaBios();
+    relocateGbaBios();
+    applyBiosVmPatches();
     loadGbaRom(romPath);
-    // kotoGba V0.3: resolve the canonical .koto package from the loaded ROM
-    // header as well, so direct argv launching and launcher selection behave alike.
+
+    // Resolve the canonical .koto package from the loaded ROM header so direct
+    // argv launching and launcher selection behave identically.
     gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);
-    char* romExtension = strrchr(romPath, '.');
+
+    char savePath[512] { };
+    strncpy(savePath, romPath, sizeof(savePath) - 1);
+    char* romExtension = strrchr(savePath, '.');
     if (romExtension)
     {
         romExtension[1] = 's';
@@ -126,7 +171,7 @@ new_runtime = """    patch_resetSwiPatches();
         romExtension[4] = '\\0';
     }
     loadGameSpecificSettings();
-    handleSave(romPath);
+    handleSave(savePath);
     SelfModifyingPatches().ApplyPatches(gAppSettingsService.GetAppSettings().runSettings);
 
     if (sSplashScreen)
@@ -137,7 +182,7 @@ new_runtime = """    patch_resetSwiPatches();
         sSplashScreen = nullptr;
     }
 
-    // kotoGba V0: keep GBA on the top physical screen and reserve the sub engine
+    // kotoGba keeps GBA on the top physical screen and reserves the sub engine
     // for the learning UI. Disabling capture/centering also frees VRAM C.
     auto displaySettings = gAppSettingsService.GetAppSettings().displaySettings;
     displaySettings.gbaScreen = GbaScreen::Top;
@@ -145,7 +190,6 @@ new_runtime = """    patch_resetSwiPatches();
     gGbaDisplayConfigurationService.ApplyDisplaySettings(displaySettings);
     gKotoGbaUiService.Initialize();
 """
-
 if old_runtime not in main_src:
     raise SystemExit("main.cpp no contiene el bloque de runtime esperado; no escribo nada.")
 main_src = main_src.replace(old_runtime, new_runtime, 1)
