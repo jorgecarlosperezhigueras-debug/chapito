@@ -154,6 +154,29 @@ static void SortEntries(int count)
 KOTOGBA_EWRAM_CODE
 static int ReadDirectory(const char* path)
 {
+#ifdef KOTOGBA_LAUNCHER_PROBE
+    (void)path;
+    static const struct
+    {
+        const char* name;
+        bool directory;
+    } probeEntries[] =
+    {
+        {"RPG", true},
+        {"Pocket Monsters - FireRed (Japan) (Rev 1).gba", false},
+        {"Mother 3 (Japan).gba", false},
+        {"Dragon Quest Monsters - Caravan Heart.gba", false},
+    };
+
+    const int count = sizeof(probeEntries) / sizeof(probeEntries[0]);
+    for (int i = 0; i < count; ++i)
+    {
+        CopyName(sEntries[i].name, sizeof(sEntries[i].name), probeEntries[i].name);
+        sEntries[i].isDirectory = probeEntries[i].directory;
+    }
+    SortEntries(count);
+    return count;
+#else
     DIR directory { };
     if (f_opendir(&directory, path) != FR_OK)
         return -1;
@@ -182,17 +205,23 @@ static int ReadDirectory(const char* path)
     f_closedir(&directory);
     SortEntries(count);
     return count;
+#endif
 }
 
 KOTOGBA_EWRAM_CODE
 static bool DirectoryExists(const char* path)
 {
+#ifdef KOTOGBA_LAUNCHER_PROBE
+    (void)path;
+    return true;
+#else
     DIR directory { };
     const FRESULT result = f_opendir(&directory, path);
     if (result != FR_OK)
         return false;
     f_closedir(&directory);
     return true;
+#endif
 }
 
 KOTOGBA_EWRAM_CODE
