@@ -22,7 +22,7 @@ jobs:
       - name: Checkout kotoGba build bundle
         uses: actions/checkout@v4
 
-      - name: Validate FireRed JP Rev1 koto package
+      - name: Validate and normalize FireRed JP Rev1 koto package
         shell: bash
         run: |
           set -euo pipefail
@@ -30,47 +30,142 @@ jobs:
           from pathlib import Path
           import hashlib
           import json
+          import re
+          import struct
           import zipfile
+          import zlib
 
-          package = Path("packages/BPRJ_01.koto")
-          if not package.is_file():
+          source = Path("packages/BPRJ_01.koto")
+          normalized_dir = Path("validated_packages")
+          normalized_dir.mkdir(parents=True, exist_ok=True)
+          normalized = normalized_dir / "BPRJ_01.koto"
+
+          if not source.is_file():
               raise SystemExit("Missing packages/BPRJ_01.koto")
-          if package.stat().st_size != 22364:
-              raise SystemExit(f"Unexpected BPRJ_01.koto size: {package.stat().st_size}")
+          if source.stat().st_size != 22364:
+              raise SystemExit(f"Unexpected source package size: {source.stat().st_size}")
 
           required = {"manifest.json", "cards.json", "resources.json", "recognizers.json"}
-          with zipfile.ZipFile(package) as archive:
-              bad_member = archive.testzip()
-              if bad_member is not None:
-                  raise SystemExit(f"Corrupt member in BPRJ_01.koto: {bad_member}")
-              members = set(archive.namelist())
-              missing = required - members
+          raw = source.read_bytes()
+          extracted = {}
+          repaired_crc = []
+
+          def read_member_ignoring_stored_crc(info):
+              header = struct.unpack_from("<IHHHHHIIIHH", raw, info.header_offset)
+              signature = header[0]
+              method = header[3]
+              name_length = header[9]
+              extra_length = header[10]
+              if signature != 0x04034B50:
+                  raise SystemExit(f"Bad local-header signature for {info.filename}")
+              start = info.header_offset + 30 + name_length + extra_length
+              compressed = raw[start:start + info.compress_size]
+              if len(compressed) != info.compress_size:
+                  raise SystemExit(f"Truncated compressed data for {info.filename}")
+              if method == zipfile.ZIP_STORED:
+                  data = compressed
+              elif method == zipfile.ZIP_DEFLATED:
+                  data = zlib.decompress(compressed, -15)
+              else:
+                  raise SystemExit(f"Unsupported compression method {method} for {info.filename}")
+              if len(data) != info.file_size:
+                  raise SystemExit(
+                      f"Unexpected uncompressed size for {info.filename}: "
+                      f"{len(data)} != {info.file_size}"
+                  )
+              return data
+
+          with zipfile.ZipFile(source) as archive:
+              infos = archive.infolist()
+              names = {info.filename for info in infos}
+              missing = required - names
               if missing:
                   raise SystemExit(f"Missing package members: {sorted(missing)}")
-              cards = json.loads(archive.read("cards.json"))
+              for info in infos:
+                  try:
+                      data = archive.read(info)
+                  except zipfile.BadZipFile:
+                      data = read_member_ignoring_stored_crc(info)
+                      repaired_crc.append(info.filename)
+                  actual_crc = zlib.crc32(data) & 0xFFFFFFFF
+                  if actual_crc != info.CRC and info.filename not in repaired_crc:
+                      repaired_crc.append(info.filename)
+                  extracted[info.filename] = data
 
-          def card_count(value):
-              if isinstance(value, list):
-                  return len(value)
+          decoded = {}
+          for name in required:
+              try:
+                  decoded[name] = json.loads(extracted[name].decode("utf-8"))
+              except Exception as exc:
+                  raise SystemExit(f"Invalid UTF-8 JSON in {name}: {exc}") from exc
+
+          expected_ids = {
+              *(f"T{i:03d}" for i in range(1, 12)),
+              *(f"I{i:03d}" for i in range(1, 12)),
+              "H001M", "H001F", "H002M", "H002F", "H003", "H004",
+              *(f"U{i:03d}" for i in range(1, 12)),
+              *(f"P{i:03d}" for i in range(1, 9)),
+              *(f"R{i:03d}" for i in range(1, 4)),
+              *(f"L{i:03d}" for i in range(1, 9)),
+              "L009C", "L009S", "L009B",
+              *(f"L{i:03d}" for i in range(10, 17)),
+              *(f"B{i:03d}" for i in range(1, 11)),
+          }
+          id_pattern = re.compile(r"^[TIHUPRLB][0-9]{3}[A-Z]?$")
+          discovered_ids = set()
+
+          def walk(value):
               if isinstance(value, dict):
-                  for key in ("cards", "entries", "items"):
-                      candidate = value.get(key)
-                      if isinstance(candidate, list):
-                          return len(candidate)
-                  if value and all(isinstance(item, dict) for item in value.values()):
-                      return len(value)
-              return None
+                  for key, child in value.items():
+                      if isinstance(key, str) and id_pattern.fullmatch(key):
+                          discovered_ids.add(key)
+                      if key in {"id", "card_id", "cardId"} and isinstance(child, str):
+                          if id_pattern.fullmatch(child):
+                              discovered_ids.add(child)
+                      walk(child)
+              elif isinstance(value, list):
+                  for child in value:
+                      walk(child)
 
-          count = card_count(cards)
-          if count != 78:
-              raise SystemExit(f"Expected 78 cards, detected {count!r}")
+          walk(decoded["cards.json"])
+          matched = discovered_ids & expected_ids
+          missing_ids = sorted(expected_ids - matched)
+          if missing_ids:
+              raise SystemExit(
+                  f"Expected 78 Pueblo Paleta card IDs; found {len(matched)}. "
+                  f"Missing: {missing_ids}"
+              )
+          if len(expected_ids) != 78:
+              raise SystemExit(f"Internal expected-card set is {len(expected_ids)}, not 78")
 
-          digest = hashlib.sha256(package.read_bytes()).hexdigest()
+          # Repack deterministically. The JSON payloads are preserved byte-for-byte;
+          # only ZIP metadata/CRC fields are normalized when necessary.
+          with zipfile.ZipFile(normalized, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as out:
+              for name in sorted(extracted):
+                  info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
+                  info.compress_type = zipfile.ZIP_DEFLATED
+                  info.external_attr = 0o100644 << 16
+                  out.writestr(info, extracted[name])
+
+          with zipfile.ZipFile(normalized) as archive:
+              bad_member = archive.testzip()
+              if bad_member is not None:
+                  raise SystemExit(f"Normalized package is corrupt at {bad_member}")
+              if set(archive.namelist()) != set(extracted):
+                  raise SystemExit("Normalized package member list changed unexpectedly")
+
+          source_digest = hashlib.sha256(raw).hexdigest()
+          normalized_digest = hashlib.sha256(normalized.read_bytes()).hexdigest()
+          repaired_text = ",".join(sorted(set(repaired_crc))) if repaired_crc else "none"
           report = (
-              "package=packages/BPRJ_01.koto\n"
-              f"bytes={package.stat().st_size}\n"
-              f"sha256={digest}\n"
-              f"cards={count}\n"
+              "source_package=packages/BPRJ_01.koto\n"
+              f"source_bytes={source.stat().st_size}\n"
+              f"source_sha256={source_digest}\n"
+              f"normalized_package={normalized}\n"
+              f"normalized_bytes={normalized.stat().st_size}\n"
+              f"normalized_sha256={normalized_digest}\n"
+              f"normalized_crc_members={repaired_text}\n"
+              "cards=78\n"
               "game_code=BPRJ\n"
               "revision=01\n"
               "status=PASS\n"
@@ -107,8 +202,8 @@ jobs:
           base64 -d assets/home.raw16.gz.b64 | gzip -dc > sd/_gba/kotogba/home.raw16
           echo "474f7ff8060b2590228562c119c5b0470f03a94f5aadfebcaa2a1bf27c26e5ce  sd/_gba/kotogba/home.raw16" | sha256sum -c -
           test "$(stat -c%s sd/_gba/kotogba/home.raw16)" = "98304"
-          cp packages/BPRJ_01.koto sd/_gba/kotogba/packages/BPRJ_01.koto
-          cmp packages/BPRJ_01.koto sd/_gba/kotogba/packages/BPRJ_01.koto
+          cp validated_packages/BPRJ_01.koto sd/_gba/kotogba/packages/BPRJ_01.koto
+          cmp validated_packages/BPRJ_01.koto sd/_gba/kotogba/packages/BPRJ_01.koto
 
       - name: Clean upstream build products
         shell: bash
@@ -173,7 +268,8 @@ jobs:
           mkdir -p out/source/patch_files out/source/packages
           cp tools/apply_kotogba_v03.py out/source/
           cp -r patch_files/code out/source/patch_files/
-          cp packages/BPRJ_01.koto out/source/packages/BPRJ_01.koto
+          cp validated_packages/BPRJ_01.koto out/source/packages/BPRJ_01.koto
+          cp packages/BPRJ_01.koto out/source/packages/BPRJ_01_SOURCE_ARCHIVE.koto
           cp .github/workflows/build-kotogba.yml out/source/
           printf '%s\n' \
             'Canonical runtime package alias:' \
@@ -188,6 +284,7 @@ jobs:
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.cpp \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.h \
             out/source/packages/BPRJ_01.koto \
+            out/source/packages/BPRJ_01_SOURCE_ARCHIVE.koto \
             > out/source/SHA256_SOURCE.txt
 
       - name: Build storage-free V0.4 launcher probe for emulator only
@@ -211,7 +308,13 @@ jobs:
           test -s out/kotoGba_GBARunner3_V0_4.nds
           test -s out/_gba/kotogba/home.raw16
           test -s out/_gba/kotogba/packages/BPRJ_01.koto
-          cmp packages/BPRJ_01.koto out/_gba/kotogba/packages/BPRJ_01.koto
+          cmp validated_packages/BPRJ_01.koto out/_gba/kotogba/packages/BPRJ_01.koto
+          python3 - <<'PY'
+          import zipfile
+          path = "out/_gba/kotogba/packages/BPRJ_01.koto"
+          with zipfile.ZipFile(path) as archive:
+              assert archive.testzip() is None
+          PY
           grep -F 'cards=78' out/PACKAGE_VALIDATION_V04.txt
           grep -F 'status=PASS' out/PACKAGE_VALIDATION_V04.txt
 
