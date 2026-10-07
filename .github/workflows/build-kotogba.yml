@@ -22,80 +22,66 @@ jobs:
       - name: Checkout kotoGba build bundle
         uses: actions/checkout@v4
 
-      - name: Record toolchain
-        shell: bash
-        run: |
-          set -euxo pipefail
-          echo "DEVKITPRO=$DEVKITPRO"
-          echo "DEVKITARM=$DEVKITARM"
-          $DEVKITARM/bin/arm-none-eabi-g++ --version | head -n 1
-          make --version | head -n 1
-
       - name: Fetch exact GBARunner3 source
         shell: bash
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           git clone https://github.com/Gericom/GBARunner3.git upstream
-          cd upstream
-          git checkout ecaa817815d9761745606592f04affe5ee9c3731
-          git submodule update --init --recursive
-          test "$(git rev-parse HEAD)" = "ecaa817815d9761745606592f04affe5ee9c3731"
-          test "$(git -C code/libs/libtwl rev-parse HEAD)" = "e069645bed14a93e149e873e9273f04851e3a04e"
+          git -C upstream checkout ecaa817815d9761745606592f04affe5ee9c3731
+          git -C upstream submodule update --init --recursive
+          test "$(git -C upstream rev-parse HEAD)" = "ecaa817815d9761745606592f04affe5ee9c3731"
+          test "$(git -C upstream/code/libs/libtwl rev-parse HEAD)" = "e069645bed14a93e149e873e9273f04851e3a04e"
 
-      - name: Build pinned upstream clean
+      - name: Build pinned GBARunner3 clean
         shell: bash
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
           mkdir -p out
           cp upstream/code/bootstrap/GBARunner3.nds out/GBARunner3_ecaa817_clean.nds
-          sha256sum out/GBARunner3_ecaa817_clean.nds | tee out/SHA256_CLEAN.txt
+          sha256sum out/GBARunner3_ecaa817_clean.nds > out/SHA256_CLEAN.txt
 
-      - name: Verify public reference release metadata
+      - name: Prepare and verify kotoGba lower-screen asset
         shell: bash
         run: |
-          set -euxo pipefail
-          curl -fL --retry 4 --retry-delay 2 \
-            https://github.com/Sanrax/GBARunner3-Vea/releases/download/v2/GBARunner3.zip \
-            -o /tmp/GBARunner3_reference.zip
-          echo "a5af74b2bb646b01650c27c4677e588a5dd40385c1c4b6f2613bb964478dd679  /tmp/GBARunner3_reference.zip" | sha256sum -c -
-          unzip -l /tmp/GBARunner3_reference.zip | tee out/REFERENCE_ZIP_CONTENTS.txt
-
-      - name: Decode and verify kotoGba home asset
-        shell: bash
-        run: |
-          set -euxo pipefail
+          set -euo pipefail
           mkdir -p sd/_gba/kotogba
           base64 -d assets/home.raw16.gz.b64 | gzip -dc > sd/_gba/kotogba/home.raw16
           echo "474f7ff8060b2590228562c119c5b0470f03a94f5aadfebcaa2a1bf27c26e5ce  sd/_gba/kotogba/home.raw16" | sha256sum -c -
           test "$(stat -c%s sd/_gba/kotogba/home.raw16)" = "98304"
 
-      - name: Clean upstream before kotoGba build
+      - name: Clean upstream build products
         shell: bash
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           make -C upstream/code clean
 
       - name: Apply exact kotoGba V0.1 patch
         shell: bash
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           python3 tools/apply_kotogba_v0.py upstream
           grep -F 'gKotoGbaUiService.Initialize();' upstream/code/core/arm9/source/main.cpp
           grep -F 'kotoGba V0: capture disabled; VRAM C belongs to SUB_BG.' upstream/code/core/arm9/source/Emulator/VBlankIrq.s
           test -f upstream/code/core/arm9/source/Application/KotoGbaUiService.cpp
+          test -f upstream/code/core/arm9/source/Application/KotoGbaUiService.h
 
       - name: Build kotoGba GBARunner3 V0
         shell: bash
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
           cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0.nds
           mkdir -p out/_gba/kotogba
           cp sd/_gba/kotogba/home.raw16 out/_gba/kotogba/home.raw16
-          sha256sum out/kotoGba_GBARunner3_V0.nds out/_gba/kotogba/home.raw16 | tee out/SHA256_KOTOGBA.txt
+          sha256sum out/kotoGba_GBARunner3_V0.nds out/_gba/kotogba/home.raw16 > out/SHA256_KOTOGBA.txt
+          printf '%s\n' \
+            'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731' \
+            'libtwl=e069645bed14a93e149e873e9273f04851e3a04e' \
+            'container=devkitpro/devkitarm:20241104' \
+            > out/BUILD_BASE.txt
 
       - name: Upload kotoGba build
         uses: actions/upload-artifact@v4
