@@ -117,39 +117,17 @@ jobs:
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.h \
             > out/source/SHA256_SOURCE.txt
 
-      - name: Build NitroFS V0.3 probe for emulator only
+      - name: Build storage-free V0.3 launcher probe for emulator only
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p upstream/code/bootstrap/nitrofiles/_gba/kotogba/games/RPG
-          mkdir -p upstream/code/bootstrap/nitrofiles/_gba/kotogba/packages
-          python3 - <<'PY'
-          from pathlib import Path
-          root=Path("upstream/code/bootstrap/nitrofiles/_gba/kotogba/games")
-          def make_rom(path, code, rev, title):
-              h=bytearray(192)
-              h[0xA0:0xAC]=title.encode("ascii")[:12].ljust(12,b" ")
-              h[0xAC:0xB0]=code.encode("ascii")
-              h[0xB0:0xB2]=b"01"
-              h[0xB2]=0x96
-              h[0xBC]=rev
-              checksum=0
-              for value in h[0xA0:0xBD]:
-                  checksum=(checksum-value)&0xFF
-              checksum=(checksum-0x19)&0xFF
-              h[0xBD]=checksum
-              path.write_bytes(h)
-          make_rom(root/"Pocket Monsters - FireRed (Japan) (Rev 1).gba","BPRJ",1,"POKEMON FIRE")
-          make_rom(root/"Mother 3 (Japan).gba","A3UJ",0,"MOTHER3")
-          make_rom(root/"Dragon Quest Monsters - Caravan Heart.gba","AZMJ",0,"DQM CARAVAN")
-          make_rom(root/"RPG"/"Golden Sun (Japan).gba","AGFJ",0,"GOLDEN SUN")
-          Path("upstream/code/bootstrap/nitrofiles/_gba/kotogba/packages/BPRJ_01.koto").write_bytes(b"kotoGba probe package")
-          PY
           make -C upstream/code clean
-          make -C upstream/code GBAR3_ISNITRO=1
+          sed -i 's/-DARM9 #-DGBAR3_IRQ_YIELDING/-DARM9 -DKOTOGBA_LAUNCHER_PROBE #-DGBAR3_IRQ_YIELDING/' upstream/code/core/arm9/Makefile
+          grep -F -- '-DKOTOGBA_LAUNCHER_PROBE' upstream/code/core/arm9/Makefile
+          make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_3_NITRO_PROBE.nds
-          sha256sum out/kotoGba_GBARunner3_V0_3_NITRO_PROBE.nds > out/SHA256_NITRO_PROBE_V03.txt
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_3_LAUNCHER_PROBE.nds
+          sha256sum out/kotoGba_GBARunner3_V0_3_LAUNCHER_PROBE.nds > out/SHA256_LAUNCHER_PROBE_V03.txt
 
       - name: Upload kotoGba V0.3 build
         uses: actions/upload-artifact@v4
