@@ -1,7 +1,8 @@
 #include "common.h"
-#include <nds.h>
-#include <stdio.h>
 #include <string.h>
+#include <libtwl/mem/memVram.h>
+#include <libtwl/gfx/gfx.h>
+#include <libtwl/gfx/gfxBackground.h>
 #include "Fat/ff.h"
 #include "SystemIpc.h"
 #include "KotoGbaLauncherService.h"
@@ -9,12 +10,52 @@
 #define KOTOGBA_MAX_ENTRIES     64
 #define KOTOGBA_NAME_BYTES      128
 #define KOTOGBA_PATH_BYTES      256
-#define KOTOGBA_VISIBLE_ROWS    11
+#define KOTOGBA_VISIBLE_ROWS    10
+
+#define KOTOGBA_REG_VCOUNT      (*(vu16*)0x04000006)
+#define KOTOGBA_REG_KEYINPUT    (*(vu16*)0x04000130)
+
+#define KOTOGBA_KEY_A           (1u << 0)
+#define KOTOGBA_KEY_B           (1u << 1)
+#define KOTOGBA_KEY_UP          (1u << 6)
+#define KOTOGBA_KEY_DOWN        (1u << 7)
+
+#define KOTOGBA_COLOR_BG        (0x8000u | 2u | (2u << 5) | (3u << 10))
+#define KOTOGBA_COLOR_ROW       (0x8000u | 5u | (5u << 5) | (7u << 10))
+#define KOTOGBA_COLOR_WHITE     0xFFFFu
+#define KOTOGBA_COLOR_MUTED     (0x8000u | 20u | (20u << 5) | (20u << 10))
+#define KOTOGBA_COLOR_RED       (0x8000u | 31u)
 
 struct KotoGbaLauncherEntry
 {
     char name[KOTOGBA_NAME_BYTES];
     bool isDirectory;
+};
+
+struct KotoGlyph
+{
+    char character;
+    u8 row[5];
+};
+
+static constexpr KotoGlyph sGlyphs[] =
+{
+    {'A',{2,5,7,5,5}}, {'B',{6,5,6,5,6}}, {'C',{3,4,4,4,3}},
+    {'D',{6,5,5,5,6}}, {'E',{7,4,6,4,7}}, {'F',{7,4,6,4,4}},
+    {'G',{3,4,5,5,3}}, {'H',{5,5,7,5,5}}, {'I',{7,2,2,2,7}},
+    {'J',{1,1,1,5,2}}, {'K',{5,5,6,5,5}}, {'L',{4,4,4,4,7}},
+    {'M',{5,7,7,5,5}}, {'N',{5,7,7,7,5}}, {'O',{2,5,5,5,2}},
+    {'P',{6,5,6,4,4}}, {'Q',{2,5,5,3,1}}, {'R',{6,5,6,5,5}},
+    {'S',{3,4,2,1,6}}, {'T',{7,2,2,2,2}}, {'U',{5,5,5,5,7}},
+    {'V',{5,5,5,5,2}}, {'W',{5,5,7,7,5}}, {'X',{5,5,2,5,5}},
+    {'Y',{5,5,2,2,2}}, {'Z',{7,1,2,4,7}},
+    {'0',{7,5,5,5,7}}, {'1',{2,6,2,2,7}}, {'2',{6,1,7,4,7}},
+    {'3',{6,1,3,1,6}}, {'4',{5,5,7,1,1}}, {'5',{7,4,6,1,6}},
+    {'6',{3,4,7,5,7}}, {'7',{7,1,1,2,2}}, {'8',{7,5,7,5,7}},
+    {'9',{7,5,7,1,6}},
+    {'.',{0,0,0,0,2}}, {'-',{0,0,7,0,0}}, {'_',{0,0,0,0,7}},
+    {'/',{1,1,2,4,4}}, {':',{0,2,0,2,0}}, {'?',{6,1,2,0,2}},
+    {'[',{6,4,4,4,6}}, {']',{3,1,1,1,3}}, {'>',{4,2,1,2,4}},
 };
 
 KotoGbaLauncherService gKotoGbaLauncherService;
@@ -26,6 +67,15 @@ static int AsciiLower(int c)
 {
     if (c >= 'A' && c <= 'Z')
         return c + ('a' - 'A');
+    return c;
+}
+
+static char DisplayChar(char c)
+{
+    if (c >= 'a' && c <= 'z')
+        return (char)(c - ('a' - 'A'));
+    if ((unsigned char)c < 32 || (unsigned char)c > 126)
+        return '?';
     return c;
 }
 
@@ -54,6 +104,15 @@ static bool IsGbaFile(const char* name)
         AsciiLower((unsigned char)ext[1]) == 'g' &&
         AsciiLower((unsigned char)ext[2]) == 'b' &&
         AsciiLower((unsigned char)ext[3]) == 'a';
+}
+
+static void CopyName(char* destination, size_t destinationSize, const char* source)
+{
+    size_t length = strlen(source);
+    if (length >= destinationSize)
+        length = destinationSize - 1;
+    memcpy(destination, source, length);
+    destination[length] = '\0';
 }
 
 static void SortEntries(int count)
@@ -99,8 +158,7 @@ static int ReadDirectory(const char* path)
         if (!isDirectory && !IsGbaFile(info.fname))
             continue;
 
-        strncpy(sEntries[count].name, info.fname, KOTOGBA_NAME_BYTES - 1);
-        sEntries[count].name[KOTOGBA_NAME_BYTES - 1] = '\0';
+        CopyName(sEntries[count].name, sizeof(sEntries[count].name), info.fname);
         sEntries[count].isDirectory = isDirectory;
         ++count;
     }
@@ -134,22 +192,30 @@ static void ChooseInitialPath(char* path, size_t pathSize)
     {
         if (DirectoryExists(candidate))
         {
-            strncpy(path, candidate, pathSize - 1);
-            path[pathSize - 1] = '\0';
+            CopyName(path, pathSize, candidate);
             return;
         }
     }
 
-    strncpy(path, "/", pathSize - 1);
-    path[pathSize - 1] = '\0';
+    CopyName(path, pathSize, "/");
 }
 
 static bool BuildChildPath(const char* parent, const char* name, char* output, size_t outputSize)
 {
-    const int written = !strcmp(parent, "/")
-        ? snprintf(output, outputSize, "/%s", name)
-        : snprintf(output, outputSize, "%s/%s", parent, name);
-    return written > 0 && (size_t)written < outputSize;
+    const size_t parentLength = strlen(parent);
+    const size_t nameLength = strlen(name);
+    const bool root = parentLength == 1 && parent[0] == '/';
+    const size_t required = parentLength + (root ? 0 : 1) + nameLength + 1;
+    if (required > outputSize)
+        return false;
+
+    memcpy(output, parent, parentLength);
+    size_t offset = parentLength;
+    if (!root)
+        output[offset++] = '/';
+    memcpy(output + offset, name, nameLength);
+    output[offset + nameLength] = '\0';
+    return true;
 }
 
 static void GoToParent(char* path)
@@ -170,35 +236,124 @@ static void GoToParent(char* path)
 
 static void WaitForNextFrame()
 {
-    while (REG_VCOUNT >= 192);
-    while (REG_VCOUNT < 192);
+    while (KOTOGBA_REG_VCOUNT >= 192);
+    while (KOTOGBA_REG_VCOUNT < 192);
 }
 
 static u16 ReadPressedKeys()
 {
     static u16 previous = 0;
-    const u16 held = (u16)(~REG_KEYINPUT) & 0x03FF;
+    const u16 held = (u16)(~KOTOGBA_REG_KEYINPUT) & 0x03FF;
     const u16 pressed = held & ~previous;
     previous = held;
     return pressed;
 }
 
+static void FillRect(int x, int y, int width, int height, u16 color)
+{
+    vu16* framebuffer = GFX_BG_SUB;
+    for (int py = 0; py < height; ++py)
+    {
+        const int yy = y + py;
+        if (yy < 0 || yy >= 192)
+            continue;
+        for (int px = 0; px < width; ++px)
+        {
+            const int xx = x + px;
+            if (xx >= 0 && xx < 256)
+                framebuffer[yy * 256 + xx] = color;
+        }
+    }
+}
+
+static const u8* FindGlyph(char character)
+{
+    character = DisplayChar(character);
+    if (character == ' ')
+        return nullptr;
+
+    for (const auto& glyph : sGlyphs)
+    {
+        if (glyph.character == character)
+            return glyph.row;
+    }
+
+    for (const auto& glyph : sGlyphs)
+    {
+        if (glyph.character == '?')
+            return glyph.row;
+    }
+    return nullptr;
+}
+
+static void DrawChar(int x, int y, char character, u16 color, int scale)
+{
+    const u8* rows = FindGlyph(character);
+    if (!rows)
+        return;
+
+    for (int row = 0; row < 5; ++row)
+    {
+        for (int column = 0; column < 3; ++column)
+        {
+            if ((rows[row] & (1u << (2 - column))) == 0)
+                continue;
+            FillRect(x + column * scale, y + row * scale, scale, scale, color);
+        }
+    }
+}
+
+static void DrawText(int x, int y, const char* text, u16 color, int scale, int maxCharacters)
+{
+    const int advance = 4 * scale;
+    int count = 0;
+    while (*text && count < maxCharacters)
+    {
+        DrawChar(x, y, *text, color, scale);
+        x += advance;
+        ++text;
+        ++count;
+    }
+}
+
+static void DrawLogo()
+{
+    const char* title = "KOTOGBA";
+    const int scale = 3;
+    const int advance = 4 * scale;
+    const int width = 7 * advance;
+    int x = (256 - width) / 2;
+
+    for (int i = 0; title[i]; ++i)
+    {
+        const u16 color = title[i] == 'G' ? KOTOGBA_COLOR_RED : KOTOGBA_COLOR_WHITE;
+        DrawChar(x, 10, title[i], color, scale);
+        x += advance;
+    }
+}
+
+static const char* TailOfPath(const char* path, int maxCharacters)
+{
+    const size_t length = strlen(path);
+    if ((int)length <= maxCharacters)
+        return path;
+    return path + length - maxCharacters;
+}
+
 static void RenderLauncher(const char* path, int count, int selected)
 {
-    iprintf("\x1b[2J\x1b[1;1H");
-    iprintf("\x1b[37mkoto\x1b[31mG\x1b[37mba\n");
-    iprintf("-------------------------------\n");
-    iprintf("ELIGE TU JUEGO\n\n");
-    iprintf("%.31s\n\n", path);
+    FillRect(0, 0, 256, 192, KOTOGBA_COLOR_BG);
+    DrawLogo();
+    DrawText(68, 32, "ELIGE TU JUEGO", KOTOGBA_COLOR_MUTED, 1, 30);
+    DrawText(8, 51, TailOfPath(path, 60), KOTOGBA_COLOR_MUTED, 1, 60);
 
     if (count < 0)
     {
-        iprintf("No puedo abrir esta carpeta.\n");
+        DrawText(8, 76, "NO PUEDO ABRIR ESTA CARPETA", KOTOGBA_COLOR_WHITE, 1, 60);
     }
     else if (count == 0)
     {
-        iprintf("No hay juegos .gba aqui.\n");
-        iprintf("B: carpeta anterior\n");
+        DrawText(8, 76, "NO HAY JUEGOS .GBA AQUI", KOTOGBA_COLOR_WHITE, 1, 60);
     }
     else
     {
@@ -214,17 +369,26 @@ static void RenderLauncher(const char* path, int count, int selected)
             ? first + KOTOGBA_VISIBLE_ROWS
             : count;
 
-        for (int i = first; i < last; ++i)
+        int row = 0;
+        for (int i = first; i < last; ++i, ++row)
         {
-            const char marker = i == selected ? '>' : ' ';
+            const int y = 68 + row * 10;
+            if (i == selected)
+                FillRect(4, y - 2, 248, 9, KOTOGBA_COLOR_ROW);
+
             if (sEntries[i].isDirectory)
-                iprintf("%c [DIR] %.23s\n", marker, sEntries[i].name);
+            {
+                DrawText(8, y, "DIR", KOTOGBA_COLOR_MUTED, 1, 3);
+                DrawText(28, y, sEntries[i].name, KOTOGBA_COLOR_WHITE, 1, 55);
+            }
             else
-                iprintf("%c       %.23s\n", marker, sEntries[i].name);
+            {
+                DrawText(8, y, sEntries[i].name, KOTOGBA_COLOR_WHITE, 1, 60);
+            }
         }
     }
 
-    iprintf("\nA: ABRIR/JUGAR   B: ATRAS\n");
+    DrawText(8, 181, "A JUGAR   B ATRAS", KOTOGBA_COLOR_MUTED, 1, 40);
 }
 
 bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
@@ -232,9 +396,12 @@ bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
     if (!outputPath || outputPathSize < 8)
         return false;
 
-    // The GBA core is not running yet. Reuse VRAM C for a temporary text launcher.
-    consoleDemoInit();
-    REG_MASTER_BRIGHT = 0x8010; // Hide the old GBARunner splash on the top screen.
+    // Lightweight launcher: direct-color framebuffer in VRAM C, no console/newlib UI.
+    mem_setVramCMapping(MEM_VRAM_C_SUB_BG_00000);
+    REG_DISPCNT_SUB = 0x00010805;
+    REG_BG3CNT_SUB = 0x4084;
+    gfx_setSubBg3Affine(256, 0, 0, 256, 0, 0);
+    REG_MASTER_BRIGHT = 0x8010;
     REG_MASTER_BRIGHT_SUB = 0;
     sysipc_setBottomBacklight(true);
 
@@ -254,7 +421,7 @@ bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
 
         bool redraw = false;
 
-        if (pressed & KEY_UP)
+        if (pressed & KOTOGBA_KEY_UP)
         {
             if (count > 0)
             {
@@ -262,7 +429,7 @@ bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
                 redraw = true;
             }
         }
-        else if (pressed & KEY_DOWN)
+        else if (pressed & KOTOGBA_KEY_DOWN)
         {
             if (count > 0)
             {
@@ -270,7 +437,7 @@ bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
                 redraw = true;
             }
         }
-        else if (pressed & KEY_B)
+        else if (pressed & KOTOGBA_KEY_B)
         {
             if (strcmp(currentPath, "/"))
             {
@@ -280,19 +447,15 @@ bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
                 redraw = true;
             }
         }
-        else if ((pressed & KEY_A) && count > 0)
+        else if ((pressed & KOTOGBA_KEY_A) && count > 0)
         {
             char nextPath[KOTOGBA_PATH_BYTES];
             if (!BuildChildPath(currentPath, sEntries[selected].name, nextPath, sizeof(nextPath)))
-            {
-                iprintf("\nRuta demasiado larga.\n");
                 continue;
-            }
 
             if (sEntries[selected].isDirectory)
             {
-                strncpy(currentPath, nextPath, sizeof(currentPath) - 1);
-                currentPath[sizeof(currentPath) - 1] = '\0';
+                CopyName(currentPath, sizeof(currentPath), nextPath);
                 selected = 0;
                 count = ReadDirectory(currentPath);
                 redraw = true;
@@ -300,11 +463,8 @@ bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
             else
             {
                 if (strlen(nextPath) + 1 > outputPathSize)
-                {
-                    iprintf("\nRuta demasiado larga.\n");
                     continue;
-                }
-                strcpy(outputPath, nextPath);
+                CopyName(outputPath, outputPathSize, nextPath);
                 return true;
             }
         }
