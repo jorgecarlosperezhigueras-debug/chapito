@@ -141,7 +141,24 @@ old_runtime = """    patch_resetSwiPatches();
 new_runtime = """    // kotoGba launcher: choose the ROM immediately after storage is mounted.
     // argv launching remains supported for TWiLight Menu++ and other frontends.
     char selectedRomPath[256] { };
-    const char* romPath = argc > 1 ? argv[1] : nullptr;
+    const char* romPath = nullptr;
+
+    // Some DS frontends pass their own extra arguments. Only treat argv[1]
+    // as a direct game path when it is actually a .gba file; otherwise show
+    // the kotoGba launcher.
+    if (argc > 1 && argv[1])
+    {
+        const char* argExtension = strrchr(argv[1], '.');
+        if (argExtension &&
+            (argExtension[1] == 'g' || argExtension[1] == 'G') &&
+            (argExtension[2] == 'b' || argExtension[2] == 'B') &&
+            (argExtension[3] == 'a' || argExtension[3] == 'A') &&
+            argExtension[4] == '\\0')
+        {
+            romPath = argv[1];
+        }
+    }
+
     if (!romPath)
     {
         waitSplashScreenAnimation();
