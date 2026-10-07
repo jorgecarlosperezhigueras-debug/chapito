@@ -4,6 +4,7 @@
 #include <libtwl/gfx/gfx.h>
 #include <libtwl/gfx/gfxBackground.h>
 #include "Fat/ff.h"
+#include "GbaHeader.h"
 #include "SystemIpc.h"
 #include "KotoGbaLauncherService.h"
 
@@ -64,6 +65,12 @@ KotoGbaLauncherService gKotoGbaLauncherService;
 
 [[gnu::section(".ewram.bss")]]
 static KotoGbaLauncherEntry sEntries[KOTOGBA_MAX_ENTRIES];
+
+[[gnu::section(".ewram.bss")]]
+static KotoGbaPackageInfo sPackageInfo;
+
+[[gnu::section(".ewram.bss")]]
+static u16 sPreviousKeys;
 
 KOTOGBA_EWRAM_CODE
 static int AsciiLower(int c)
@@ -257,11 +264,18 @@ static void WaitForNextFrame()
 KOTOGBA_EWRAM_CODE
 static u16 ReadPressedKeys()
 {
-    static u16 previous = 0;
     const u16 held = (u16)(~KOTOGBA_REG_KEYINPUT) & 0x03FF;
-    const u16 pressed = held & ~previous;
-    previous = held;
+    const u16 pressed = held & ~sPreviousKeys;
+    sPreviousKeys = held;
     return pressed;
+}
+
+KOTOGBA_EWRAM_CODE
+static void WaitForKeysReleased()
+{
+    while (((u16)(~KOTOGBA_REG_KEYINPUT) & 0x03FF) != 0)
+        WaitForNextFrame();
+    sPreviousKeys = 0;
 }
 
 KOTOGBA_EWRAM_CODE
@@ -359,6 +373,128 @@ static const char* TailOfPath(const char* path, int maxCharacters)
     if ((int)length <= maxCharacters)
         return path;
     return path + length - maxCharacters;
+}
+
+KOTOGBA_EWRAM_CODE
+static bool IsGameCodeCharacter(char c)
+{
+    return (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9');
+}
+
+KOTOGBA_EWRAM_CODE
+static bool ValidateGbaHeader(const GbaHeader& header)
+{
+    if (header.fixedValue != 0x96)
+        return false;
+
+    const char code[4] =
+    {
+        (char)(header.gameCode & 0xFF),
+        (char)((header.gameCode >> 8) & 0xFF),
+        (char)((header.gameCode >> 16) & 0xFF),
+        (char)((header.gameCode >> 24) & 0xFF)
+    };
+    for (char c : code)
+    {
+        if (!IsGameCodeCharacter(c))
+            return false;
+    }
+
+    const u8* raw = reinterpret_cast<const u8*>(&header);
+    u8 checksum = 0;
+    for (int i = 0xA0; i <= 0xBC; ++i)
+        checksum = (u8)(checksum - raw[i]);
+    checksum = (u8)(checksum - 0x19);
+    return checksum == header.headerChecksum;
+}
+
+KOTOGBA_EWRAM_CODE
+static char HexDigit(u8 value)
+{
+    value &= 0x0F;
+    return value < 10 ? (char)('0' + value) : (char)('A' + value - 10);
+}
+
+KOTOGBA_EWRAM_CODE
+static void BuildPackagePath(const GbaHeader& header, char* output)
+{
+    static const char prefix[] = "/_gba/kotogba/packages/";
+    static const char suffix[] = ".koto";
+
+    int offset = 0;
+    for (int i = 0; prefix[i]; ++i)
+        output[offset++] = prefix[i];
+
+    output[offset++] = (char)(header.gameCode & 0xFF);
+    output[offset++] = (char)((header.gameCode >> 8) & 0xFF);
+    output[offset++] = (char)((header.gameCode >> 16) & 0xFF);
+    output[offset++] = (char)((header.gameCode >> 24) & 0xFF);
+    output[offset++] = '_';
+    output[offset++] = HexDigit(header.softwareVersion >> 4);
+    output[offset++] = HexDigit(header.softwareVersion);
+
+    for (int i = 0; suffix[i]; ++i)
+        output[offset++] = suffix[i];
+    output[offset] = '\0';
+}
+
+KOTOGBA_EWRAM_CODE
+static bool PackageFileExists(const char* path)
+{
+    FIL file { };
+    if (f_open(&file, path, FA_OPEN_EXISTING | FA_READ) != FR_OK)
+        return false;
+    f_close(&file);
+    return true;
+}
+
+KOTOGBA_EWRAM_CODE
+static void ClearPackageInfo()
+{
+    memset(&sPackageInfo, 0, sizeof(sPackageInfo));
+}
+
+KOTOGBA_EWRAM_CODE
+static void BuildIdentityText(char* output)
+{
+    int offset = 0;
+    output[offset++] = sPackageInfo.gameCode[0];
+    output[offset++] = sPackageInfo.gameCode[1];
+    output[offset++] = sPackageInfo.gameCode[2];
+    output[offset++] = sPackageInfo.gameCode[3];
+    output[offset++] = ' ';
+    output[offset++] = 'R';
+    output[offset++] = 'E';
+    output[offset++] = 'V';
+    output[offset++] = ' ';
+    output[offset++] = HexDigit(sPackageInfo.revision >> 4);
+    output[offset++] = HexDigit(sPackageInfo.revision);
+    output[offset] = '\0';
+}
+
+KOTOGBA_EWRAM_CODE
+static void RenderRomDetails(const char* romPath)
+{
+    FillRect(0, 0, 256, 192, KOTOGBA_COLOR_BG);
+    DrawLogo();
+    DrawText(72, 40, "JUEGO DETECTADO", KOTOGBA_COLOR_MUTED, 1, 30);
+    DrawText(8, 62, TailOfPath(romPath, 60), KOTOGBA_COLOR_WHITE, 1, 60);
+
+    if (!sPackageInfo.validRom)
+    {
+        DrawText(8, 88, "ROM GBA NO VALIDA", KOTOGBA_COLOR_RED, 1, 40);
+        DrawText(8, 181, "B ATRAS", KOTOGBA_COLOR_MUTED, 1, 20);
+        return;
+    }
+
+    char identity[16] { };
+    BuildIdentityText(identity);
+    DrawText(8, 88, identity, KOTOGBA_COLOR_WHITE, 1, 20);
+    DrawText(8, 106,
+        sPackageInfo.installed ? "KOTO: INSTALADO" : "KOTO: NO INSTALADO",
+        sPackageInfo.installed ? KOTOGBA_COLOR_WHITE : KOTOGBA_COLOR_MUTED,
+        1, 30);
+    DrawText(8, 181, "A JUGAR   B ATRAS", KOTOGBA_COLOR_MUTED, 1, 40);
 }
 
 KOTOGBA_EWRAM_CODE
@@ -485,14 +621,82 @@ bool KotoGbaLauncherService::SelectRom(char* outputPath, size_t outputPathSize)
             }
             else
             {
-                if (strlen(nextPath) + 1 > outputPathSize)
-                    continue;
-                CopyName(outputPath, outputPathSize, nextPath);
-                return true;
+                gKotoGbaLauncherService.ResolvePackageForRom(nextPath);
+                RenderRomDetails(nextPath);
+
+                while (true)
+                {
+                    WaitForNextFrame();
+                    const u16 detailPressed = ReadPressedKeys();
+
+                    if (detailPressed & KOTOGBA_KEY_B)
+                    {
+                        redraw = true;
+                        break;
+                    }
+
+                    if ((detailPressed & KOTOGBA_KEY_A) && sPackageInfo.validRom)
+                    {
+                        if (strlen(nextPath) + 1 > outputPathSize)
+                            break;
+                        CopyName(outputPath, outputPathSize, nextPath);
+                        WaitForKeysReleased();
+                        return true;
+                    }
+                }
             }
         }
 
         if (redraw)
             RenderLauncher(currentPath, count, selected);
     }
+}
+
+
+KOTOGBA_EWRAM_CODE
+bool KotoGbaLauncherService::ResolvePackageForRom(const char* romPath)
+{
+    ClearPackageInfo();
+    if (!romPath)
+        return false;
+
+    FIL file { };
+    if (f_open(&file, romPath, FA_OPEN_EXISTING | FA_READ) != FR_OK)
+        return false;
+
+    GbaHeader header { };
+    UINT bytesRead = 0;
+    const FRESULT readResult = f_read(&file, &header, sizeof(header), &bytesRead);
+    f_close(&file);
+
+    if (readResult != FR_OK || bytesRead != sizeof(header))
+        return false;
+
+    return ResolvePackageForHeader(header);
+}
+
+KOTOGBA_EWRAM_CODE
+bool KotoGbaLauncherService::ResolvePackageForHeader(const GbaHeader& header)
+{
+    ClearPackageInfo();
+    if (!ValidateGbaHeader(header))
+        return false;
+
+    sPackageInfo.gameCode[0] = (char)(header.gameCode & 0xFF);
+    sPackageInfo.gameCode[1] = (char)((header.gameCode >> 8) & 0xFF);
+    sPackageInfo.gameCode[2] = (char)((header.gameCode >> 16) & 0xFF);
+    sPackageInfo.gameCode[3] = (char)((header.gameCode >> 24) & 0xFF);
+    sPackageInfo.gameCode[4] = '\0';
+    sPackageInfo.revision = header.softwareVersion;
+    sPackageInfo.validRom = true;
+
+    BuildPackagePath(header, sPackageInfo.packagePath);
+    sPackageInfo.installed = PackageFileExists(sPackageInfo.packagePath);
+    return true;
+}
+
+KOTOGBA_EWRAM_CODE
+const KotoGbaPackageInfo& KotoGbaLauncherService::GetPackageInfo() const
+{
+    return sPackageInfo;
 }
