@@ -1,15 +1,15 @@
-name: Build kotoGba GBARunner3 V0.3
+name: Build kotoGba GBARunner3 V0.4
 
 on:
   push:
-    branches: [ main ]
+    branches: [main, kotogba-v0.4-package]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: kotogba-gbarunner3-v03-hardware-approved
+  group: kotogba-gbarunner3-v04-package
   cancel-in-progress: true
 
 jobs:
@@ -21,6 +21,15 @@ jobs:
     steps:
       - name: Checkout kotoGba build bundle
         uses: actions/checkout@v4
+
+      - name: Validate and normalize FireRed JP Rev1 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/validate_koto_v04.py
+          grep -F 'cards=78' PACKAGE_VALIDATION_V04.txt
+          grep -F 'json_payloads_preserved=yes' PACKAGE_VALIDATION_V04.txt
+          grep -F 'status=PASS' PACKAGE_VALIDATION_V04.txt
 
       - name: Fetch exact GBARunner3 source
         shell: bash
@@ -42,14 +51,16 @@ jobs:
           cp upstream/code/bootstrap/GBARunner3.nds out/GBARunner3_ecaa817_clean.nds
           sha256sum out/GBARunner3_ecaa817_clean.nds > out/SHA256_CLEAN.txt
 
-      - name: Prepare and verify kotoGba lower-screen asset
+      - name: Prepare and verify kotoGba assets
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p sd/_gba/kotogba
+          mkdir -p sd/_gba/kotogba/packages
           base64 -d assets/home.raw16.gz.b64 | gzip -dc > sd/_gba/kotogba/home.raw16
           echo "474f7ff8060b2590228562c119c5b0470f03a94f5aadfebcaa2a1bf27c26e5ce  sd/_gba/kotogba/home.raw16" | sha256sum -c -
           test "$(stat -c%s sd/_gba/kotogba/home.raw16)" = "98304"
+          cp validated_packages/BPRJ_01.koto sd/_gba/kotogba/packages/BPRJ_01.koto
+          cmp validated_packages/BPRJ_01.koto sd/_gba/kotogba/packages/BPRJ_01.koto
 
       - name: Clean upstream build products
         shell: bash
@@ -65,7 +76,7 @@ jobs:
           git -C upstream submodule update --init --recursive --checkout
           test "$(git -C upstream rev-parse HEAD)" = "ecaa817815d9761745606592f04affe5ee9c3731"
 
-      - name: Apply exact kotoGba V0.3 package-association patch
+      - name: Apply hardware-approved V0.3 runtime for V0.4
         shell: bash
         run: |
           set -euo pipefail
@@ -80,46 +91,62 @@ jobs:
           test -f upstream/code/core/arm9/source/Application/KotoGbaLauncherService.cpp
           test -f upstream/code/core/arm9/source/Application/KotoGbaLauncherService.h
 
-      - name: Build kotoGba GBARunner3 V0.3
+      - name: Build kotoGba GBARunner3 V0.4
         shell: bash
         run: |
           set -euo pipefail
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_3.nds
-          mkdir -p out/_gba/kotogba
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_4.nds
+          mkdir -p out/_gba/kotogba/packages
           cp sd/_gba/kotogba/home.raw16 out/_gba/kotogba/home.raw16
-          sha256sum out/kotoGba_GBARunner3_V0_3.nds out/_gba/kotogba/home.raw16 > out/SHA256_KOTOGBA_V03.txt
+          cp sd/_gba/kotogba/packages/BPRJ_01.koto out/_gba/kotogba/packages/BPRJ_01.koto
+          cp PACKAGE_VALIDATION_V04.txt out/PACKAGE_VALIDATION_V04.txt
+          sha256sum \
+            out/kotoGba_GBARunner3_V0_4.nds \
+            out/_gba/kotogba/home.raw16 \
+            out/_gba/kotogba/packages/BPRJ_01.koto \
+            > out/SHA256_KOTOGBA_V04.txt
           printf '%s\n' \
             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731' \
             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e' \
-            'feature=V0.3 ROM launcher + canonical .koto association + hardware-validated EWRAM execution fix' \
-            'package_path=/_gba/kotogba/packages/<GAMECODE>_<REV_HEX>.koto' \
+            'runtime=hardware-approved kotoGba V0.3 EWRAM execution fix' \
+            'feature=V0.4 FireRed JP Rev1 package with 78 learning cards' \
+            'package_path=/_gba/kotogba/packages/BPRJ_01.koto' \
+            'rom_path=/_gba/kotogba/games/Pocket Monsters - FireRed (Japan) (Rev 1).gba' \
+            'rom_included=no' \
             'container=devkitpro/devkitarm:20241104' \
-            > out/BUILD_BASE_V03.txt
+            > out/BUILD_BASE_V04.txt
 
-      - name: Save V0.3 source checkpoint
+      - name: Save V0.4 source checkpoint
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p out/source/patch_files
-          cp tools/apply_kotogba_v03.py out/source/
+          mkdir -p out/source/patch_files out/source/packages out/source/tools
+          cp tools/apply_kotogba_v03.py out/source/tools/
+          cp tools/validate_koto_v04.py out/source/tools/
           cp -r patch_files/code out/source/patch_files/
+          cp validated_packages/BPRJ_01.koto out/source/packages/BPRJ_01.koto
+          cp packages/BPRJ_01.koto out/source/packages/BPRJ_01_SOURCE_ARCHIVE.koto
           cp .github/workflows/build-kotogba.yml out/source/
           printf '%s\n' \
             'Canonical runtime package alias:' \
             '/_gba/kotogba/packages/<GAMECODE>_<REV_HEX>.koto' \
-            'Example FireRed JP Rev1: /_gba/kotogba/packages/BPRJ_01.koto' \
+            'FireRed JP Rev1: /_gba/kotogba/packages/BPRJ_01.koto' \
+            'The user-owned .gba ROM is intentionally not included.' \
             > out/source/PACKAGE_NAMING.txt
           sha256sum \
-            out/source/apply_kotogba_v03.py \
+            out/source/tools/apply_kotogba_v03.py \
+            out/source/tools/validate_koto_v04.py \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaLauncherService.cpp \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaLauncherService.h \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.cpp \
             out/source/patch_files/code/core/arm9/source/Application/KotoGbaUiService.h \
+            out/source/packages/BPRJ_01.koto \
+            out/source/packages/BPRJ_01_SOURCE_ARCHIVE.koto \
             > out/source/SHA256_SOURCE.txt
 
-      - name: Build storage-free V0.3 launcher probe for emulator only
+      - name: Build storage-free V0.4 launcher probe for emulator only
         shell: bash
         run: |
           set -euo pipefail
@@ -130,13 +157,30 @@ jobs:
           grep -F -- '-DKOTOGBA_LAUNCHER_PROBE' upstream/code/bootstrap/arm9/Makefile
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_3_LAUNCHER_PROBE.nds
-          sha256sum out/kotoGba_GBARunner3_V0_3_LAUNCHER_PROBE.nds > out/SHA256_LAUNCHER_PROBE_V03.txt
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_4_LAUNCHER_PROBE.nds
+          sha256sum out/kotoGba_GBARunner3_V0_4_LAUNCHER_PROBE.nds > out/SHA256_LAUNCHER_PROBE_V04.txt
 
-      - name: Upload kotoGba V0.3 build
+      - name: Verify distributable layout
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s out/kotoGba_GBARunner3_V0_4.nds
+          test -s out/_gba/kotogba/home.raw16
+          test -s out/_gba/kotogba/packages/BPRJ_01.koto
+          cmp validated_packages/BPRJ_01.koto out/_gba/kotogba/packages/BPRJ_01.koto
+          python3 - <<'PY'
+          import zipfile
+          path = 'out/_gba/kotogba/packages/BPRJ_01.koto'
+          with zipfile.ZipFile(path) as archive:
+              assert archive.testzip() is None
+          PY
+          grep -F 'cards=78' out/PACKAGE_VALIDATION_V04.txt
+          grep -F 'status=PASS' out/PACKAGE_VALIDATION_V04.txt
+
+      - name: Upload kotoGba V0.4 build
         uses: actions/upload-artifact@v4
         with:
-          name: kotoGba_GBARunner3_V0_3
+          name: kotoGba_GBARunner3_V0_4
           path: out
-          retention-days: 7
+          retention-days: 14
           if-no-files-found: error
