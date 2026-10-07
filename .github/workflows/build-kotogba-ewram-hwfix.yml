@@ -2,7 +2,7 @@ name: Build kotoGba EWRAM hardware fix
 
 on:
   push:
-    branches: [ kotogba-ewram-fix-test ]
+    branches: [ kotogba-ewram-fix-run ]
   workflow_dispatch:
 
 permissions:
