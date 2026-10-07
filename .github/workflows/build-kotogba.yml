@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: kotogba-gbarunner3-v03
+  group: kotogba-gbarunner3-v03-launcher-probe2
   cancel-in-progress: true
 
 jobs:
