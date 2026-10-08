@@ -19,7 +19,8 @@ SERVICE_BLOB_SHA = {
     "KotoGbaLauncherService.h": "770103bb8ee997406ba2b71439ea266c370f8aa7",
     "KotoGbaRuntimeService.cpp": "fb8d4b06e134197b14fea840b8cc33fa14e30413",
     "KotoGbaRuntimeService.h": "9e310e75a421fd69923016f7532e9d31708a7fc8",
-    "KotoGbaDetector.inc": "a93c8579d9a98f4989c08aafc0b17fb56b702911",
+    "KotoGbaDetector.inc": "812652b1339a684376b964fc73623394da0fcc34",
+    "KotoGbaDetector.s": "4f91e9957fd2633c7c610ed6835de920fd8079aa",
 }
 
 ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
