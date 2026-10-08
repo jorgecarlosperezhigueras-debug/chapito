@@ -3,7 +3,6 @@
 #include <libtwl/gfx/gfxBackground.h>
 #include "KotoGbaRuntimeService.h"
 
-#define KOTOGBA_ITCM __attribute__((section(".itcm"), noinline))
 #define KOTOGBA_SCREEN_WIDTH  256
 #define KOTOGBA_SCREEN_HEIGHT 192
 #define KOTOGBA_COLOR_BG      (0x8000u | 2u | (2u << 5) | (3u << 10))
@@ -45,7 +44,6 @@ static constexpr KotoGlyph sGlyphs[] =
     {':',{0,2,0,2,0}}, {'?',{6,1,2,0,2}},
 };
 
-KOTOGBA_ITCM
 static void FillRect(int x, int y, int width, int height, u16 color)
 {
     vu16* framebuffer = GFX_BG_SUB;
@@ -63,7 +61,6 @@ static void FillRect(int x, int y, int width, int height, u16 color)
     }
 }
 
-KOTOGBA_ITCM
 static const u8* FindGlyph(char character)
 {
     if (character == ' ')
@@ -77,7 +74,6 @@ static const u8* FindGlyph(char character)
     return nullptr;
 }
 
-KOTOGBA_ITCM
 static void DrawChar(int x, int y, char character, u16 color, int scale)
 {
     const u8* rows = FindGlyph(character);
@@ -95,7 +91,6 @@ static void DrawChar(int x, int y, char character, u16 color, int scale)
     }
 }
 
-KOTOGBA_ITCM
 static void DrawText(int x, int y, const char* text, u16 color, int scale)
 {
     const int advance = 4 * scale;
@@ -107,7 +102,6 @@ static void DrawText(int x, int y, const char* text, u16 color, int scale)
     }
 }
 
-KOTOGBA_ITCM
 static void DrawCardId(u32 cardId)
 {
     char id[5] = {'I', '0', '0', '0', '\0'};
@@ -127,7 +121,6 @@ static void DrawCardId(u32 cardId)
     DrawText(58, 166, "SIGUE JUGANDO", KOTOGBA_COLOR_MUTED, 1);
 }
 
-KOTOGBA_ITCM
 void KotoGbaRuntimeService::Initialize(u32 gameCode, u8 revision, bool packageInstalled)
 {
     const u32 bprj = (u32)'B' | ((u32)'P' << 8) | ((u32)'R' << 16) | ((u32)'J' << 24);
@@ -136,8 +129,7 @@ void KotoGbaRuntimeService::Initialize(u32 gameCode, u8 revision, bool packageIn
     gKotoGbaRuntimeEnabled = (gameCode == bprj && revision == 1 && packageInstalled) ? 1u : 0u;
 }
 
-extern "C" KOTOGBA_ITCM
-void kotogba_vblankUpdate()
+extern "C" void kotogba_vblankUpdate()
 {
     if (!gKotoGbaRuntimeEnabled)
         return;
