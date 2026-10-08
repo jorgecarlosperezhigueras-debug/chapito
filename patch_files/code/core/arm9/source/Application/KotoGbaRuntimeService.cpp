@@ -17,7 +17,7 @@
 #define KOTOGBA_COLOR_MUTED   (0x8000u | 20u | (20u << 5) | (20u << 10))
 #define KOTOGBA_COLOR_RED     (0x8000u | 31u)
 
-KotoGbaRuntimeService gKotoGbaRuntimeService;
+[[gnu::section(".ewram.bss")]] KotoGbaRuntimeService gKotoGbaRuntimeService;
 
 [[gnu::section(".dtcm")]]
 volatile u32 gKotoGbaRuntimeEnabled = 0;
@@ -62,6 +62,7 @@ struct KotoGbaCardPreview
 };
 
 [[gnu::section(".ewram")]] static const char sUiLogo[] = "kotoGBA";
+[[gnu::section(".ewram")]] static const char sUiLogoRedG[] = "G";
 [[gnu::section(".ewram")]] static const char sUiAutoHelp[] = "AYUDA AUTOMÁTICA";
 [[gnu::section(".ewram")]] static const char sUiTranslation[] = "TRADUCCIÓN";
 [[gnu::section(".ewram")]] static const char sUiAutomatic[] = "AUTOMÁTICO";
@@ -208,7 +209,7 @@ static void BuildCardId(u32 cardId, char* output)
 static void DrawLogo()
 {
     DrawTextUtf8(8, 9, sUiLogo, KOTOGBA_COLOR_WHITE);
-    DrawTextUtf8(8 + 4 * KOTOGBA_GLYPH_WIDTH, 9, "G", KOTOGBA_COLOR_RED);
+    DrawTextUtf8(8 + 4 * KOTOGBA_GLYPH_WIDTH, 9, sUiLogoRedG, KOTOGBA_COLOR_RED);
 }
 
 static void DrawCard(u32 cardId)
