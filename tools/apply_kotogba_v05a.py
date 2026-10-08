@@ -10,10 +10,10 @@ import sys
 TARGET_COMMIT = "ecaa817815d9761745606592f04affe5ee9c3731"
 
 V05_SERVICE_BLOB_SHA = {
-    "KotoGbaRuntimeService.cpp": "0a0813ac89245d069ea7c12f2cd28f7e0108ff24",
-    "KotoGbaRuntimeService.h": "9e310e75a421fd69923016f7532e9d31708a7fc8",
-    "KotoGbaDetector.inc": "6e859375e75b7c24244bb9f17c36f6fe2588f1c3",
-    "KotoGbaDetector.s": "46f6951c924ced321cc794233de7a5ad6c594c56",
+    "KotoGbaRuntimeService.cpp": "55233509b35167c629f6ec5ef84a92108d52611e",
+    "KotoGbaRuntimeService.h": "e7383845d17083c466a9264dc3164a678c361ee0",
+    "KotoGbaDetector.inc": "c1188e9898dbfd6966097912d098ce131dd539c0",
+    "KotoGbaDetector.s": "aa3fd2d2389725e55a416641bd99736a9f089264",
     "KotoGbaLatinFont6x10.h": "eb185228168315c3cc4b1ec914f84b6e12e19431",
 }
 
@@ -91,6 +91,43 @@ if main_src.count(ui_anchor) != 1:
     raise SystemExit("No encuentro una única inicialización de la UI V0.3; no escribo nada.")
 main_src = main_src.replace(ui_anchor, ui_replacement, 1)
 
+# GBARunner3 relocates and patches the Nintendo BIOS at fixed offsets.
+# Reject missing/truncated files and a different reset-vector layout (emibios).
+# A successful file read alone does not make an open BIOS compatible.
+bios_old = """static void loadGbaBios()
+{
+    memset(&gFile, 0, sizeof(gFile));
+    f_open(&gFile, BIOS_FILE_PATH, FA_OPEN_EXISTING | FA_READ);
+    UINT br;
+    f_read(&gFile, gGbaBios, 16 * 1024, &br);
+    f_close(&gFile);
+}
+"""
+bios_new = """static bool loadGbaBios()
+{
+    memset(&gFile, 0, sizeof(gFile));
+    if (f_open(&gFile, BIOS_FILE_PATH, FA_OPEN_EXISTING | FA_READ) != FR_OK)
+        return false;
+    const bool sizeOk = f_size(&gFile) == 16 * 1024;
+    UINT br = 0;
+    const FRESULT result = f_read(&gFile, gGbaBios, 16 * 1024, &br);
+    f_close(&gFile);
+    // Reset must branch to the layout used by relocateGbaBios/applyBiosVmPatches.
+    return sizeOk && result == FR_OK && br == 16 * 1024 &&
+        gGbaBios[0] == 0xEA00002Eu;
+}
+"""
+if main_src.count(bios_old) != 1 or main_src.count("    loadGbaBios();\n") != 1:
+    raise SystemExit("No encuentro el cargador BIOS esperado; no escribo nada.")
+main_src = main_src.replace(bios_old, bios_new, 1)
+main_src = main_src.replace("    loadGbaBios();\n", """    if (!loadGbaBios())
+    {
+        gKotoGbaUiService.Initialize();
+        gKotoGbaRuntimeService.ShowBiosError();
+        while (true);
+    }
+""", 1)
+
 vblank_src = VBLANK.read_text(encoding="utf-8")
 vblank_old = """kotogba_skipDisplayCapture:
     // kotoGba V0: capture disabled; VRAM C belongs to SUB_BG.
@@ -127,7 +164,8 @@ memload8_handler = """arm_func memu_load8Ewram
 """
 memload8_patched = """arm_func memu_load8Ewram
     kotogba_detectIntroText
-    cmp r8, #ROM_LINEAR_END_DS_ADDRESS
+.global kotogba_load8EwramAfterDetector
+kotogba_load8EwramAfterDetector:
 """
 if memload8_src.count(memload8_handler) != 1:
     raise SystemExit("MemoryLoad8.s no contiene el handler EWRAM esperado; no escribo nada.")
@@ -166,6 +204,15 @@ for ok, label in checks:
     if not ok:
         raise SystemExit(f"Estado inesperado ({label}); no escribo nada.")
 
+# V0.5 owns the passive screen. Do not load the obsolete manual bitmap.
+# This also frees VRAM code space for the initial automatic waiting view.
+ui_path = APP / "KotoGbaUiService.cpp"
+ui_src = ui_path.read_text(encoding="utf-8")
+ui_start = ui_src.index("    // Dark fallback if the SD asset is missing/corrupt.")
+ui_end = ui_src.index("    return loaded;", ui_start) + len("    return loaded;")
+ui_src = ui_src[:ui_start] + "    FillLowerScreen(0x8000 | 0x0842);\n    return true;" + ui_src[ui_end:]
+ui_path.write_text(ui_src, encoding="utf-8")
+
 MAIN.write_text(main_src, encoding="utf-8")
 VBLANK.write_text(vblank_src, encoding="utf-8")
 MEMLOAD8.write_text(memload8_src, encoding="utf-8")
@@ -177,5 +224,5 @@ for name in V05_SERVICE_BLOB_SHA:
 print("PATCH_V05A_OK")
 print(f"BASE={TARGET_COMMIT}")
 print("BASE_RUNTIME=hardware-approved V0.3 patch")
-print("DETECTOR=FireRed JP Rev1 I001-I005 byte-read detector with LR preservation")
+print("DETECTOR=FireRed JP Rev1 I001-I005 byte-read branch trampolines preserving caller LR")
 print("UI=automatic Spanish translation on lower screen")

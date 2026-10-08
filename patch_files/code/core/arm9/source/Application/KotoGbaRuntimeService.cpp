@@ -52,13 +52,27 @@ struct KotoGbaCardPreview
 [[gnu::section(".ewram")]] static const char sIntroI005[] =
     "¿Cómo te llamas?";
 
+[[gnu::section(".ewram")]] static const char sWaiting[] =
+    "La traducción aparecerá automáticamente\n"
+    "cuando comience un diálogo compatible.";
+[[gnu::section(".ewram")]] static const char sBiosError[] =
+    "No se puede usar /_gba/bios.bin.\n"
+    "Falta, está incompleta o no tiene\n"
+    "el formato compatible con este motor.\n"
+    "Usa la BIOS con la que ya arrancaba.";
+[[gnu::section(".ewram")]] static const char sNoSync[] =
+    "Este juego o paquete no dispone de\n"
+    "sincronización automática en V0.5.";
 [[gnu::section(".ewram")]] static const KotoGbaCardPreview sIntroCards[] =
 {
+    {0, sWaiting},
     {1, sIntroI001},
     {2, sIntroI002},
     {3, sIntroI003},
     {4, sIntroI004},
     {5, sIntroI005},
+    {6, sBiosError},
+    {7, sNoSync},
 };
 
 [[gnu::section(".ewram")]] static const char sUiLogo[] = "kotoGBA";
@@ -66,6 +80,9 @@ struct KotoGbaCardPreview
 [[gnu::section(".ewram")]] static const char sUiAutoHelp[] = "AYUDA AUTOMÁTICA";
 [[gnu::section(".ewram")]] static const char sUiTranslation[] = "TRADUCCIÓN";
 [[gnu::section(".ewram")]] static const char sUiAutomatic[] = "AUTOMÁTICO";
+[[gnu::section(".ewram")]] static const char sUiWaiting[] = "ESPERANDO DIÁLOGO";
+[[gnu::section(".ewram")]] static const char sUiBootError[] = "ARRANQUE DETENIDO";
+[[gnu::section(".ewram")]] static const char sUiNoSync[] = "SIN SINCRONIZACIÓN";
 
 static void FillRect(int x, int y, int width, int height, u16 color)
 {
@@ -227,12 +244,18 @@ static void DrawCard(u32 cardId)
 
     DrawLogo();
     DrawTextUtf8(62, 9, sUiAutoHelp, KOTOGBA_COLOR_MUTED);
-    DrawTextUtf8(8, 42, sUiTranslation, KOTOGBA_COLOR_RED);
+    const char* heading = cardId == 0 ? sUiWaiting :
+        cardId == 6 ? sUiBootError : cardId == 7 ? sUiNoSync : sUiTranslation;
+    DrawTextUtf8(8, 42, heading, KOTOGBA_COLOR_RED);
     DrawTextUtf8(8, 60, card->spanish, KOTOGBA_COLOR_WHITE);
 
     FillRect(8, 174, 240, 1, KOTOGBA_COLOR_PANEL);
-    DrawTextUtf8(8, 178, id, KOTOGBA_COLOR_MUTED);
-    DrawTextUtf8(44, 178, sUiAutomatic, KOTOGBA_COLOR_MUTED);
+    if (cardId <= 5)
+    {
+        if (cardId)
+            DrawTextUtf8(8, 178, id, KOTOGBA_COLOR_MUTED);
+        DrawTextUtf8(44, 178, sUiAutomatic, KOTOGBA_COLOR_MUTED);
+    }
 }
 
 void KotoGbaRuntimeService::Initialize(u32 gameCode, u8 revision, bool packageInstalled)
@@ -241,6 +264,13 @@ void KotoGbaRuntimeService::Initialize(u32 gameCode, u8 revision, bool packageIn
     gKotoGbaPendingCardId = 0;
     sKotoGbaActiveCardId = 0;
     gKotoGbaRuntimeEnabled = (gameCode == bprj && revision == 1 && packageInstalled) ? 1u : 0u;
+    DrawCard(gKotoGbaRuntimeEnabled ? 0 : 7);
+}
+
+void KotoGbaRuntimeService::ShowBiosError()
+{
+    gKotoGbaRuntimeEnabled = 0;
+    DrawCard(6);
 }
 
 extern "C" void kotogba_vblankUpdate()

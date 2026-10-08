@@ -1,4 +1,4 @@
-name: Build kotoGba GBARunner3 V0.5-B automatic translation
+name: Build kotoGba GBARunner3 V0.5-C automatic translation
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: kotogba-gbarunner3-v05b-auto-translation-${{ github.ref }}
+  group: kotogba-gbarunner3-v05c-auto-translation-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Checkout kotoGba V0.5-B
+      - name: Checkout kotoGba V0.5-C
         uses: actions/checkout@v4
 
       - name: Validate FireRed JP Rev1 package
@@ -56,8 +56,6 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out/_gba/kotogba/packages
-          base64 -d assets/home.raw16.gz.b64 | gzip -dc > out/_gba/kotogba/home.raw16
-          echo "474f7ff8060b2590228562c119c5b0470f03a94f5aadfebcaa2a1bf27c26e5ce  out/_gba/kotogba/home.raw16" | sha256sum -c -
           cp validated_packages/BPRJ_01.koto out/_gba/kotogba/packages/BPRJ_01.koto
 
       - name: Restore exact pinned source before patch
@@ -68,7 +66,7 @@ jobs:
           git -C upstream reset --hard ecaa817815d9761745606592f04affe5ee9c3731
           git -C upstream submodule update --init --recursive --checkout
 
-      - name: Apply V0.5-B automatic translation
+      - name: Apply V0.5-C automatic translation
         shell: bash
         run: |
           set -euo pipefail
@@ -83,29 +81,20 @@ jobs:
           test -f upstream/code/core/arm9/source/Application/KotoGbaLatinFont6x10.h
           test -f upstream/code/core/arm9/source/Application/KotoGbaDetector.inc
 
-      - name: Build kotoGba V0.5-B
+      - name: Build kotoGba V0.5-C
         shell: bash
         run: |
           set -euo pipefail
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_5B.nds
-          cp upstream/code/core/arm9/arm9.elf out/arm9_v05b.elf
-          /opt/devkitpro/devkitARM/bin/arm-none-eabi-nm -n upstream/code/core/arm9/arm9.elf > out/ARM9_SYMBOLS_V05B.txt
-          /opt/devkitpro/devkitARM/bin/arm-none-eabi-objdump -h upstream/code/core/arm9/arm9.elf > out/ARM9_SECTIONS_V05B.txt
-          sha256sum             out/kotoGba_GBARunner3_V0_5B.nds             out/_gba/kotogba/home.raw16             out/_gba/kotogba/packages/BPRJ_01.koto             > out/SHA256_KOTOGBA_V05B.txt
-          printf '%s\n'             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731'             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e'             'base_runtime=hardware-approved kotoGba V0.4/V0.3 EWRAM execution fix'             'checkpoint=V0.5-B automatic Spanish translation'             'detector=FireRed JP Rev1 I001-I005'             'ui=automatic lower-screen approved Spanish translation'             'rom_included=no'             > out/BUILD_BASE_V05A.txt
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_5C.nds
+          cp upstream/code/core/arm9/arm9.elf out/arm9_v05c.elf
+          /opt/devkitpro/devkitARM/bin/arm-none-eabi-nm -n upstream/code/core/arm9/arm9.elf > out/ARM9_SYMBOLS_V05C.txt
+          /opt/devkitpro/devkitARM/bin/arm-none-eabi-objdump -h upstream/code/core/arm9/arm9.elf > out/ARM9_SECTIONS_V05C.txt
+          sha256sum             out/kotoGba_GBARunner3_V0_5C.nds             out/_gba/kotogba/packages/BPRJ_01.koto             > out/SHA256_KOTOGBA_V05C.txt
+          printf '%s\n'             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731'             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e'             'base_runtime=hardware-approved kotoGba V0.4/V0.3 EWRAM execution fix'             'checkpoint=V0.5-C automatic Spanish translation'             'detector=FireRed JP Rev1 I001-I005'             'ui=automatic lower-screen approved Spanish translation'             'rom_included=no'             > out/BUILD_BASE_V05A.txt
 
-      - name: Prepare emibios GBA BIOS for emulator QA only
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -L --fail --retry 3             https://github.com/coolbho3k/emibios/releases/download/0.1.6/gba_bios.bin             -o out/OPEN_GBA_BIOS_EMULATOR_QA.bin
-          test "$(stat -c%s out/OPEN_GBA_BIOS_EMULATOR_QA.bin)" = "16384"
-          echo "ca56efafc53af12f6ba2eec722302dd2cb725f65dd2ed8afdeb5d27bc14e2d08  out/OPEN_GBA_BIOS_EMULATOR_QA.bin" | sha256sum -c -
-          sha256sum out/OPEN_GBA_BIOS_EMULATOR_QA.bin > out/SHA256_OPEN_GBA_BIOS.txt
-
-      - name: Save V0.5-B source checkpoint
+      - name: Save V0.5-C source checkpoint
         shell: bash
         run: |
           set -euo pipefail
@@ -116,22 +105,21 @@ jobs:
           cp -r patch_files/code out/source/patch_files/
           cp validated_packages/BPRJ_01.koto out/source/packages/BPRJ_01.koto
           cp .github/workflows/build-kotogba-v05a.yml out/source/
-          sha256sum             out/source/tools/apply_kotogba_v05a.py             out/source/patch_files/code/core/arm9/source/Application/KotoGbaDetector.inc             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.h             > out/source/SHA256_SOURCE_V05B.txt
+          sha256sum             out/source/tools/apply_kotogba_v05a.py             out/source/patch_files/code/core/arm9/source/Application/KotoGbaDetector.inc             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.h             > out/source/SHA256_SOURCE_V05C.txt
 
-      - name: Verify V0.5-B distributable
+      - name: Verify V0.5-C distributable
         shell: bash
         run: |
           set -euo pipefail
-          test -s out/kotoGba_GBARunner3_V0_5B.nds
-          test -s out/_gba/kotogba/home.raw16
+          test -s out/kotoGba_GBARunner3_V0_5C.nds
           test -s out/_gba/kotogba/packages/BPRJ_01.koto
           grep -F 'cards=78' PACKAGE_VALIDATION_V04.txt
           grep -F 'status=PASS' PACKAGE_VALIDATION_V04.txt
 
-      - name: Upload kotoGba V0.5-B build
+      - name: Upload kotoGba V0.5-C build
         uses: actions/upload-artifact@v4
         with:
-          name: kotoGba_GBARunner3_V0_5B_AUTO_TRANSLATION
+          name: kotoGba_GBARunner3_V0_5C_AUTO_TRANSLATION
           path: out
           retention-days: 14
           if-no-files-found: error

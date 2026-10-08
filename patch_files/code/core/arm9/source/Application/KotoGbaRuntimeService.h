@@ -4,6 +4,7 @@
 class KotoGbaRuntimeService
 {
 public:
+    void ShowBiosError();
     void Initialize(u32 gameCode, u8 revision, bool packageInstalled);
 };
 

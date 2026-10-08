@@ -2,6 +2,7 @@
 
 #include "AsmMacros.inc"
 #include "VirtualMachine/VMDtcmDefs.inc"
+#include "MemoryEmulator/RomDefs.h"
 
 .macro kotogba_detector_body exitLabel
     ldr r10,= gKotoGbaRuntimeEnabled
@@ -39,16 +40,14 @@
     str r12, [r10]
 .endm
 
-/// @brief Hook used by MemoryLoad8.s, where one extra BL fits safely.
+/// @brief Size-neutral linear-memory trampoline; both jumps preserve caller LR.
 /// @param r8 Address being read; r10-r12 may be trashed by caller contract.
-/// The host load handler still needs its original LR after this BL, so keep it
-/// temporarily in r9. r9 has not received the emulated byte yet and may be used.
 arm_func kotogba_detectIntroTextFromLoad8
-    mov r9, lr
     kotogba_detector_body 99f
 99:
-    mov lr, r9
-    bx lr
+    // Execute the CMP displaced from memu_load8Ewram, including its flags.
+    cmp r8, #ROM_LINEAR_END_DS_ADDRESS
+    b kotogba_load8EwramAfterDetector
 
 /// @brief Size-neutral trampoline for MemoryLoadRom.s.
 /// Replaces its existing first LDR so the fixed 0x390-0x400 ITCM slot does not grow.
