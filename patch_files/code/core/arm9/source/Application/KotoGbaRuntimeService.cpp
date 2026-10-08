@@ -2,14 +2,18 @@
 #include <libtwl/gfx/gfx.h>
 #include <libtwl/gfx/gfxBackground.h>
 #include "KotoGbaRuntimeService.h"
+#include "KotoGbaLatinFont6x10.h"
 
 #define KOTOGBA_SCREEN_WIDTH  256
 #define KOTOGBA_SCREEN_HEIGHT 192
+#define KOTOGBA_GLYPH_WIDTH   6
+#define KOTOGBA_GLYPH_HEIGHT  10
+#define KOTOGBA_LINE_HEIGHT   14
 #define KOTOGBA_COLOR_BG      (0x8000u | 2u | (2u << 5) | (3u << 10))
+#define KOTOGBA_COLOR_PANEL   (0x8000u | 5u | (5u << 5) | (7u << 10))
 #define KOTOGBA_COLOR_WHITE   0xFFFFu
 #define KOTOGBA_COLOR_MUTED   (0x8000u | 20u | (20u << 5) | (20u << 10))
 #define KOTOGBA_COLOR_RED     (0x8000u | 31u)
-#define KOTOGBA_COLOR_ROW     (0x8000u | 5u | (5u << 5) | (7u << 10))
 
 KotoGbaRuntimeService gKotoGbaRuntimeService;
 
@@ -20,28 +24,22 @@ volatile u32 gKotoGbaPendingCardId = 0;
 [[gnu::section(".dtcm")]]
 static u32 sKotoGbaActiveCardId = 0;
 
-struct KotoGlyph
+struct KotoGbaCardPreview
 {
-    char character;
-    u8 row[5];
+    u32 id;
+    const char* spanish;
 };
 
-static constexpr KotoGlyph sGlyphs[] =
+// These strings come directly from the approved BPRJ_01.koto package.
+// V0.5-B intentionally exposes only the automatic translation view.
+// Vocabulary/grammar stay out of the passive screen and belong to investigation mode.
+static constexpr KotoGbaCardPreview sIntroCards[] =
 {
-    {'A',{2,5,7,5,5}}, {'B',{6,5,6,5,6}}, {'C',{3,4,4,4,3}},
-    {'D',{6,5,5,5,6}}, {'E',{7,4,6,4,7}}, {'F',{7,4,6,4,4}},
-    {'G',{3,4,5,5,3}}, {'H',{5,5,7,5,5}}, {'I',{7,2,2,2,7}},
-    {'J',{1,1,1,5,2}}, {'K',{5,5,6,5,5}}, {'L',{4,4,4,4,7}},
-    {'M',{5,7,7,5,5}}, {'N',{5,7,7,7,5}}, {'O',{2,5,5,5,2}},
-    {'P',{6,5,6,4,4}}, {'Q',{2,5,5,3,1}}, {'R',{6,5,6,5,5}},
-    {'S',{3,4,2,1,6}}, {'T',{7,2,2,2,2}}, {'U',{5,5,5,5,7}},
-    {'V',{5,5,5,5,2}}, {'W',{5,5,7,7,5}}, {'X',{5,5,2,5,5}},
-    {'Y',{5,5,2,2,2}}, {'Z',{7,1,2,4,7}},
-    {'0',{7,5,5,5,7}}, {'1',{2,6,2,2,7}}, {'2',{6,1,7,4,7}},
-    {'3',{6,1,3,1,6}}, {'4',{5,5,7,1,1}}, {'5',{7,4,6,1,6}},
-    {'6',{3,4,7,5,7}}, {'7',{7,1,1,2,2}}, {'8',{7,5,7,5,7}},
-    {'9',{7,5,7,1,6}}, {'.',{0,0,0,0,2}}, {'-',{0,0,7,0,0}},
-    {':',{0,2,0,2,0}}, {'?',{6,1,2,0,2}},
+    {1, "¡Encantado! ¡Bienvenido al mundo de los Pokémon! Me llamo Oak. Todos me conocen y respetan como el Profesor Pokémon."},
+    {2, "En este mundo viven por todas partes unas criaturas llamadas Pokémon."},
+    {3, "Las personas tienen a esas criaturas llamadas Pokémon como mascotas o las usan en combates... Y yo me dedico a investigar a los Pokémon."},
+    {4, "Pero antes, háblame un poco de ti."},
+    {5, "¿Cómo te llamas?"},
 };
 
 static void FillRect(int x, int y, int width, int height, u16 color)
@@ -61,64 +59,207 @@ static void FillRect(int x, int y, int width, int height, u16 color)
     }
 }
 
-static const u8* FindGlyph(char character)
+static const KotoGbaGlyph6x10* FindGlyph(u16 codepoint)
 {
-    if (character == ' ')
-        return nullptr;
-
-    for (const auto& glyph : sGlyphs)
+    for (unsigned i = 0; i < kKotoGbaLatinGlyphCount; ++i)
     {
-        if (glyph.character == character)
-            return glyph.row;
+        if (kKotoGbaLatinGlyphs[i].codepoint == codepoint)
+            return &kKotoGbaLatinGlyphs[i];
     }
+
+    if (codepoint != '?')
+        return FindGlyph('?');
     return nullptr;
 }
 
-static void DrawChar(int x, int y, char character, u16 color, int scale)
+static void DrawGlyph(int x, int y, u16 codepoint, u16 color)
 {
-    const u8* rows = FindGlyph(character);
-    if (!rows)
+    if (codepoint == ' ')
         return;
 
-    for (int row = 0; row < 5; ++row)
+    const KotoGbaGlyph6x10* glyph = FindGlyph(codepoint);
+    if (!glyph)
+        return;
+
+    vu16* framebuffer = GFX_BG_SUB;
+    for (int row = 0; row < KOTOGBA_GLYPH_HEIGHT; ++row)
     {
-        for (int column = 0; column < 3; ++column)
+        const int yy = y + row;
+        if (yy < 0 || yy >= KOTOGBA_SCREEN_HEIGHT)
+            continue;
+
+        const u8 bits = glyph->rows[row];
+        for (int column = 0; column < KOTOGBA_GLYPH_WIDTH; ++column)
         {
-            if ((rows[row] & (1u << (2 - column))) == 0)
+            if ((bits & (1u << (5 - column))) == 0)
                 continue;
-            FillRect(x + column * scale, y + row * scale, scale, scale, color);
+            const int xx = x + column;
+            if (xx >= 0 && xx < KOTOGBA_SCREEN_WIDTH)
+                framebuffer[yy * KOTOGBA_SCREEN_WIDTH + xx] = color;
         }
     }
 }
 
-static void DrawText(int x, int y, const char* text, u16 color, int scale)
+static u16 DecodeUtf8(const char*& text)
 {
-    const int advance = 4 * scale;
-    while (*text)
+    const u8 first = (u8)*text++;
+    if (first < 0x80)
+        return first;
+
+    if ((first & 0xE0) == 0xC0)
     {
-        DrawChar(x, y, *text, color, scale);
-        x += advance;
+        const u8 second = (u8)*text;
+        if ((second & 0xC0) != 0x80)
+            return '?';
         ++text;
+        return (u16)(((first & 0x1F) << 6) | (second & 0x3F));
+    }
+
+    // The V0.5-B Spanish strings only require Latin-1 codepoints.
+    // Consume any longer UTF-8 sequence safely and render a fallback glyph.
+    if ((first & 0xF0) == 0xE0)
+    {
+        for (int i = 0; i < 2 && *text; ++i)
+        {
+            if ((((u8)*text) & 0xC0) == 0x80)
+                ++text;
+        }
+    }
+    else if ((first & 0xF8) == 0xF0)
+    {
+        for (int i = 0; i < 3 && *text; ++i)
+        {
+            if ((((u8)*text) & 0xC0) == 0x80)
+                ++text;
+        }
+    }
+    return '?';
+}
+
+static void DrawTextUtf8(int x, int y, const char* text, u16 color)
+{
+    const char* cursor = text;
+    int column = 0;
+    while (*cursor)
+    {
+        const u16 codepoint = DecodeUtf8(cursor);
+        DrawGlyph(x + column * KOTOGBA_GLYPH_WIDTH, y, codepoint, color);
+        ++column;
     }
 }
 
-static void DrawCardId(u32 cardId)
+static int CountWordCharacters(const char* text)
 {
-    char id[5] = {'I', '0', '0', '0', '\0'};
-    if (cardId > 999)
-        cardId = 999;
-    id[1] = (char)('0' + ((cardId / 100) % 10));
-    id[2] = (char)('0' + ((cardId / 10) % 10));
-    id[3] = (char)('0' + (cardId % 10));
+    const char* cursor = text;
+    int count = 0;
+    while (*cursor && *cursor != ' ' && *cursor != '\n')
+    {
+        DecodeUtf8(cursor);
+        ++count;
+    }
+    return count;
+}
 
-    FillRect(0, 0, 256, 192, KOTOGBA_COLOR_BG);
-    FillRect(0, 0, 256, 28, KOTOGBA_COLOR_ROW);
-    DrawText(20, 8, "KOTOGBA V0.5-A", KOTOGBA_COLOR_WHITE, 2);
-    DrawText(52, 47, "AUTO SYNC", KOTOGBA_COLOR_MUTED, 2);
-    DrawText(80, 78, id, KOTOGBA_COLOR_RED, 5);
-    DrawText(48, 119, "TEXTO DETECTADO", KOTOGBA_COLOR_WHITE, 1);
-    DrawText(38, 145, "SIN TOCAR KOTOGBA", KOTOGBA_COLOR_MUTED, 1);
-    DrawText(58, 166, "SIGUE JUGANDO", KOTOGBA_COLOR_MUTED, 1);
+static void DrawWrappedText(int x, int y, const char* text, u16 color,
+    int maxColumns, int maxLines)
+{
+    const char* cursor = text;
+    int column = 0;
+    int line = 0;
+
+    while (*cursor && line < maxLines)
+    {
+        while (*cursor == ' ')
+            ++cursor;
+
+        if (*cursor == '\n')
+        {
+            ++cursor;
+            ++line;
+            column = 0;
+            continue;
+        }
+        if (!*cursor)
+            break;
+
+        const int wordLength = CountWordCharacters(cursor);
+        if (column > 0 && column + 1 + wordLength > maxColumns)
+        {
+            ++line;
+            column = 0;
+            if (line >= maxLines)
+                break;
+        }
+
+        if (column > 0)
+            ++column;
+
+        while (*cursor && *cursor != ' ' && *cursor != '\n')
+        {
+            if (column >= maxColumns)
+            {
+                ++line;
+                column = 0;
+                if (line >= maxLines)
+                    return;
+            }
+
+            const u16 codepoint = DecodeUtf8(cursor);
+            DrawGlyph(
+                x + column * KOTOGBA_GLYPH_WIDTH,
+                y + line * KOTOGBA_LINE_HEIGHT,
+                codepoint,
+                color);
+            ++column;
+        }
+    }
+}
+
+static const KotoGbaCardPreview* FindCard(u32 cardId)
+{
+    for (const auto& card : sIntroCards)
+    {
+        if (card.id == cardId)
+            return &card;
+    }
+    return nullptr;
+}
+
+static void BuildCardId(u32 cardId, char* output)
+{
+    output[0] = 'I';
+    output[1] = (char)('0' + ((cardId / 100) % 10));
+    output[2] = (char)('0' + ((cardId / 10) % 10));
+    output[3] = (char)('0' + (cardId % 10));
+    output[4] = '\0';
+}
+
+static void DrawLogo()
+{
+    DrawTextUtf8(8, 9, "kotoGBA", KOTOGBA_COLOR_WHITE);
+    DrawTextUtf8(8 + 4 * KOTOGBA_GLYPH_WIDTH, 9, "G", KOTOGBA_COLOR_RED);
+}
+
+static void DrawCard(u32 cardId)
+{
+    const KotoGbaCardPreview* card = FindCard(cardId);
+    if (!card)
+        return;
+
+    char id[5];
+    BuildCardId(cardId, id);
+
+    FillRect(0, 0, KOTOGBA_SCREEN_WIDTH, KOTOGBA_SCREEN_HEIGHT, KOTOGBA_COLOR_BG);
+    FillRect(0, 0, KOTOGBA_SCREEN_WIDTH, 30, KOTOGBA_COLOR_PANEL);
+
+    DrawLogo();
+    DrawTextUtf8(62, 9, "AYUDA AUTOMÁTICA", KOTOGBA_COLOR_MUTED);
+    DrawTextUtf8(8, 42, "TRADUCCIÓN", KOTOGBA_COLOR_RED);
+    DrawWrappedText(8, 60, card->spanish, KOTOGBA_COLOR_WHITE, 40, 8);
+
+    FillRect(8, 174, 240, 1, KOTOGBA_COLOR_PANEL);
+    DrawTextUtf8(8, 178, id, KOTOGBA_COLOR_MUTED);
+    DrawTextUtf8(44, 178, "AUTOMÁTICO", KOTOGBA_COLOR_MUTED);
 }
 
 void KotoGbaRuntimeService::Initialize(u32 gameCode, u8 revision, bool packageInstalled)
@@ -139,5 +280,5 @@ extern "C" void kotogba_vblankUpdate()
         return;
 
     sKotoGbaActiveCardId = pending;
-    DrawCardId(pending);
+    DrawCard(pending);
 }
