@@ -1,3 +1,15 @@
+## V0.5-C — corrección posterior a run 75
+
+Rama: `kotogba-v0.5-auto-sync`. Base inmediata: `56e81f7144585132281e2f8006e950ad5e393c4a` (run 75).
+
+- El hook lineal de lectura de bytes conserva LR con dos saltos, sin BL. El hook anterior guardaba LR después de que BL ya lo hubiese sobrescrito.
+- La pantalla inferior se dibuja al iniciar: espera de diálogo automático. Ya no carga el bitmap antiguo de TRADUCIR.
+- El cargador comprueba apertura, tamaño, lectura y vector de reset de `/_gba/bios.bin` antes de aplicar las relocaciones fijas del motor.
+- No se distribuye emibios como BIOS de QA: su estructura no es compatible con esos parches.
+- ROM y BIOS del usuario no se incluyen. Conserva la BIOS y las partidas que funcionaban previamente.
+
+Validación de lanzamiento y de I001 → I005: pendiente hasta ejecutar con una BIOS compatible. Compilación correcta por sí sola no valida el juego.
+
 # kotoGBA — GBARunner3 para aprender japonés jugando
 
 Repositorio de construcción de **kotoGBA**, una adaptación experimental de GBARunner3 para cargar una ROM de GBA propiedad del usuario y asociarle un paquete didáctico independiente.

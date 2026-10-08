@@ -1,0 +1,125 @@
+name: Build kotoGba GBARunner3 V0.5-C automatic translation
+
+on:
+  push:
+    branches: [kotogba-v0.5-auto-sync]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kotogba-gbarunner3-v05c-auto-translation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitarm:20241104
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout kotoGba V0.5-C
+        uses: actions/checkout@v4
+
+      - name: Validate FireRed JP Rev1 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/validate_koto_v04.py
+          grep -F 'cards=78' PACKAGE_VALIDATION_V04.txt
+          grep -F 'status=PASS' PACKAGE_VALIDATION_V04.txt
+
+      - name: Fetch exact GBARunner3 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/Gericom/GBARunner3.git upstream
+          git -C upstream checkout ecaa817815d9761745606592f04affe5ee9c3731
+          git -C upstream submodule update --init --recursive
+          test "$(git -C upstream rev-parse HEAD)" = "ecaa817815d9761745606592f04affe5ee9c3731"
+          test "$(git -C upstream/code/libs/libtwl rev-parse HEAD)" = "e069645bed14a93e149e873e9273f04851e3a04e"
+
+      - name: Build pinned GBARunner3 clean
+        shell: bash
+        run: |
+          set -euo pipefail
+          make -C upstream/code
+          test -s upstream/code/bootstrap/GBARunner3.nds
+          mkdir -p out
+          cp upstream/code/bootstrap/GBARunner3.nds out/GBARunner3_ecaa817_clean.nds
+
+      - name: Prepare kotoGba assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/_gba/kotogba/packages
+          cp validated_packages/BPRJ_01.koto out/_gba/kotogba/packages/BPRJ_01.koto
+
+      - name: Restore exact pinned source before patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          make -C upstream/code clean
+          git -C upstream reset --hard ecaa817815d9761745606592f04affe5ee9c3731
+          git -C upstream submodule update --init --recursive --checkout
+
+      - name: Apply V0.5-C automatic translation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/apply_kotogba_v05a.py upstream
+          grep -F 'gKotoGbaRuntimeService.Initialize(' upstream/code/core/arm9/source/main.cpp
+          grep -F 'kotogba_detectIntroText' upstream/code/core/arm9/source/MemoryEmulator/MemoryLoad8.s
+          grep -F 'kotogba_detectIntroText' upstream/code/core/arm9/source/MemoryEmulator/MemoryLoadRom.s
+          grep -F 'bl kotogba_vblankUpdate' upstream/code/core/arm9/source/Emulator/VBlankIrq.s
+          grep -F 'TRADUCCIÓN' upstream/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp
+          grep -F '¿Cómo te llamas?' upstream/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp
+          test -f upstream/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp
+          test -f upstream/code/core/arm9/source/Application/KotoGbaLatinFont6x10.h
+          test -f upstream/code/core/arm9/source/Application/KotoGbaDetector.inc
+
+      - name: Build kotoGba V0.5-C
+        shell: bash
+        run: |
+          set -euo pipefail
+          make -C upstream/code
+          test -s upstream/code/bootstrap/GBARunner3.nds
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_5C.nds
+          cp upstream/code/core/arm9/arm9.elf out/arm9_v05c.elf
+          /opt/devkitpro/devkitARM/bin/arm-none-eabi-nm -n upstream/code/core/arm9/arm9.elf > out/ARM9_SYMBOLS_V05C.txt
+          /opt/devkitpro/devkitARM/bin/arm-none-eabi-objdump -h upstream/code/core/arm9/arm9.elf > out/ARM9_SECTIONS_V05C.txt
+          sha256sum             out/kotoGba_GBARunner3_V0_5C.nds             out/_gba/kotogba/packages/BPRJ_01.koto             > out/SHA256_KOTOGBA_V05C.txt
+          printf '%s\n'             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731'             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e'             'base_runtime=hardware-approved kotoGba V0.4/V0.3 EWRAM execution fix'             'checkpoint=V0.5-C automatic Spanish translation'             'detector=FireRed JP Rev1 I001-I005'             'ui=automatic lower-screen approved Spanish translation'             'rom_included=no'             > out/BUILD_BASE_V05A.txt
+
+      - name: Save V0.5-C source checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out/source/patch_files out/source/packages out/source/tools
+          cp tools/apply_kotogba_v03.py out/source/tools/
+          cp tools/apply_kotogba_v05a.py out/source/tools/
+          cp tools/validate_koto_v04.py out/source/tools/
+          cp -r patch_files/code out/source/patch_files/
+          cp validated_packages/BPRJ_01.koto out/source/packages/BPRJ_01.koto
+          cp .github/workflows/build-kotogba-v05a.yml out/source/
+          sha256sum             out/source/tools/apply_kotogba_v05a.py             out/source/patch_files/code/core/arm9/source/Application/KotoGbaDetector.inc             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.h             > out/source/SHA256_SOURCE_V05C.txt
+
+      - name: Verify V0.5-C distributable
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s out/kotoGba_GBARunner3_V0_5C.nds
+          test -s out/_gba/kotogba/packages/BPRJ_01.koto
+          grep -F 'cards=78' PACKAGE_VALIDATION_V04.txt
+          grep -F 'status=PASS' PACKAGE_VALIDATION_V04.txt
+
+      - name: Upload kotoGba V0.5-C build
+        uses: actions/upload-artifact@v4
+        with:
+          name: kotoGba_GBARunner3_V0_5C_AUTO_TRANSLATION
+          path: out
+          retention-days: 14
+          if-no-files-found: error
