@@ -102,7 +102,7 @@ jobs:
           set -euo pipefail
           curl -L --fail --retry 3             https://github.com/coolbho3k/emibios/releases/download/0.1.6/gba_bios.bin             -o out/OPEN_GBA_BIOS_EMULATOR_QA.bin
           test "$(stat -c%s out/OPEN_GBA_BIOS_EMULATOR_QA.bin)" = "16384"
-          echo "468cabfecc339cf2625382e36601f2396d6da243d21da1822a7598fb4183ff4f  out/OPEN_GBA_BIOS_EMULATOR_QA.bin" | sha256sum -c -
+          echo "ca56efafc53af12f6ba2eec722302dd2cb725f65dd2ed8afdeb5d27bc14e2d08  out/OPEN_GBA_BIOS_EMULATOR_QA.bin" | sha256sum -c -
           sha256sum out/OPEN_GBA_BIOS_EMULATOR_QA.bin > out/SHA256_OPEN_GBA_BIOS.txt
 
       - name: Save V0.5-B source checkpoint
