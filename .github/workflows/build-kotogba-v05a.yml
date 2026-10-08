@@ -1,4 +1,4 @@
-name: Build kotoGba GBARunner3 V0.5-A detector
+name: Build kotoGba GBARunner3 V0.5-B automatic translation
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: kotogba-gbarunner3-v05a-detector-${{ github.ref }}
+  group: kotogba-gbarunner3-v05b-auto-translation-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Checkout kotoGba V0.5-A
+      - name: Checkout kotoGba V0.5-B
         uses: actions/checkout@v4
 
       - name: Validate FireRed JP Rev1 package
@@ -68,7 +68,7 @@ jobs:
           git -C upstream reset --hard ecaa817815d9761745606592f04affe5ee9c3731
           git -C upstream submodule update --init --recursive --checkout
 
-      - name: Apply V0.5-A automatic detector
+      - name: Apply V0.5-B automatic translation
         shell: bash
         run: |
           set -euo pipefail
@@ -77,20 +77,23 @@ jobs:
           grep -F 'kotogba_detectIntroText' upstream/code/core/arm9/source/MemoryEmulator/MemoryLoad8.s
           grep -F 'kotogba_detectIntroText' upstream/code/core/arm9/source/MemoryEmulator/MemoryLoadRom.s
           grep -F 'bl kotogba_vblankUpdate' upstream/code/core/arm9/source/Emulator/VBlankIrq.s
+          grep -F 'TRADUCCIÓN' upstream/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp
+          grep -F '¿Cómo te llamas?' upstream/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp
           test -f upstream/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp
+          test -f upstream/code/core/arm9/source/Application/KotoGbaLatinFont6x10.h
           test -f upstream/code/core/arm9/source/Application/KotoGbaDetector.inc
 
-      - name: Build kotoGba V0.5-A
+      - name: Build kotoGba V0.5-B
         shell: bash
         run: |
           set -euo pipefail
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
-          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_5A.nds
-          sha256sum             out/kotoGba_GBARunner3_V0_5A.nds             out/_gba/kotogba/home.raw16             out/_gba/kotogba/packages/BPRJ_01.koto             > out/SHA256_KOTOGBA_V05A.txt
-          printf '%s\n'             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731'             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e'             'base_runtime=hardware-approved kotoGba V0.4/V0.3 EWRAM execution fix'             'checkpoint=V0.5-A automatic detector'             'detector=FireRed JP Rev1 I001-I005'             'ui=automatic lower-screen debug card id'             'rom_included=no'             > out/BUILD_BASE_V05A.txt
+          cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_5B.nds
+          sha256sum             out/kotoGba_GBARunner3_V0_5B.nds             out/_gba/kotogba/home.raw16             out/_gba/kotogba/packages/BPRJ_01.koto             > out/SHA256_KOTOGBA_V05B.txt
+          printf '%s\n'             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731'             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e'             'base_runtime=hardware-approved kotoGba V0.4/V0.3 EWRAM execution fix'             'checkpoint=V0.5-B automatic Spanish translation'             'detector=FireRed JP Rev1 I001-I005'             'ui=automatic lower-screen approved Spanish translation'             'rom_included=no'             > out/BUILD_BASE_V05A.txt
 
-      - name: Save V0.5-A source checkpoint
+      - name: Save V0.5-B source checkpoint
         shell: bash
         run: |
           set -euo pipefail
@@ -101,22 +104,22 @@ jobs:
           cp -r patch_files/code out/source/patch_files/
           cp validated_packages/BPRJ_01.koto out/source/packages/BPRJ_01.koto
           cp .github/workflows/build-kotogba-v05a.yml out/source/
-          sha256sum             out/source/tools/apply_kotogba_v05a.py             out/source/patch_files/code/core/arm9/source/Application/KotoGbaDetector.inc             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.h             > out/source/SHA256_SOURCE_V05A.txt
+          sha256sum             out/source/tools/apply_kotogba_v05a.py             out/source/patch_files/code/core/arm9/source/Application/KotoGbaDetector.inc             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.cpp             out/source/patch_files/code/core/arm9/source/Application/KotoGbaRuntimeService.h             > out/source/SHA256_SOURCE_V05B.txt
 
-      - name: Verify V0.5-A distributable
+      - name: Verify V0.5-B distributable
         shell: bash
         run: |
           set -euo pipefail
-          test -s out/kotoGba_GBARunner3_V0_5A.nds
+          test -s out/kotoGba_GBARunner3_V0_5B.nds
           test -s out/_gba/kotogba/home.raw16
           test -s out/_gba/kotogba/packages/BPRJ_01.koto
           grep -F 'cards=78' PACKAGE_VALIDATION_V04.txt
           grep -F 'status=PASS' PACKAGE_VALIDATION_V04.txt
 
-      - name: Upload kotoGba V0.5-A build
+      - name: Upload kotoGba V0.5-B build
         uses: actions/upload-artifact@v4
         with:
-          name: kotoGba_GBARunner3_V0_5A_DETECTOR
+          name: kotoGba_GBARunner3_V0_5B_AUTO_TRANSLATION
           path: out
           retention-days: 14
           if-no-files-found: error
