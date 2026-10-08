@@ -200,6 +200,8 @@ new_runtime = """    // kotoGba launcher: choose the ROM immediately after stora
     // Resolve the canonical .koto package from the loaded ROM header so direct
     // argv launching and launcher selection behave identically.
     gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);
+    const bool kotoPackageInstalled =
+        gKotoGbaLauncherService.GetPackageInfo().installed;
 
     // Restore GBARunner3's normal protection before entering emulation.
     mpu_setRegionInstructionAccessPermission(
@@ -236,7 +238,7 @@ new_runtime = """    // kotoGba launcher: choose the ROM immediately after stora
     gKotoGbaUiService.Initialize();
     gKotoGbaRuntimeService.Initialize(
         gRomHeader.gameCode, gRomHeader.softwareVersion,
-        gKotoGbaLauncherService.GetPackageInfo().installed);
+        kotoPackageInstalled);
 """
 if old_runtime not in main_src:
     raise SystemExit("main.cpp no contiene el bloque de runtime esperado; no escribo nada.")
