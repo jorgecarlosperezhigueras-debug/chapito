@@ -4,6 +4,8 @@
 #include "KotoGbaRuntimeService.h"
 #include "KotoGbaLatinFont6x10.h"
 
+#pragma GCC optimize ("Os")
+
 #define KOTOGBA_SCREEN_WIDTH  256
 #define KOTOGBA_SCREEN_HEIGHT 192
 #define KOTOGBA_GLYPH_WIDTH   6
@@ -52,6 +54,11 @@ struct KotoGbaCardPreview
     {4, sIntroI004},
     {5, sIntroI005},
 };
+
+[[gnu::section(".ewram")]] static const char sUiLogo[] = "kotoGBA";
+[[gnu::section(".ewram")]] static const char sUiAutoHelp[] = "AYUDA AUTOMÁTICA";
+[[gnu::section(".ewram")]] static const char sUiTranslation[] = "TRADUCCIÓN";
+[[gnu::section(".ewram")]] static const char sUiAutomatic[] = "AUTOMÁTICO";
 
 static void FillRect(int x, int y, int width, int height, u16 color)
 {
@@ -247,7 +254,7 @@ static void BuildCardId(u32 cardId, char* output)
 
 static void DrawLogo()
 {
-    DrawTextUtf8(8, 9, "kotoGBA", KOTOGBA_COLOR_WHITE);
+    DrawTextUtf8(8, 9, sUiLogo, KOTOGBA_COLOR_WHITE);
     DrawTextUtf8(8 + 4 * KOTOGBA_GLYPH_WIDTH, 9, "G", KOTOGBA_COLOR_RED);
 }
 
@@ -264,13 +271,13 @@ static void DrawCard(u32 cardId)
     FillRect(0, 0, KOTOGBA_SCREEN_WIDTH, 30, KOTOGBA_COLOR_PANEL);
 
     DrawLogo();
-    DrawTextUtf8(62, 9, "AYUDA AUTOMÁTICA", KOTOGBA_COLOR_MUTED);
-    DrawTextUtf8(8, 42, "TRADUCCIÓN", KOTOGBA_COLOR_RED);
+    DrawTextUtf8(62, 9, sUiAutoHelp, KOTOGBA_COLOR_MUTED);
+    DrawTextUtf8(8, 42, sUiTranslation, KOTOGBA_COLOR_RED);
     DrawWrappedText(8, 60, card->spanish, KOTOGBA_COLOR_WHITE, 40, 8);
 
     FillRect(8, 174, 240, 1, KOTOGBA_COLOR_PANEL);
     DrawTextUtf8(8, 178, id, KOTOGBA_COLOR_MUTED);
-    DrawTextUtf8(44, 178, "AUTOMÁTICO", KOTOGBA_COLOR_MUTED);
+    DrawTextUtf8(44, 178, sUiAutomatic, KOTOGBA_COLOR_MUTED);
 }
 
 void KotoGbaRuntimeService::Initialize(u32 gameCode, u8 revision, bool packageInstalled)
