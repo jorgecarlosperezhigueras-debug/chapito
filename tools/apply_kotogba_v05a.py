@@ -372,6 +372,7 @@ for name in SERVICE_BLOB_SHA:
 
 print("PATCH_V05A_OK")
 print(f"BASE={TARGET_COMMIT}")
-print("CAMBIOS=main.cpp,VBlankIrq.s,MemoryLoad8.s,MemoryLoadRom.s,bootstrap/Makefile,bootstrap/arm9/main.cpp,KotoGbaUiService.*,KotoGbaLauncherService.*,KotoGbaRuntimeService.*")\nprint("DETECTOR=FireRed JP Rev1 I001-I005 automatic byte-read detector")
+print("CAMBIOS=main.cpp,VBlankIrq.s,MemoryLoad8.s,MemoryLoadRom.s,bootstrap/Makefile,bootstrap/arm9/main.cpp,KotoGbaUiService.*,KotoGbaLauncherService.*,KotoGbaRuntimeService.*")
+print("DETECTOR=FireRed JP Rev1 I001-I005 automatic byte-read detector")
 print("PACKAGE_ALIAS=<GAMECODE>_<REV_HEX>.koto")
 print("LAUNCHER=direct launch -> ROM browser; argv launch -> direct ROM")
