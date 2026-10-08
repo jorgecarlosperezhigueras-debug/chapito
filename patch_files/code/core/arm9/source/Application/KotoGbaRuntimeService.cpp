@@ -1,5 +1,6 @@
 #include "common.h"
 #include <libtwl/gfx/gfx.h>
+#include <libtwl/gfx/gfxBackground.h>
 #include "KotoGbaRuntimeService.h"
 
 #define KOTOGBA_ITCM __attribute__((section(".itcm"), noinline))
