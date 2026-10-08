@@ -90,6 +90,9 @@ jobs:
           make -C upstream/code
           test -s upstream/code/bootstrap/GBARunner3.nds
           cp upstream/code/bootstrap/GBARunner3.nds out/kotoGba_GBARunner3_V0_5B.nds
+          cp upstream/code/core/arm9/arm9.elf out/arm9_v05b.elf
+          arm-none-eabi-nm -n upstream/code/core/arm9/arm9.elf > out/ARM9_SYMBOLS_V05B.txt
+          arm-none-eabi-objdump -h upstream/code/core/arm9/arm9.elf > out/ARM9_SECTIONS_V05B.txt
           sha256sum             out/kotoGba_GBARunner3_V0_5B.nds             out/_gba/kotogba/home.raw16             out/_gba/kotogba/packages/BPRJ_01.koto             > out/SHA256_KOTOGBA_V05B.txt
           printf '%s\n'             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731'             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e'             'base_runtime=hardware-approved kotoGba V0.4/V0.3 EWRAM execution fix'             'checkpoint=V0.5-B automatic Spanish translation'             'detector=FireRed JP Rev1 I001-I005'             'ui=automatic lower-screen approved Spanish translation'             'rom_included=no'             > out/BUILD_BASE_V05A.txt
 
