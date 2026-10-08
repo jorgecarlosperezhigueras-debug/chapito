@@ -17,7 +17,7 @@ SERVICE_BLOB_SHA = {
     "KotoGbaUiService.h": "75fbc437801bdc315c2a9e584afe3f28acb97b14",
     "KotoGbaLauncherService.cpp": "f99edaa7bd8b8d8955b881d4fd049ba16d166efc",
     "KotoGbaLauncherService.h": "770103bb8ee997406ba2b71439ea266c370f8aa7",
-    "KotoGbaRuntimeService.cpp": "b0a264116930b40ccaa8b1756ed771b739d074d3",
+    "KotoGbaRuntimeService.cpp": "fb8d4b06e134197b14fea840b8cc33fa14e30413",
     "KotoGbaRuntimeService.h": "9e310e75a421fd69923016f7532e9d31708a7fc8",
     "KotoGbaDetector.inc": "a93c8579d9a98f4989c08aafc0b17fb56b702911",
 }
