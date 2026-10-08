@@ -36,11 +36,17 @@ struct KotoGbaCardPreview
 // V0.5-B intentionally exposes only the automatic translation view.
 // Vocabulary/grammar stay out of the passive screen and belong to investigation mode.
 [[gnu::section(".ewram")]] static const char sIntroI001[] =
-    "¡Encantado! ¡Bienvenido al mundo de los Pokémon! Me llamo Oak. Todos me conocen y respetan como el Profesor Pokémon.";
+    "¡Encantado! ¡Bienvenido al mundo de los\n"
+    "Pokémon! Me llamo Oak. Todos me conocen\n"
+    "y respetan como el Profesor Pokémon.";
 [[gnu::section(".ewram")]] static const char sIntroI002[] =
-    "En este mundo viven por todas partes unas criaturas llamadas Pokémon.";
+    "En este mundo viven por todas partes\n"
+    "unas criaturas llamadas Pokémon.";
 [[gnu::section(".ewram")]] static const char sIntroI003[] =
-    "Las personas tienen a esas criaturas llamadas Pokémon como mascotas o las usan en combates... Y yo me dedico a investigar a los Pokémon.";
+    "Las personas tienen a esas criaturas\n"
+    "llamadas Pokémon como mascotas o las\n"
+    "usan en combates... Y yo me dedico a\n"
+    "investigar a los Pokémon.";
 [[gnu::section(".ewram")]] static const char sIntroI004[] =
     "Pero antes, háblame un poco de ti.";
 [[gnu::section(".ewram")]] static const char sIntroI005[] =
@@ -90,7 +96,6 @@ static const KotoGbaGlyph6x10* FindGlyph(u16 codepoint)
     return nullptr;
 }
 
-[[gnu::section(".itcm"), gnu::noinline]]
 static void DrawGlyph(int x, int y, u16 codepoint, u16 color)
 {
     if (codepoint == ' ')
@@ -159,39 +164,10 @@ static void DrawTextUtf8(int x, int y, const char* text, u16 color)
 {
     const char* cursor = text;
     int column = 0;
-    while (*cursor)
-    {
-        const u16 codepoint = DecodeUtf8(cursor);
-        DrawGlyph(x + column * KOTOGBA_GLYPH_WIDTH, y, codepoint, color);
-        ++column;
-    }
-}
-
-static int CountWordCharacters(const char* text)
-{
-    const char* cursor = text;
-    int count = 0;
-    while (*cursor && *cursor != ' ' && *cursor != '\n')
-    {
-        DecodeUtf8(cursor);
-        ++count;
-    }
-    return count;
-}
-
-[[gnu::section(".itcm"), gnu::noinline]]
-static void DrawWrappedText(int x, int y, const char* text, u16 color,
-    int maxColumns, int maxLines)
-{
-    const char* cursor = text;
-    int column = 0;
     int line = 0;
 
-    while (*cursor && line < maxLines)
+    while (*cursor)
     {
-        while (*cursor == ' ')
-            ++cursor;
-
         if (*cursor == '\n')
         {
             ++cursor;
@@ -199,39 +175,14 @@ static void DrawWrappedText(int x, int y, const char* text, u16 color,
             column = 0;
             continue;
         }
-        if (!*cursor)
-            break;
 
-        const int wordLength = CountWordCharacters(cursor);
-        if (column > 0 && column + 1 + wordLength > maxColumns)
-        {
-            ++line;
-            column = 0;
-            if (line >= maxLines)
-                break;
-        }
-
-        if (column > 0)
-            ++column;
-
-        while (*cursor && *cursor != ' ' && *cursor != '\n')
-        {
-            if (column >= maxColumns)
-            {
-                ++line;
-                column = 0;
-                if (line >= maxLines)
-                    return;
-            }
-
-            const u16 codepoint = DecodeUtf8(cursor);
-            DrawGlyph(
-                x + column * KOTOGBA_GLYPH_WIDTH,
-                y + line * KOTOGBA_LINE_HEIGHT,
-                codepoint,
-                color);
-            ++column;
-        }
+        const u16 codepoint = DecodeUtf8(cursor);
+        DrawGlyph(
+            x + column * KOTOGBA_GLYPH_WIDTH,
+            y + line * KOTOGBA_LINE_HEIGHT,
+            codepoint,
+            color);
+        ++column;
     }
 }
 
@@ -275,7 +226,7 @@ static void DrawCard(u32 cardId)
     DrawLogo();
     DrawTextUtf8(62, 9, sUiAutoHelp, KOTOGBA_COLOR_MUTED);
     DrawTextUtf8(8, 42, sUiTranslation, KOTOGBA_COLOR_RED);
-    DrawWrappedText(8, 60, card->spanish, KOTOGBA_COLOR_WHITE, 40, 8);
+    DrawTextUtf8(8, 60, card->spanish, KOTOGBA_COLOR_WHITE);
 
     FillRect(8, 174, 240, 1, KOTOGBA_COLOR_PANEL);
     DrawTextUtf8(8, 178, id, KOTOGBA_COLOR_MUTED);
