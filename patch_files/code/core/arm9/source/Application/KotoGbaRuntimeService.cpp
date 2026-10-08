@@ -90,6 +90,7 @@ static const KotoGbaGlyph6x10* FindGlyph(u16 codepoint)
     return nullptr;
 }
 
+[[gnu::section(".itcm"), gnu::noinline]]
 static void DrawGlyph(int x, int y, u16 codepoint, u16 color)
 {
     if (codepoint == ' ')
@@ -178,6 +179,7 @@ static int CountWordCharacters(const char* text)
     return count;
 }
 
+[[gnu::section(".itcm"), gnu::noinline]]
 static void DrawWrappedText(int x, int y, const char* text, u16 color,
     int maxColumns, int maxLines)
 {
