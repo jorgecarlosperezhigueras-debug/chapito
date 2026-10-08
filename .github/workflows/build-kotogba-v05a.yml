@@ -96,15 +96,13 @@ jobs:
           sha256sum             out/kotoGba_GBARunner3_V0_5B.nds             out/_gba/kotogba/home.raw16             out/_gba/kotogba/packages/BPRJ_01.koto             > out/SHA256_KOTOGBA_V05B.txt
           printf '%s\n'             'GBARunner3=ecaa817815d9761745606592f04affe5ee9c3731'             'libtwl=e069645bed14a93e149e873e9273f04851e3a04e'             'base_runtime=hardware-approved kotoGba V0.4/V0.3 EWRAM execution fix'             'checkpoint=V0.5-B automatic Spanish translation'             'detector=FireRed JP Rev1 I001-I005'             'ui=automatic lower-screen approved Spanish translation'             'rom_included=no'             > out/BUILD_BASE_V05A.txt
 
-      - name: Prepare open-source GBA BIOS for emulator QA only
+      - name: Prepare emibios GBA BIOS for emulator QA only
         shell: bash
         run: |
           set -euo pipefail
-          git clone https://github.com/Cult-of-GBA/BIOS.git open-gba-bios
-          git -C open-gba-bios checkout a30e9a96df083628b650724b7d4d7112b4070b98
-          test -s open-gba-bios/bios.bin
-          test "$(stat -c%s open-gba-bios/bios.bin)" = "16384"
-          cp open-gba-bios/bios.bin out/OPEN_GBA_BIOS_EMULATOR_QA.bin
+          curl -L --fail --retry 3             https://github.com/coolbho3k/emibios/releases/download/0.1.6/gba_bios.bin             -o out/OPEN_GBA_BIOS_EMULATOR_QA.bin
+          test "$(stat -c%s out/OPEN_GBA_BIOS_EMULATOR_QA.bin)" = "16384"
+          echo "468cabfecc339cf2625382e36601f2396d6da243d21da1822a7598fb4183ff4f  out/OPEN_GBA_BIOS_EMULATOR_QA.bin" | sha256sum -c -
           sha256sum out/OPEN_GBA_BIOS_EMULATOR_QA.bin > out/SHA256_OPEN_GBA_BIOS.txt
 
       - name: Save V0.5-B source checkpoint
