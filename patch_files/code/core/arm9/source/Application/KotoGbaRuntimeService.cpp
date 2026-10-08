@@ -33,13 +33,24 @@ struct KotoGbaCardPreview
 // These strings come directly from the approved BPRJ_01.koto package.
 // V0.5-B intentionally exposes only the automatic translation view.
 // Vocabulary/grammar stay out of the passive screen and belong to investigation mode.
-static constexpr KotoGbaCardPreview sIntroCards[] =
+[[gnu::section(".ewram")]] static const char sIntroI001[] =
+    "¡Encantado! ¡Bienvenido al mundo de los Pokémon! Me llamo Oak. Todos me conocen y respetan como el Profesor Pokémon.";
+[[gnu::section(".ewram")]] static const char sIntroI002[] =
+    "En este mundo viven por todas partes unas criaturas llamadas Pokémon.";
+[[gnu::section(".ewram")]] static const char sIntroI003[] =
+    "Las personas tienen a esas criaturas llamadas Pokémon como mascotas o las usan en combates... Y yo me dedico a investigar a los Pokémon.";
+[[gnu::section(".ewram")]] static const char sIntroI004[] =
+    "Pero antes, háblame un poco de ti.";
+[[gnu::section(".ewram")]] static const char sIntroI005[] =
+    "¿Cómo te llamas?";
+
+[[gnu::section(".ewram")]] static const KotoGbaCardPreview sIntroCards[] =
 {
-    {1, "¡Encantado! ¡Bienvenido al mundo de los Pokémon! Me llamo Oak. Todos me conocen y respetan como el Profesor Pokémon."},
-    {2, "En este mundo viven por todas partes unas criaturas llamadas Pokémon."},
-    {3, "Las personas tienen a esas criaturas llamadas Pokémon como mascotas o las usan en combates... Y yo me dedico a investigar a los Pokémon."},
-    {4, "Pero antes, háblame un poco de ti."},
-    {5, "¿Cómo te llamas?"},
+    {1, sIntroI001},
+    {2, sIntroI002},
+    {3, sIntroI003},
+    {4, sIntroI004},
+    {5, sIntroI005},
 };
 
 static void FillRect(int x, int y, int width, int height, u16 color)
