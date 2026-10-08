@@ -19,8 +19,8 @@ SERVICE_BLOB_SHA = {
     "KotoGbaLauncherService.h": "770103bb8ee997406ba2b71439ea266c370f8aa7",
     "KotoGbaRuntimeService.cpp": "fb8d4b06e134197b14fea840b8cc33fa14e30413",
     "KotoGbaRuntimeService.h": "9e310e75a421fd69923016f7532e9d31708a7fc8",
-    "KotoGbaDetector.inc": "812652b1339a684376b964fc73623394da0fcc34",
-    "KotoGbaDetector.s": "4f91e9957fd2633c7c610ed6835de920fd8079aa",
+    "KotoGbaDetector.inc": "6e859375e75b7c24244bb9f17c36f6fe2588f1c3",
+    "KotoGbaDetector.s": "fd81f1be275d65d6b21758b1cd07181cf29310e2",
 }
 
 ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
@@ -307,8 +307,9 @@ memloadrom_rom_old = """arm_func memu_load8Rom
     ldr r11, DTCM(memu_adjustedRomBlockToCacheBlockAddress)
 """
 memloadrom_rom_new = """arm_func memu_load8Rom
-    kotogba_detectIntroText
-    ldr r11, DTCM(memu_adjustedRomBlockToCacheBlockAddress)
+    kotogba_detectIntroTextFixedRom
+.global kotogba_load8RomAfterDetector
+kotogba_load8RomAfterDetector:
 """
 if memloadrom_rom_old not in memloadrom_src:
     raise SystemExit("MemoryLoadRom.s no contiene el handler ROM esperado; no escribo nada.")
