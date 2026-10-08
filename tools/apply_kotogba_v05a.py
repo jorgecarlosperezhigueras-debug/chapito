@@ -60,6 +60,18 @@ for path in (MAIN, VBLANK, MEMLOAD8, MEMLOADROM):
     require_file(path)
 
 main_src = MAIN.read_text(encoding="utf-8")
+
+# V0.5 runtime needs the package-installed flag after GBARunner3 restores
+# EWRAM to non-executable. Read it while the hardware-approved V0.3 MPU
+# execution window is still open, then carry only the bool forward.
+package_anchor = "    gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);\n"
+package_replacement = """    gKotoGbaLauncherService.ResolvePackageForHeader(gRomHeader);
+    const bool kotoPackageInstalled =
+        gKotoGbaLauncherService.GetPackageInfo().installed;
+"""
+if main_src.count(package_anchor) != 1:
+    raise SystemExit("No encuentro una única resolución de paquete V0.3; no escribo nada.")
+main_src = main_src.replace(package_anchor, package_replacement, 1)
 include_anchor = '#include "Application/KotoGbaUiService.h"\n'
 if main_src.count(include_anchor) != 1:
     raise SystemExit("No encuentro un único include de KotoGbaUiService; no escribo nada.")
@@ -73,7 +85,7 @@ ui_anchor = "    gKotoGbaUiService.Initialize();\n"
 ui_replacement = """    gKotoGbaUiService.Initialize();
     gKotoGbaRuntimeService.Initialize(
         gRomHeader.gameCode, gRomHeader.softwareVersion,
-        gKotoGbaLauncherService.GetPackageInfo().installed);
+        kotoPackageInstalled);
 """
 if main_src.count(ui_anchor) != 1:
     raise SystemExit("No encuentro una única inicialización de la UI V0.3; no escribo nada.")
