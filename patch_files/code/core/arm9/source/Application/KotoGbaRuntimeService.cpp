@@ -197,6 +197,7 @@ static const KotoGbaCardPreview* FindCard(u32 cardId)
     return nullptr;
 }
 
+[[gnu::section(".itcm"), gnu::noinline]]
 static void BuildCardId(u32 cardId, char* output)
 {
     output[0] = 'I';
