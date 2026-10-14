@@ -1,0 +1,73 @@
+name: D23 SD auditor - synthetic tests, not ROM validation
+
+on:
+  push:
+    branches: [kotogba-d23-auditoria-sd]
+    paths:
+      - diagnostics/d23_sd_audit.py
+      - diagnostics/test_d23_sd_audit.py
+      - .github/workflows/d23-sd-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: d23-sd-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned audit dependencies
+        run: python -m pip install pyfatfs==1.1.0 fs==2.4.16 setuptools==75.8.0 six==1.17.0 appdirs==1.4.4
+      - name: Test real FAT images with synthetic data
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-output
+          python -m unittest -v diagnostics.test_d23_sd_audit 2>&1 | tee audit-output/test-results.txt
+      - name: Produce explicitly synthetic sample report
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, tempfile
+          from pathlib import Path
+          from diagnostics.test_d23_sd_audit import make_image, DATA, PATHS
+          from diagnostics.d23_sd_audit import audit
+          with tempfile.TemporaryDirectory() as tmp:
+              root = Path(tmp)
+              reference = root / 'reference'
+              reference.mkdir()
+              for name, data in DATA.items():
+                  (reference / name).write_bytes(data)
+              image = root / 'synthetic.img'
+              make_image(image)
+              result = audit(image, reference, expected_paths=PATHS)
+              result['fixture'] = 'SYNTHETIC - NOT THE USER SD OR REAL D23 PACKAGES'
+              Path('audit-output/example-SYNTHETIC-only.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
+          PY
+      - name: Package diagnostic source and evidence only
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-output
+          cp diagnostics/d23_sd_audit.py diagnostics/test_d23_sd_audit.py diagnostics/README_D23.md audit-output/
+          printf '%s\n' 'pyfatfs==1.1.0' 'fs==2.4.16' 'setuptools==75.8.0' 'six==1.17.0' 'appdirs==1.4.4' > audit-output/requirements.txt
+          printf '%s\n' 'DIAGNOSTIC ONLY. NO ROM. NO REAL D23 EXECUTION CLAIM.' > audit-output/NOT_A_ROM.txt
+          sha256sum audit-output/* > AUDIT_SHA256.txt
+          cp AUDIT_SHA256.txt audit-output/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kotoGBA_D23_DIAGNOSTICO_SD_NO_ROM
+          path: audit-output
+          retention-days: 30
+          if-no-files-found: error
