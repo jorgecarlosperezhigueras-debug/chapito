@@ -59,9 +59,12 @@ class D23SDAuditTests(unittest.TestCase):
     def test_same_header_but_corrupt_tail_is_not_accepted(self):
         damaged = DATA["KANJI.K20"][:-1] + b"!"
         self.assertEqual(damaged[:64], DATA["KANJI.K20"][:64])
-        with PyFatFS(str(self.image)) as store:
-            store.writebytes(PATHS["KANJI.K20"], damaged)
-        report = audit(self.image, self.reference)
+        # Build a separate corrupt fixture. pyfatfs 1.1.0's multi-cluster
+        # overwrite path failed during initial fixture creation; the auditor
+        # never uses that write path and always opens images read-only.
+        corrupted_image = self.root / "corrupted.img"
+        make_image(corrupted_image, data={**DATA, "KANJI.K20": damaged})
+        report = audit(corrupted_image, self.reference)
         self.assertEqual(report["result"], "FAIL")
         self.assertEqual(status(report)["status"], "BYTE_MISMATCH")
         self.assertTrue(status(report)["header_matches"])
