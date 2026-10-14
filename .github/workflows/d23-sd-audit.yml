@@ -58,12 +58,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p audit-output
-          cp diagnostics/d23_sd_audit.py diagnostics/test_d23_sd_audit.py diagnostics/README_D23.md audit-output/
+          mkdir -p audit-output/diagnostics
+          cp diagnostics/d23_sd_audit.py diagnostics/test_d23_sd_audit.py audit-output/diagnostics/
+          cp diagnostics/README_D23.md diagnostics/RESULTADO_PRUEBAS_D23.md audit-output/
           printf '%s\n' 'pyfatfs==1.1.0' 'fs==2.4.16' 'setuptools==75.8.0' 'six==1.17.0' 'appdirs==1.4.4' > audit-output/requirements.txt
           printf '%s\n' 'DIAGNOSTIC ONLY. NO ROM. NO REAL D23 EXECUTION CLAIM.' > audit-output/NOT_A_ROM.txt
-          sha256sum audit-output/* > AUDIT_SHA256.txt
-          cp AUDIT_SHA256.txt audit-output/
+          printf '%s\n' "commit=${GITHUB_SHA}" "run=${GITHUB_RUN_ID}" > audit-output/BUILD_REF.txt
+      - name: Verify the packaged directory runs independently
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd audit-output
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest -v diagnostics.test_d23_sd_audit 2>&1 | tee packaged-test-results.txt
+          find . -type f ! -name AUDIT_SHA256.txt -print0 | sort -z | xargs -0 sha256sum > AUDIT_SHA256.txt
+          sha256sum -c AUDIT_SHA256.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
