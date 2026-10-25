@@ -1,62 +1,125 @@
-# Recuperación y pruebas de kotoGBA
+# Recuperar y continuar kotoGBA
 
-## Qué queda operativo con este cambio
+## Autoridad actual
 
-El código de infraestructura, las instrucciones para agentes y las huellas de los checkpoints se guardan en Git. El workflow `kotoGBA - recuperación (no ROM)` prueba el diario de lotes y el control de publicación, conserva informes y comprueba por separado el compilador ARM. Ninguno de esos controles compila ni valida B19. El resultado de CI es infraestructura, no una ROM nueva.
+La SD vigente es **B19/B10**. El desarrollo más reciente es **B12, memoria 50 /
+runtime 36**, con la tanda 000–007 adoptada. B12 todavía no es instalable y el
+bloque 2 sigue abierto. B11 39/27 es un punto anterior de recuperación.
 
-La migración de las fuentes actuales NO está terminada. `project/STATE.json` lo declara expresamente. El código histórico retenido en este repositorio no reemplaza B19/B10 ni B11. No se han trasladado ni alterado los ZIP privados, la ROM original, partidas ni colecciones. No se aprovisiona ningún servidor ni Codespace.
+El código propio B19 está en `current/`; el código lingüístico B12 está en
+`linguistic/`. `project/STATE.json` recoge los bloqueos actuales. Las fuentes
+V0.x retenidas en otras carpetas son antecedentes, no el ejecutable vigente.
 
-## Recuperar el estado sin leer la conversación
+## Recuperación del código
 
 ```sh
 git clone https://github.com/jorgecarlosperezhigueras-debug/chapito.git
 cd chapito
 git switch kotogba-persistencia-20261025
 python3 -m unittest discover -s tests/recovery -v
+python3 -m unittest discover -s tests/build -v
+python3 -m unittest discover -s tests/linguistic -v
 python3 tools/recovery/checkpoint.py contract
+python3 tools/build/b19.py check-sources
+python3 linguistic/verify.py
 ```
 
-Lee las incidencias abiertas y verifica el último commit de la rama antes de continuar. Si se trabaja desde otra IA, `AGENTS.md` es el contrato común y `CLAUDE.md` remite a él.
+La CI pública ejecuta estas comprobaciones con el commit exacto de cada cambio.
+La compilación completa se ha reproducido localmente; necesita inputs privados
+y todavía no dispone de su suministro privado en GitHub Actions.
 
-## Recuperar los archivos actuales (pendiente de ejecución)
+## Recuperación del ejecutable B19
 
-Los archivos de B19/B10 y B11 se mantienen en la Biblioteca privada del proyecto. Sus nombres y huellas están en `project/CHECKPOINTS.json`. Los identificadores privados no se publican aquí. El checkpoint B19 consta de once segmentos consecutivos de un único ZIP, no once ZIP independientes. Deben reconstruirse en orden y comprobar la huella del ZIP entero.
+El checkpoint B19/B10 existente consta de **once segmentos consecutivos de un
+único ZIP**. Sus hashes están verificados en `evidence/migration-20261025/archives.json`.
+Reconstruir en orden y comprobar el hash del archivo entero antes de extraerlo.
+Las rutas y huellas canónicas están en `project/CHECKPOINTS.json`.
 
-La herramienta siguiente sólo lee y verifica el archivo local; NO lo extrae, NO lo sube y NO ejecuta programas del ZIP:
+Una vez recuperada la raíz `Recuperacion_R38/r38_trabajo`:
 
 ```sh
-python3 tools/recovery/checkpoint.py verify-archive --key b11 --archive /ruta/privada/kotoGBA_B11_BLOQUE1_MEMORIA_ADOPTADA_NO_INSTALABLE_20261025.zip
-python3 tools/recovery/checkpoint.py verify-archive --key b19_full --archive /ruta/privada/kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip
+python3 tools/build/b19.py make-inputs \
+  --checkpoint-root /ruta/restaurada/Recuperacion_R38/r38_trabajo \
+  --output /ruta/privada/nueva/kotoGBA_B19_PRIVATE_BUILD_INPUTS_20261025.zip
+python3 tools/build/b19.py build \
+  --inputs /ruta/privada/nueva/kotoGBA_B19_PRIVATE_BUILD_INPUTS_20261025.zip \
+  --output /ruta/privada/nueva/resultado_B19 --jobs 3
 ```
 
-Tras comprobar los bytes, el responsable de la migración debe inventariar las fuentes B19 y sus dependencias reales, revisar licencias/secretos/recursos privados, importar sólo lo publicable y fijar el comando de compilación de B19. No adivinar un Makefile a partir de V0.5. El SDK y los datos voluminosos necesitan almacenamiento privado durable, no la carpeta temporal de un runner ni únicamente artefactos con caducidad.
+`make-inputs` regenera exactamente el paquete mínimo de 54.993.645 bytes.
+El constructor recompone las 526 fuentes en una carpeta nueva, verifica los
+inputs, compila libtwl/ARM7/ARM9 y comprueba el NDS y `arm9.bin`. Rechaza salidas
+existentes. No modifica las memorias ni necesita una ROM o BIOS comercial.
 
-Para B11, dentro de `Recuperacion_R38/r38_trabajo`, el procedimiento documentado es:
+La reproducción actual del NDS tiene 572.416 bytes y SHA-256
+`1cd6128200e6a08824202681868f500a085971ccbb16afae884d7e30774e22ad`.
+La evidencia del build y de la regeneración del paquete está versionada. Los
+ELF de depuración pueden variar por las rutas; no se usan como identidad del NDS.
+
+## Recuperación de B12
+
+El checkpoint final es
+`kotoGBA_B12_TANDA_000_007_ADOPTADA_NO_INSTALABLE_20261025.zip`,
+513.632.421 bytes. Su hash, SQLite 50/36 y par de runtime se han comprobado
+directamente. **Su copia duradera privada sigue pendiente de aprobación**;
+no confundir el hash registrado en Git con la conservación del archivo.
+
+Cuando ese ZIP esté disponible, recuperar una copia privada y ejecutar:
 
 ```sh
-python3 desarrollo/pruebas_HITO_B/memory/memory.py restore-copy --backup desarrollo/pruebas_HITO_B/memory/data/kotogba_memory_b11.sqlite.gz --output /ruta/privada/nueva/kotogba_b11.sqlite
-python3 desarrollo/pruebas_HITO_B/memory/continuation_b11/export_runtime_v3.py --db /ruta/privada/nueva/kotogba_b11.sqlite --output /ruta/privada/export/BPRJ_01.kl29 --base-kc15 desarrollo/pruebas_HITO_B/memory/data/runtime_base/BPRJ_01.kc15 --output-kc15 /ruta/privada/export/BPRJ_01.kc15
+python3 linguistic/verify.py --private-project /ruta/restaurada/Recuperacion_R38/r38_trabajo
 ```
 
-Esto es una transcripción del procedimiento del checkpoint, no una nueva ejecución. No importar el parche v1 grueso de B11; conservar su parche v2 exacto y las decisiones adoptadas. El caso literal `しまっ` y el cierre del bloque 2 no están acreditados aquí.
+[../linguistic/README.md](../linguistic/README.md) documenta los comandos y las
+58 dependencias privadas. Conservar las guardas del exportador, el sello v2 y
+los adaptadores privados exactos. No sustituirlos por datos genéricos ni
+modificar una guarda para exportar con entradas ausentes.
 
-## Diario de lotes
+## Lotes y recuperación tras un corte
 
-`tools/recovery/checkpoint.py record --packet /ruta/privada/recibo.json --journal /ruta/privada/diario` guarda un recibo inmutable por lote. El recibo acepta sólo metadatos, huellas e identificadores; no texto japonés, traducciones ni datos del jugador. Su estado siempre es `prepared`, nunca `imported`.
+El mecanismo de adopción B12 conserva el paquete completo en SQLite dentro de
+la transacción, respaldo previo, intención de adopción, libro e informe. Puede
+reconocer una operación ya aplicada y recuperar un commit interrumpido. Se
+requiere un único escritor coordinado; los lectores usan snapshots.
 
-Repetir exactamente el mismo recibo no duplica trabajo. Cambiarlo bajo el mismo ID falla. Solapar apariciones dentro de la misma base falla. La escritura se serializa mediante bloqueo local y el archivo final se publica atómicamente. Un corte anterior a la publicación puede dejar un temporal oculto, pero no un recibo final truncado. El bloqueo sólo cubre escritores que usen este programa en el mismo sistema de archivos local: NO es un bloqueo distribuido.
+El diario público añade comprobaciones de procedencia:
 
-El agente conserva tanto las correcciones reales como sus recibos en almacenamiento privado duradero antes de seguir. Para integración remota se usa un único escritor y actualización Git con SHA esperado; esta herramienta no hace push ni integra la memoria por su cuenta.
+```sh
+python3 tools/recovery/checkpoint.py record \
+  --packet /ruta/privada/recibo.json --journal /ruta/privada/diario
+```
 
-## Publicación
+El recibo contiene metadatos y hashes; siempre significa `prepared`, nunca
+`imported`. Repetir un recibo idéntico no duplica el trabajo. Una colisión de
+identidad, solapamiento o recibo corrupto detiene la operación. También se valida
+todo el diario al reintentar un lote ya guardado. La escritura usa bloqueo local,
+sincronización y publicación atómica sin sobrescritura.
 
-`python3 tools/recovery/checkpoint.py release-gate` falla mientras no consten la importación de fuentes actuales, la compilación y las pruebas de runtime. Cambiar booleanos a mano no constituye evidencia: el control es una barrera básica, no una certificación independiente. La comprobación física y el cierre del Hito B siguen separados.
+El diario **no contiene las correcciones**. Antes de abrir otro lote deben quedar
+conservados el payload, el libro, el snapshot y sus verificaciones en un destino
+privado duradero. Esa confirmación externa no está automatizada todavía; no
+tratar el temporal local ni los informes de Actions como único respaldo.
 
-Los informes de Actions tienen retención de 90 días y no sustituyen las fuentes ni los checkpoints privados. Los commits son la continuidad del código; la Biblioteca conserva por ahora los archivos de recuperación existentes. Un trabajo futuro no está ejecutándose simplemente porque exista una incidencia.
+## Verificación de archivos y entregas
 
-## Referencias de la infraestructura
+`verify-archive` sólo lee y verifica el archivo local: no extrae ni ejecuta
+programas del ZIP. Hash y CRC se calculan sobre el mismo descriptor; se rechazan
+cambios durante la lectura, colisiones de nombres, rutas peligrosas y enlaces.
+
+```sh
+python3 tools/recovery/checkpoint.py verify-archive \
+  --key b11 --archive /ruta/privada/kotoGBA_B11_BLOQUE1_MEMORIA_ADOPTADA_NO_INSTALABLE_20261025.zip
+python3 tools/recovery/checkpoint.py release-gate
+```
+
+El último comando debe seguir bloqueando una nueva entrega instalable. Compilar
+B19 y verificar B12 no significa que B12 esté integrado en la SD. No se han
+ejecutado nuevas pruebas de emulador o consola en esta migración.
+
+Los informes de Actions tienen una retención de 90 días. Los commits conservan
+el código; los checkpoints privados conservan los datos y resultados reales.
+
+## Referencias de automatización
 
 - https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency
 - https://docs.github.com/en/actions/tutorials/store-and-share-data
-- https://github.com/actions/checkout
-- https://github.com/actions/upload-artifact

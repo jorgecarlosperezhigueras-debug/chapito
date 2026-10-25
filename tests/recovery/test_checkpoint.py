@@ -109,6 +109,25 @@ class RecoveryTests(unittest.TestCase):
             cp.record(self.journal, packet())
         self.assertFalse((self.journal / "batch-001.json").exists())
 
+    def test_corrupt_receipt_blocks_idempotent_retry(self):
+        cp.record(self.journal, packet())
+        (self.journal / "broken.json").write_text("{truncated")
+        with self.assertRaises(ValueError):
+            cp.record(self.journal, packet())
+
+    def test_overlapping_receipt_blocks_idempotent_retry(self):
+        cp.record(self.journal, packet())
+        (self.journal / "batch-002.json").write_bytes(cp.canonical(packet("batch-002")))
+        with self.assertRaises(ValueError):
+            cp.record(self.journal, packet())
+
+    def test_previous_overlap_blocks_unrelated_new_batch(self):
+        cp.record(self.journal, packet())
+        (self.journal / "batch-002.json").write_bytes(cp.canonical(packet("batch-002")))
+        with self.assertRaises(ValueError):
+            cp.record(self.journal, packet("batch-003", ["synthetic:3"]))
+        self.assertFalse((self.journal / "batch-003.json").exists())
+
     def test_symlink_journal_rejected(self):
         destination = self.root / "other"
         destination.mkdir()
@@ -152,6 +171,32 @@ class RecoveryTests(unittest.TestCase):
         path, expected = self.make_zip(symlink=True)
         with self.assertRaises(ValueError):
             cp.verify_archive(path, expected)
+
+    def test_archive_file_directory_collision_rejected(self):
+        for names in (("source", "source/example.txt"), ("source/example.txt", "source")):
+            with self.subTest(names=names):
+                path = self.root / "collision.zip"
+                with zipfile.ZipFile(path, "w") as archive:
+                    for name in names:
+                        archive.writestr(name, b"synthetic test only")
+                expected = {"bytes": path.stat().st_size, "sha256": cp.digest(path)}
+                with self.assertRaises(ValueError):
+                    cp.verify_archive(path, expected)
+
+    def test_archive_replaced_between_hash_and_crc_rejected(self):
+        path, expected = self.make_zip()
+        replacement = self.root / "replacement.zip"
+        with zipfile.ZipFile(replacement, "w") as archive:
+            archive.writestr("source/example.txt", b"different contents!")
+        zip_class = zipfile.ZipFile
+
+        def replace_before_crc(*args, **kwargs):
+            replacement.replace(path)
+            return zip_class(*args, **kwargs)
+
+        with mock.patch.object(cp.zipfile, "ZipFile", side_effect=replace_before_crc):
+            with self.assertRaises(ValueError):
+                cp.verify_archive(path, expected)
 
     def test_truncated_archive_rejected(self):
         path, expected = self.make_zip()

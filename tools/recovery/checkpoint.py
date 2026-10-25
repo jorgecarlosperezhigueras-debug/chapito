@@ -33,12 +33,16 @@ def canonical(value: object) -> bytes:
     return (json.dumps(value, sort_keys=True, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
 
 
-def digest(path: Path) -> str:
+def _stream_digest(stream) -> str:
     h = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            h.update(chunk)
+    for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+        h.update(chunk)
     return h.hexdigest()
+
+
+def digest(path: Path) -> str:
+    with path.open("rb") as stream:
+        return _stream_digest(stream)
 
 
 def validate_receipt(value: object) -> dict:
@@ -67,16 +71,25 @@ def record(journal: Path, packet: object) -> str:
         target = journal / (value["batch_id"] + ".json")
         body = canonical(value)
         require(not target.is_symlink(), "El destino no puede ser un enlace simbólico")
-        if target.exists():
-            require(target.read_bytes() == body, "Conflicto: el lote ya existe con otros bytes")
+        already_present = False
+        claimed: dict[str, set[str]] = {}
+        for old_path in sorted(journal.glob("*.json")):
+            require(old_path.is_file() and not old_path.is_symlink(), "El recibo debe ser un archivo regular, no un enlace")
+            old_body = old_path.read_bytes()
+            old = validate_receipt(json.loads(old_body))
+            require(old_path.stem == old["batch_id"], "Nombre de recibo incoherente")
+            old_ids = set(old["occurrence_ids"])
+            previous_ids = claimed.setdefault(old["base_sha256"], set())
+            require(not previous_ids.intersection(old_ids), "Solapamiento previo en lote " + old["batch_id"])
+            previous_ids.update(old_ids)
+            if old_path == target:
+                require(old_body == body, "Conflicto: el lote ya existe con otros bytes")
+                already_present = True
+        # A retry must not hide corruption elsewhere in the same journal.
+        if already_present:
             return "already_present"
         ids = set(value["occurrence_ids"])
-        for old_path in sorted(journal.glob("*.json")):
-            require(not old_path.is_symlink(), "Recibo enlazado no permitido")
-            old = validate_receipt(json.loads(old_path.read_text("utf-8")))
-            require(old_path.stem == old["batch_id"], "Nombre de recibo incoherente")
-            if old["base_sha256"] == value["base_sha256"]:
-                require(not ids.intersection(old["occurrence_ids"]), "Solapamiento con lote " + old["batch_id"])
+        require(not ids.intersection(claimed.get(value["base_sha256"], set())), "Solapamiento con un lote anterior")
         temp_fd, temp_name = tempfile.mkstemp(prefix=".pending-", dir=journal)
         try:
             with os.fdopen(temp_fd, "wb") as stream:
@@ -98,26 +111,45 @@ def record(journal: Path, packet: object) -> str:
 
 def verify_archive(path: Path, expected: dict) -> dict:
     require(path.is_file() and not path.is_symlink(), "No hay un archivo regular para verificar")
-    require(path.stat().st_size == expected["bytes"], "Tamaño de archivo incorrecto")
-    actual = digest(path)
-    require(actual == expected["sha256"], "SHA-256 de archivo incorrecto")
-    with zipfile.ZipFile(path) as archive:
-        infos = archive.infolist()
-        require(len(infos) <= 100000, "Demasiados miembros ZIP")
-        require(sum(i.file_size for i in infos) <= 32 * 1024**3, "ZIP expandido excede el límite de lectura")
-        names: set[str] = set()
-        for info in infos:
-            raw = info.filename
-            p = PurePosixPath(raw)
-            require(bool(raw) and not p.is_absolute() and ".." not in p.parts and "\\" not in raw and ":" not in raw and "\x00" not in raw, "Ruta ZIP insegura")
-            key = str(p).casefold()
-            require(key not in names, "Nombre ZIP duplicado")
-            names.add(key)
-            require(not stat.S_ISLNK(info.external_attr >> 16), "Enlace simbólico ZIP no permitido")
-            require(not (info.flag_bits & 1), "ZIP cifrado no verificable")
-        bad = archive.testzip()
-        require(bad is None, "CRC ZIP incorrecto")
-    return {"scope": "archive_integrity_only", "sha256": actual, "bytes": path.stat().st_size, "members": len(infos), "passed": True, "extracted": False}
+    fd = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
+    with os.fdopen(fd, "rb") as stream:
+        initial = os.fstat(stream.fileno())
+        require(stat.S_ISREG(initial.st_mode), "No hay un archivo regular para verificar")
+        require(initial.st_size == expected["bytes"], "Tamaño de archivo incorrecto")
+        actual = _stream_digest(stream)
+        require(actual == expected["sha256"], "SHA-256 de archivo incorrecto")
+        stream.seek(0)
+        # Hash and CRC must refer to the same open file, not two pathname lookups.
+        with zipfile.ZipFile(stream) as archive:
+            infos = archive.infolist()
+            require(len(infos) <= 100000, "Demasiados miembros ZIP")
+            require(sum(i.file_size for i in infos) <= 32 * 1024**3, "ZIP expandido excede el límite de lectura")
+            names: set[str] = set()
+            files: set[str] = set()
+            directories: set[str] = set()
+            for info in infos:
+                raw = info.orig_filename
+                p = PurePosixPath(raw)
+                require(bool(raw) and not p.is_absolute() and ".." not in p.parts and "\\" not in raw and ":" not in raw and "\x00" not in raw, "Ruta ZIP insegura")
+                key = str(p).casefold()
+                require(key not in names, "Nombre ZIP duplicado")
+                names.add(key)
+                parents = {"/".join(p.parts[:i]).casefold() for i in range(1, len(p.parts))}
+                require(not files.intersection(parents), "Conflicto ZIP entre archivo y directorio")
+                if info.is_dir():
+                    directories.add(key)
+                else:
+                    require(key not in directories, "Conflicto ZIP entre archivo y directorio")
+                    files.add(key)
+                directories.update(parents)
+                require(not stat.S_ISLNK(info.external_attr >> 16), "Enlace simbólico ZIP no permitido")
+                require(not (info.flag_bits & 1), "ZIP cifrado no verificable")
+            bad = archive.testzip()
+            require(bad is None, "CRC ZIP incorrecto")
+        signature = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
+        require(signature(os.fstat(stream.fileno())) == signature(initial), "El archivo cambió durante la verificación")
+        require(signature(path.stat(follow_symlinks=False)) == signature(initial), "La ruta del archivo cambió durante la verificación")
+    return {"scope": "archive_integrity_only", "sha256": actual, "bytes": initial.st_size, "members": len(infos), "passed": True, "extracted": False}
 
 
 def validate_state(state: dict) -> None:
@@ -136,7 +168,7 @@ def release_gate(state: dict) -> None:
 
 def check_tracked(root: Path) -> None:
     raw = subprocess.check_output(["git", "ls-files", "-z"], cwd=root)
-    forbidden = {".gba", ".nds", ".bios", ".sav", ".srm", ".sqlite", ".db", ".pdf", ".rar", ".zip", ".ttf", ".otf", ".woff", ".woff2", ".pem", ".key"}
+    forbidden = {".elf", ".bin", ".kl29", ".kc15", ".ks5", ".km7", ".k20", ".gba", ".nds", ".bios", ".sav", ".srm", ".sqlite", ".db", ".pdf", ".rar", ".zip", ".ttf", ".otf", ".woff", ".woff2", ".pem", ".key"}
     for item in raw.decode("utf-8").split("\0"):
         if not item:
             continue
@@ -155,7 +187,7 @@ def main() -> int:
     p.add_argument("--packet", type=Path, required=True)
     p.add_argument("--journal", type=Path, required=True)
     p = sub.add_parser("verify-archive")
-    p.add_argument("--key", choices=("b11", "b19_full", "b19_sd"), required=True)
+    p.add_argument("--key", choices=("b11", "b12", "b19_full", "b19_sd"), required=True)
     p.add_argument("--archive", type=Path, required=True)
     args = parser.parse_args()
     try:

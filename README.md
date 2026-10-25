@@ -1,56 +1,90 @@
-# kotoGBA — GBARunner3 para aprender japonés jugando
+# kotoGBA — desarrollo recuperable
 
-Repositorio de construcción de **kotoGBA**, una adaptación experimental de GBARunner3 para cargar una ROM de GBA propiedad del usuario y asociarle un paquete didáctico independiente.
+kotoGBA permite aprender japonés jugando a Pokémon Rojo Fuego japonés Rev. 1
+(`BPRJ1`), con traducción contextual al castellano, vocabulario, gramática y kanjis.
 
-## Estado actual
+## Estado vigente
 
-### V0.3 — aprobada en hardware real
+| Parte | Versión comprobada | Estado |
+| --- | --- | --- |
+| Entrega para la SD | **B19/B10** | Última entrega instalable validada |
+| Código del ejecutable | **B19** | Recompilado desde cero, NDS idéntico al entregado |
+| Memoria de desarrollo | **B12 — 50/36** | Tanda 000–007 adoptada; no instalable |
+| Hito B / bloque 2 | Abiertos | La migración no los da por terminados |
 
-- Selector de archivos `.gba` desde la tarjeta SD.
-- Navegación con cruceta, `A` y `B`.
-- Identificación del juego mediante cabecera GBA.
-- Asociación automática con `/_gba/kotogba/packages/<GAMECODE>_<REV_HEX>.koto`.
-- Corrección de ejecución en EWRAM validada en una Nintendo 3DS real.
+El estado detallado está en [project/STATE.json](project/STATE.json), las huellas
+en [project/CHECKPOINTS.json](project/CHECKPOINTS.json) y las comprobaciones
+en [evidence/migration-20261025/](evidence/migration-20261025/).
 
-### V0.4 — paquete FireRed integrado
+## Empezar desde otra sesión o herramienta
 
-La V0.4 conserva íntegramente el runtime V0.3 aprobado y añade al artefacto de instalación el paquete real:
+Lee [AGENTS.md](AGENTS.md) y [docs/RECUPERACION.md](docs/RECUPERACION.md).
+`CLAUDE.md` remite al mismo contrato de continuidad.
 
-```text
-/_gba/kotogba/packages/BPRJ_01.koto
+```sh
+git clone https://github.com/jorgecarlosperezhigueras-debug/chapito.git
+cd chapito
+git switch kotogba-persistencia-20261025
+python3 -m unittest discover -s tests/recovery -v
+python3 -m unittest discover -s tests/build -v
+python3 -m unittest discover -s tests/linguistic -v
+python3 tools/recovery/checkpoint.py contract
+python3 tools/build/b19.py check-sources
+python3 linguistic/verify.py
 ```
 
-Ese paquete corresponde a **Pocket Monsters FireRed (Japón), revisión 1** (`BPRJ`, revisión `01`) y contiene **78 fichas didácticas** del prototipo de Pueblo Paleta.
+Python 3.12 o posterior permite ejecutar estas comprobaciones sin instalar
+dependencias Python adicionales. La CI pública ejecuta las mismas suites y
+conserva el commit y los resultados, incluso cuando una prueba falla.
 
-El archivo `.koto` es un contenedor ZIP con:
+## Compilar B19
 
-- `manifest.json`
-- `cards.json`
-- `resources.json`
-- `recognizers.json`
+`current/` conserva 43 archivos propios y el manifiesto de las 526 fuentes
+congeladas. El constructor verifica fuentes, SDK y dependencias antes de ejecutar
+y exige que el NDS y `arm9.bin` reproduzcan B19 exactamente.
 
-El checkpoint V0.4 es autónomo y reproducible: el paquete validado está versionado en el repositorio, no depende de descargas temporales y su SHA-256 es:
-
-```text
-a7c725161f3f033d52b2e2e90becc3f295fc90e8bd8b48acb202323054219328
+```sh
+python3 tools/build/b19.py build \
+  --inputs /ruta/privada/kotoGBA_B19_PRIVATE_BUILD_INPUTS_20261025.zip \
+  --output /ruta/privada/nueva/resultado_B19 --jobs 3
 ```
 
-La ROM no se incluye en el repositorio ni en los artefactos. El usuario debe colocar su copia legal en una de las rutas examinadas por el selector, preferiblemente:
+El paquete mínimo puede regenerarse desde el checkpoint B19/B10 conservado;
+[current/README.md](current/README.md) documenta el comando `make-inputs`.
+La compilación completa se ha ejecutado localmente y está acreditada en el
+informe `build-b19.json`. La CI pública no dispone de los inputs privados y no
+debe confundirse con esa compilación completa.
 
-```text
-/_gba/kotogba/games/Pocket Monsters - FireRed (Japan) (Rev 1).gba
-```
+## Memoria y trabajo por lotes
 
-## Base técnica fijada
+[linguistic/](linguistic/) conserva 28 fuentes y esquemas verificados de B12,
+incluidos el importador y el código de exportación. Los archivos privados están
+identificados por huellas. La revisión vigente es **50/36**; volver a B11 como
+base perdería el avance posterior comprobado.
 
-- GBARunner3: `ecaa817815d9761745606592f04affe5ee9c3731`
-- libtwl: `e069645bed14a93e149e873e9273f04851e3a04e`
-- contenedor de compilación: `devkitpro/devkitarm:20241104`
+Cada lote necesita el payload real, sus comprobaciones y un checkpoint
+recuperable. El diario rechaza duplicados, solapamientos y recibos corruptos;
+un recibo sin sus correcciones no es una copia del trabajo. No abrir el siguiente
+lote mientras el anterior sólo exista en una sesión temporal.
 
-## Siguiente fase
+El guardado duradero del ZIP final B12 está pendiente de resolver la aprobación
+del destino privado. El código conserva esta limitación expresamente.
 
-La V0.5 conectará el contexto del juego con los identificadores de ficha —por ejemplo `I001`, `U011` o `B003`— para abrir la tarjeta didáctica adecuada durante la partida. Después se activarán las vistas **Traducción**, **Palabras**, **Gramática** y **Volver**.
+## Estructura
 
-## Propiedad y distribución
+| Ruta | Contenido |
+| --- | --- |
+| `current/` | Fuentes propias B19 y dependencias fijadas |
+| `linguistic/` | Código de memoria B12 y manifiestos |
+| `tools/build/` | Recuperación y compilación reproducible |
+| `tools/recovery/` | Verificación de archivos y diario de lotes |
+| `tests/` | Pruebas con datos sintéticos |
+| `project/` | Autoridad, estado y checkpoints |
+| `evidence/` | Resultados de verificaciones realizadas |
 
-Este repositorio no contiene ROMs de GBA, BIOS ni partidas guardadas. El paquete `.koto` contiene únicamente datos didácticos creados para el proyecto.
+Las carpetas históricas `patch_files/`, `packages/` y los scripts V0.x se mantienen
+como antecedentes. Su descripción anterior está en
+[docs/HISTORICO_V04.md](docs/HISTORICO_V04.md). No son la fuente vigente B19.
+
+Este repositorio público conserva código y metadatos. La ROM, BIOS, partidas,
+libros, tipografías, bases y checkpoints privados permanecen separados.

@@ -2,21 +2,40 @@
   "schema": "kotogba.recovery-state/1",
   "project": "kotoGBA",
   "reference_date": "2026-10-25",
-  "migration_status": "infrastructure_only",
-  "repository_sources": "historical_not_B19",
-  "current_sources_imported": false,
-  "current_build_verified": false,
+  "migration_status": "verified_current_code_private_persistence_pending",
+  "repository_sources": "B19_own_overlays_and_B12_memory_tools_with_locked_private_dependencies",
+  "current_sources_imported": true,
+  "current_build_verified": true,
   "runtime_tests_verified": false,
   "physical_console_verified": false,
   "installable": false,
-  "block2_status": "authorized_not_verified_complete",
+  "block2_status": "partial_B12_000_007_adopted_not_complete",
   "last_documented_installable": "B19/B10",
-  "documented_memory": {"release": "B11", "revision": 39, "runtime_revision": 27, "installable": false},
-  "evidence_scope": "Previous delivery records were read; archive bytes and current sources have NOT been verified in this migration.",
+  "documented_memory": {
+    "release": "B12",
+    "revision": 50,
+    "runtime_revision": 36,
+    "installable": false
+  },
+  "evidence_scope": "Archive bytes and SQLite integrity verified; exact B19 NDS rebuilt locally from a new source tree. No new emulator or physical-console tests.",
   "blockers": [
-    "Local container and Python execution returned ClientError; archive contents cannot currently be inspected here.",
-    "B19 complete source and SDK remain in the private recovery checkpoint; not imported into GitHub.",
-    "B11 data and any block2 staging require private storage and byte-level verification; not uploaded to this public repository."
+    "Private durable saving of final B12 and the minimal build-input archive needs explicit approval after automatic review rejected the upload.",
+    "GitHub-hosted full B19 compilation needs private build inputs; the public CI checks code, contracts and synthetic tests only."
   ],
-  "next_action": "Recover the exact B19 checkpoint and B11 memory in a functioning execution environment; verify CHECKPOINTS.json hashes; inventory and review source files before publication; do not publish raw archives or private assets."
+  "next_action": "Finish authorized code publication and inspect Actions for the exact commit. Obtain the explicit private-storage approval requested by automatic review; preserve final B12 and build inputs before new linguistic batches. Continue block 2 from B12 50/36, not B11.",
+  "previous_memory": {
+    "release": "B11",
+    "revision": 39,
+    "runtime_revision": 27,
+    "installable": false
+  },
+  "build": {
+    "candidate": "B19",
+    "nds_bytes": 572416,
+    "nds_sha256": "1cd6128200e6a08824202681868f500a085971ccbb16afae884d7e30774e22ad",
+    "scope": "local_full_rebuild_matches_previous_installable",
+    "private_inputs_required": true,
+    "full_B19_GitHub_Actions_configured": false
+  },
+  "evidence_directory": "evidence/migration-20261025"
 }

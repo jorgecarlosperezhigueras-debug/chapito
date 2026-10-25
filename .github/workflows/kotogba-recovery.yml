@@ -1,12 +1,12 @@
-name: kotoGBA - recuperacion (no ROM)
+name: kotoGBA - fuentes y recuperacion
 
 on:
   push:
     branches: [main, kotogba-persistencia-20261025]
-    paths: ['tools/recovery/**', 'tests/recovery/**', 'project/**', 'docs/RECUPERACION.md', 'AGENTS.md', 'CLAUDE.md', '.gitignore', '.github/workflows/kotogba-recovery.yml']
+    paths: ['current/**', 'linguistic/**', 'tools/build/**', 'tools/recovery/**', 'tests/**', 'project/**', 'evidence/**', 'docs/**', 'README.md', 'AGENTS.md', 'CLAUDE.md', '.gitignore', '.gitattributes', '.github/workflows/kotogba-recovery.yml']
   pull_request:
     branches: [main]
-    paths: ['tools/recovery/**', 'tests/recovery/**', 'project/**', 'docs/RECUPERACION.md', 'AGENTS.md', 'CLAUDE.md', '.gitignore', '.github/workflows/kotogba-recovery.yml']
+    paths: ['current/**', 'linguistic/**', 'tools/build/**', 'tools/recovery/**', 'tests/**', 'project/**', 'evidence/**', 'docs/**', 'README.md', 'AGENTS.md', 'CLAUDE.md', '.gitignore', '.gitattributes', '.github/workflows/kotogba-recovery.yml']
   workflow_dispatch:
 
 permissions:
@@ -18,76 +18,62 @@ concurrency:
 
 jobs:
   recovery-tests:
-    name: Pruebas de recuperacion y contrato
+    name: Fuentes B19, memoria B12 y recuperacion
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Probar con datos sinteticos
+      - name: Pruebas de recuperacion
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p evidence
-          python3 --version | tee evidence/python.txt
-          python3 -m unittest discover -s tests/recovery -v 2>&1 | tee evidence/unit-tests.txt
-      - name: Validar contrato y bloqueo de publicacion
+          mkdir -p .local/ci
+          python3 --version | tee .local/ci/python.txt
+          python3 -m unittest discover -s tests/recovery -v 2>&1 | tee .local/ci/recovery-tests.txt
+      - name: Pruebas del constructor B19
         shell: bash
         run: |
           set -euo pipefail
-          python3 tools/recovery/checkpoint.py contract | tee evidence/contract.json
+          python3 -m unittest discover -s tests/build -v 2>&1 | tee .local/ci/build-tests.txt
+          python3 tools/build/b19.py check-sources | tee .local/ci/b19-sources.json
+      - name: Pruebas y fuentes de memoria B12
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests/linguistic -v 2>&1 | tee .local/ci/linguistic-tests.txt
+          python3 linguistic/verify.py | tee .local/ci/linguistic-sources.json
+      - name: Contrato y separacion de la entrega instalable
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/recovery/checkpoint.py contract | tee .local/ci/contract.json
           set +e
-          python3 tools/recovery/checkpoint.py release-gate > evidence/release-gate.txt 2>&1
+          python3 tools/recovery/checkpoint.py release-gate > .local/ci/release-gate.txt 2>&1
           status=$?
           set -e
           test "$status" -eq 2
-          grep -F 'BLOQUEADO' evidence/release-gate.txt
+          grep -F 'BLOQUEADO' .local/ci/release-gate.txt
           git diff --exit-code
-      - name: Estado verificable
+      - name: Identificar exactamente el resultado
         if: always()
-        shell: bash
-        run: |
-          mkdir -p evidence
-          git rev-parse HEAD > evidence/COMMIT.txt
-          cp project/STATE.json evidence/STATE.json
-          printf '%s\n' '## Infraestructura, NO una ROM nueva' 'Las pruebas usan datos sinteticos. B19/B11 todavia no estan migrados. No se ha validado el juego ni una consola.' >> "$GITHUB_STEP_SUMMARY"
-          sha256sum evidence/* > checksums.txt
-          mv checksums.txt evidence/SHA256SUMS.txt
-      - name: Conservar informes incluso tras un fallo
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: recovery-evidence-${{ github.run_id }}-${{ github.run_attempt }}
-          path: evidence/
-          retention-days: 90
-          if-no-files-found: error
-
-  arm-toolchain:
-    name: Compilador ARM - prueba sintetica, no B19
-    runs-on: ubuntu-24.04
-    container: devkitpro/devkitarm:20241104
-    timeout-minutes: 12
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          persist-credentials: false
-      - name: Compilar un objeto sintetico para ARM9
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p evidence-arm
-          /opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc --version > evidence-arm/compiler.txt
-          /opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc -mcpu=arm946e-s -mthumb -Wall -Wextra -Werror -c tests/recovery/arm_smoke.c -o /tmp/kotogba-infrastructure-smoke.o
-          /opt/devkitpro/devkitARM/bin/arm-none-eabi-nm /tmp/kotogba-infrastructure-smoke.o | tee evidence-arm/symbols.txt
-          grep -F 'kotogba_infrastructure_smoke' evidence-arm/symbols.txt
-          sha256sum /tmp/kotogba-infrastructure-smoke.o > evidence-arm/object.sha256
-          printf '%s\n' 'scope=synthetic_compiler_smoke_only' 'B19_compiled=false' 'ROM_produced=false' > evidence-arm/SCOPE.txt
-      - name: Conservar evidencia de compilador sin distribuir binarios
+          mkdir -p .local/ci
+          git rev-parse HEAD > .local/ci/COMMIT.txt
+          cp project/STATE.json .local/ci/STATE.json
+          printf '%s\n' 'scope=public_source_and_recovery_tests' 'B19_compiled_in_this_run=false' 'private_inputs_present=false' 'new_SD_release=false' > .local/ci/SCOPE.txt
+          printf '%s\n' '## Fuentes y recuperacion de kotoGBA' 'Pruebas con datos sinteticos y fuentes fijadas por hash.' 'La compilacion B19 completa requiere inputs privados y se acredita por separado.' 'B19/B10 sigue instalable; B12 50/36 sigue en desarrollo.' >> "$GITHUB_STEP_SUMMARY"
+          sha256sum .local/ci/* > .local/ci-checksums.txt
+          mv .local/ci-checksums.txt .local/ci/SHA256SUMS.txt
+      - name: Conservar resultados incluso tras un fallo
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: arm-toolchain-evidence-${{ github.run_id }}-${{ github.run_attempt }}
-          path: evidence-arm/
+          name: kotogba-verification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .local/ci/
+          include-hidden-files: true
           retention-days: 90
           if-no-files-found: error

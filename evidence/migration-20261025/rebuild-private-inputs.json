@@ -1,0 +1,13 @@
+{
+  "schema": "kotogba.b19.make-inputs-verification/1",
+  "passed": true,
+  "archive": {
+    "bytes": 54993645,
+    "sha256": "73cf863d5beb9a1b4eed6c9b6f13341365db79a39d89fec4393a3e36c58b1e76"
+  },
+  "same_as_original": true,
+  "existing_output_refused": true,
+  "existing_output_unchanged": true,
+  "refusal": "Output already exists; choose a new filename",
+  "source_mutations": 0
+}

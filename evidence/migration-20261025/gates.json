@@ -1,0 +1,54 @@
+{
+  "schema": "kotogba.migration-gates/1",
+  "checks": [
+    {
+      "name": "recovery",
+      "returncode": 0,
+      "passed": true,
+      "tail": "d_new_batch) ... ok\ntest_private_payload_rejected (test_checkpoint.RecoveryTests.test_private_payload_rejected) ... ok\ntest_repository_state_valid_but_not_releasable (test_checkpoint.RecoveryTests.test_repository_state_valid_but_not_releasable) ... ok\ntest_string_boolean_rejected (test_checkpoint.RecoveryTests.test_string_boolean_rejected) ... ok\ntest_symlink_journal_rejected (test_checkpoint.RecoveryTests.test_symlink_journal_rejected) ... ok\ntest_truncated_archive_rejected (test_checkpoint.RecoveryTests.test_truncated_archive_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 30 tests in 0.045s\n\nOK\n"
+    },
+    {
+      "name": "build",
+      "returncode": 0,
+      "passed": true,
+      "tail": "ber_fails (test_b19_inputs.PrivateBuildInputTests.test_parent_traversal_member_fails) ... ok\ntest_public_source_changes_are_detected (test_b19_inputs.PrivateBuildInputTests.test_public_source_changes_are_detected) ... ok\ntest_public_source_symlink_is_rejected (test_b19_inputs.PrivateBuildInputTests.test_public_source_symlink_is_rejected) ... ok\ntest_unlisted_extra_file_fails (test_b19_inputs.PrivateBuildInputTests.test_unlisted_extra_file_fails) ... ok\ntest_zip_symlink_fails (test_b19_inputs.PrivateBuildInputTests.test_zip_symlink_fails) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.007s\n\nOK\n"
+    },
+    {
+      "name": "linguistic",
+      "returncode": 0,
+      "passed": true,
+      "tail": "_help_without_private_inputs) ... ok\ntest_finite_state_includes_dictionary_tables_and_preserves_order_independence (test_migration.LinguisticMigrationTests.test_finite_state_includes_dictionary_tables_and_preserves_order_independence) ... ok\ntest_outputs_cannot_alias_database_or_staging_input (test_migration.LinguisticMigrationTests.test_outputs_cannot_alias_database_or_staging_input) ... ok\ntest_public_exporter_refuses_missing_private_contract (test_migration.LinguisticMigrationTests.test_public_exporter_refuses_missing_private_contract) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.371s\n\nOK\n"
+    },
+    {
+      "name": "contract",
+      "returncode": 0,
+      "passed": true,
+      "tail": "{\"scope\": \"infrastructure_contract_only\", \"passed\": true, \"current_sources_imported\": true, \"installable\": false}\n"
+    },
+    {
+      "name": "b19_sources",
+      "returncode": 0,
+      "passed": true,
+      "tail": "{\n  \"source_files\": {\n    \"public\": 43,\n    \"private\": 483\n  },\n  \"passed\": true\n}\n"
+    },
+    {
+      "name": "b12_sources",
+      "returncode": 0,
+      "passed": true,
+      "tail": "{\"installable\": false, \"memory_revision\": 50, \"passed\": true, \"private_input_count\": 0, \"private_inputs_verified\": false, \"public_code_bytes\": 424657, \"public_code_files_verified\": 28, \"release\": \"B12\", \"runtime_revision\": 36, \"schema\": \"kotogba.linguistic-code-check/1\"}\n"
+    },
+    {
+      "name": "release_gate",
+      "returncode": 2,
+      "passed": true,
+      "tail": "ERROR: BLOQUEADO: esta infraestructura no es una entrega instalable\n"
+    }
+  ],
+  "passed": true,
+  "tests": {
+    "recovery": 30,
+    "build": 11,
+    "linguistic": 5,
+    "total": 46
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "schema": "kotogba.linguistic-sources/1",
+  "release": "B12",
+  "memory_revision": 50,
+  "runtime_revision": 36,
+  "installable": false,
+  "source_archive": {
+    "name": "kotoGBA_B12_TANDA_000_007_ADOPTADA_NO_INSTALABLE_20261025.zip",
+    "bytes": 513632421,
+    "sha256": "9bac60c7a80ec2a0e9b6a800ae64e7dd67741ed9416a7d4fd75e8639a1d0c1bc"
+  },
+  "copy_policy": "Exact bytes from verified private B12 recovery; no source transformations. Private payloads and source files with embedded translation data remain outside Git.",
+  "files": [
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/memory.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/memory.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/memory.py",
+      "bytes": 71093,
+      "original_sha256": "ed5337c45884b852446be7c195e2ed8ae7b9f305e4dd3a4e67a2a6dbb603ae99",
+      "sha256": "ed5337c45884b852446be7c195e2ed8ae7b9f305e4dd3a4e67a2a6dbb603ae99"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/schema.sql",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/schema.sql",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/schema.sql",
+      "bytes": 5252,
+      "original_sha256": "6f36581881d1c72d7819dfe27d2852e1d38f838f34991f6b7c9955d512a3e6e9",
+      "sha256": "6f36581881d1c72d7819dfe27d2852e1d38f838f34991f6b7c9955d512a3e6e9"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/runtime_cards.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/runtime_cards.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/runtime_cards.py",
+      "bytes": 9344,
+      "original_sha256": "d1876d6358506d89e5ff59d3db4fd23f92d659a48b84a2683eda9dbc75241e92",
+      "sha256": "d1876d6358506d89e5ff59d3db4fd23f92d659a48b84a2683eda9dbc75241e92"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/document_translations.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/document_translations.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/document_translations.py",
+      "bytes": 21099,
+      "original_sha256": "1e070ec9acf5c41d2d65f911ae8157a9899e757c83945ce9d02f47ee5cb53834",
+      "sha256": "1e070ec9acf5c41d2d65f911ae8157a9899e757c83945ce9d02f47ee5cb53834"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/kc15_companion.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/kc15_companion.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/kc15_companion.py",
+      "bytes": 10020,
+      "original_sha256": "45cc5da7ab35808e9d3511fd5da084acc28a7d0599bd4430299e61949b32ad22",
+      "sha256": "45cc5da7ab35808e9d3511fd5da084acc28a7d0599bd4430299e61949b32ad22"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/analyze.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/analyze.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/analyze.py",
+      "bytes": 9232,
+      "original_sha256": "d7c4394d4d6e51e46a0efa5ed930123f139ae1336db4bc40312e56a2c684b1fb",
+      "sha256": "d7c4394d4d6e51e46a0efa5ed930123f139ae1336db4bc40312e56a2c684b1fb"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/incremental_queue.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/incremental_queue.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/incremental_queue.py",
+      "bytes": 20634,
+      "original_sha256": "ffaec4ca9dbb818065642e47f740c7fe29bc3d615a290a5dc05610b0ae9b61da",
+      "sha256": "ffaec4ca9dbb818065642e47f740c7fe29bc3d615a290a5dc05610b0ae9b61da"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/dispositions.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/dispositions.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/dispositions.py",
+      "bytes": 7779,
+      "original_sha256": "02c0389849d10391745014f962c6cd29d45ec648c1336753a7a045091bff324e",
+      "sha256": "02c0389849d10391745014f962c6cd29d45ec648c1336753a7a045091bff324e"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/span_findings.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/span_findings.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/span_findings.py",
+      "bytes": 9460,
+      "original_sha256": "84cade69bdd8ac90db3eaedb7380213788f09b87ad8a2e197e52df33e4590620",
+      "sha256": "84cade69bdd8ac90db3eaedb7380213788f09b87ad8a2e197e52df33e4590620"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/variable_links.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/variable_links.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/variable_links.py",
+      "bytes": 9241,
+      "original_sha256": "0cef79b9b0b7094e266ef6173b8a7053ca72276fb1156aadd757e1cb2caab7f7",
+      "sha256": "0cef79b9b0b7094e266ef6173b8a7053ca72276fb1156aadd757e1cb2caab7f7"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/archive_backups.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/archive_backups.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/archive_backups.py",
+      "bytes": 2844,
+      "original_sha256": "832875ffb90187e13e28f86b772c274933e5dfe86b064b343b5e607b77fcb405",
+      "sha256": "832875ffb90187e13e28f86b772c274933e5dfe86b064b343b5e607b77fcb405"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b10/export_runtime_v2.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b10/export_runtime_v2.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b10/export_runtime_v2.py",
+      "bytes": 17930,
+      "original_sha256": "538ff023b4922a172a9f146b71e3df6d6750100542725e28eb54f96aee132389",
+      "sha256": "538ff023b4922a172a9f146b71e3df6d6750100542725e28eb54f96aee132389"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b10/variable_links_v2.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b10/variable_links_v2.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b10/variable_links_v2.py",
+      "bytes": 17149,
+      "original_sha256": "fc279d71adeda1276c4fa5baf34e8e133ea80fb4d801044aaf8a28a559137b80",
+      "sha256": "fc279d71adeda1276c4fa5baf34e8e133ea80fb4d801044aaf8a28a559137b80"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b10/unsupported_audit/marker_mapping_v2.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b10/unsupported_audit/marker_mapping_v2.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b10/unsupported_audit/marker_mapping_v2.py",
+      "bytes": 2739,
+      "original_sha256": "9ce191739bf8049e046991c6ecdeddd236851bc63c3664ab2d84093cf0112080",
+      "sha256": "9ce191739bf8049e046991c6ecdeddd236851bc63c3664ab2d84093cf0112080"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b11/export_runtime_v3.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b11/export_runtime_v3.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b11/export_runtime_v3.py",
+      "bytes": 24138,
+      "original_sha256": "e726339b00852591277fa2c44607dc0d9c76b93714a606f29cadad9394d8c9b9",
+      "sha256": "e726339b00852591277fa2c44607dc0d9c76b93714a606f29cadad9394d8c9b9"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b11/publish_snapshot_v3.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b11/publish_snapshot_v3.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b11/publish_snapshot_v3.py",
+      "bytes": 6229,
+      "original_sha256": "a8fa6197d82cbc264096a9c4e4fd537ad95da10bbc9ee91a255960150c6f3671",
+      "sha256": "a8fa6197d82cbc264096a9c4e4fd537ad95da10bbc9ee91a255960150c6f3671"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b11/patch_import_v2.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b11/patch_import_v2.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b11/patch_import_v2.py",
+      "bytes": 17894,
+      "original_sha256": "9f71c4c8017f96068cee6ea562d0047510e860674fb1020c30a5bc00734e74b8",
+      "sha256": "9f71c4c8017f96068cee6ea562d0047510e860674fb1020c30a5bc00734e74b8"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/export_runtime_v4.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/export_runtime_v4.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/export_runtime_v4.py",
+      "bytes": 13250,
+      "original_sha256": "bdacb08b8ce00dc5eeed8005309a504b5070782beda79c0734d5616f9218646b",
+      "sha256": "bdacb08b8ce00dc5eeed8005309a504b5070782beda79c0734d5616f9218646b"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/finite_contract_v4.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/finite_contract_v4.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/finite_contract_v4.py",
+      "bytes": 13970,
+      "original_sha256": "0b2faa8f21dd1bf6f587f9c137177dd6748c12300bdbd46a3d3c67985f15c787",
+      "sha256": "0b2faa8f21dd1bf6f587f9c137177dd6748c12300bdbd46a3d3c67985f15c787"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/publish_snapshot_v4.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/publish_snapshot_v4.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/publish_snapshot_v4.py",
+      "bytes": 8202,
+      "original_sha256": "9022dc42594770b95e60379e4ac7473b0bec02c68c62de94702077447d215d9f",
+      "sha256": "9022dc42594770b95e60379e4ac7473b0bec02c68c62de94702077447d215d9f"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/header_dispatch_b12.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/header_dispatch_b12.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/header_dispatch_b12.py",
+      "bytes": 16232,
+      "original_sha256": "5d2f76fc93fa5ed896eb329820fac0c3e4b0a60bc791dcfed8f612e043347030",
+      "sha256": "5d2f76fc93fa5ed896eb329820fac0c3e4b0a60bc791dcfed8f612e043347030"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/kc15_companion_v2.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/kc15_companion_v2.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/kc15_companion_v2.py",
+      "bytes": 23999,
+      "original_sha256": "d6b44430b3890d181ce55e745e60940a2d4ab3deaa878edf2c253d2326f730ba",
+      "sha256": "d6b44430b3890d181ce55e745e60940a2d4ab3deaa878edf2c253d2326f730ba"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/adopt_b12.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/adopt_b12.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/adopt_b12.py",
+      "bytes": 18570,
+      "original_sha256": "2c77db0faa26afee991243ba44c3fb619e244eea7c482b0c206cd9ee73a7201b",
+      "sha256": "2c77db0faa26afee991243ba44c3fb619e244eea7c482b0c206cd9ee73a7201b"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/exact_union_v3.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/exact_union_v3.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/exact_union_v3.py",
+      "bytes": 21005,
+      "original_sha256": "fcff3d261a8f6754848eff6a75b5aee05f2c86d5f18a8d25bac69993dd446a60",
+      "sha256": "fcff3d261a8f6754848eff6a75b5aee05f2c86d5f18a8d25bac69993dd446a60"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/variable_links_v3.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/variable_links_v3.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/variable_links_v3.py",
+      "bytes": 14411,
+      "original_sha256": "f51b3b7bd63764e6a9aed1f009a8c2143f23bda49ffc15cb76b581296213b7f7",
+      "sha256": "f51b3b7bd63764e6a9aed1f009a8c2143f23bda49ffc15cb76b581296213b7f7"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_R38/vocab/package.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_R38/vocab/package.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_R38/vocab/package.py",
+      "bytes": 7183,
+      "original_sha256": "fa58511094539adf20fa7827bb1f6796d4d52d463274cc2b4723b21db28dbd0e",
+      "sha256": "fa58511094539adf20fa7827bb1f6796d4d52d463274cc2b4723b21db28dbd0e"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_R39/vocab/build_r39.py",
+      "original_relative_path": "r38_trabajo/desarrollo/pruebas_R39/vocab/build_r39.py",
+      "tracked_path": "source/r38_trabajo/desarrollo/pruebas_R39/vocab/build_r39.py",
+      "bytes": 11084,
+      "original_sha256": "f0a5e7769eca984807cabe42a8c75bec2ba4c0bf12be70f11b92a56bda4e8fb8",
+      "sha256": "f0a5e7769eca984807cabe42a8c75bec2ba4c0bf12be70f11b92a56bda4e8fb8"
+    },
+    {
+      "root": "recovery",
+      "path": "dictionary_data/DI03_ES/dictionary.py",
+      "original_relative_path": "dictionary_data/DI03_ES/dictionary.py",
+      "tracked_path": "source/dictionary_data/DI03_ES/dictionary.py",
+      "bytes": 14674,
+      "original_sha256": "dfbd35c96948bd7af704954558217adb48cbfc08cde5323108d1272a30d98285",
+      "sha256": "dfbd35c96948bd7af704954558217adb48cbfc08cde5323108d1272a30d98285"
+    }
+  ]
+}

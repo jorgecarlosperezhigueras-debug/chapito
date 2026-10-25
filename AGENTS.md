@@ -4,9 +4,9 @@ Lee primero `project/STATE.json`, `project/CHECKPOINTS.json` y `docs/RECUPERACIO
 
 ## Autoridad y límites
 
-La rama principal contiene fuentes históricas, NO el ejecutable B19 ni la memoria B11 actuales. No recompiles una versión antigua y la presentes como una actualización. La última entrega SD documentada es B19/B10; la memoria de desarrollo documentada es B11, revisión 39/runtime 27, no instalable. Sus bytes no se han importado todavía a este repositorio. Las huellas son referencias de actas anteriores, no una nueva comprobación de esos bytes.
+Esta rama conserva fuentes propias B19 en `current/` y código de memoria B12 en `linguistic/`, con dependencias privadas fijadas por hash. B19 se ha recompilado en una carpeta nueva y reproduce exactamente el NDS entregado. Los checkpoints B19/B10, B11 y B12 se han verificado de nuevo por bytes e integridad. La entrega SD vigente sigue siendo B19/B10; la memoria de desarrollo más reciente es B12, revisión 50/runtime 36, no instalable. El bloque 2 sigue abierto. No sustituirla por B11 (39/27), que se conserva como antecedente. El ZIP final B12 todavía no tiene confirmación nueva de copia privada duradera; consulta el bloqueo en `project/STATE.json`. Las carpetas V0.x son históricas.
 
-El bloque 2 está autorizado, pero su cierre no está acreditado. No conviertas los números comunicados en conversaciones en revisiones importadas. Recupera resultados únicamente de archivos verificables y conserva el origen de cada decisión. No repitas las 100 decisiones ya adoptadas en B11.
+El bloque 2 está autorizado, pero su cierre no está acreditado. No conviertas los números comunicados en conversaciones en revisiones importadas. Recupera resultados únicamente de archivos verificables y conserva el origen de cada decisión. No repitas las decisiones ya adoptadas en B11 ni en la tanda 000–007 de B12; verifica ledger, hashes y SQLite.
 
 ## Trabajar sin perder el avance
 
@@ -25,6 +25,6 @@ Respeta la UX aprobada: japonés literal y traducción contextual al castellano;
 
 Este repositorio es público. No publiques ROM, BIOS, partidas, colecciones personales, libros, fuentes tipográficas, bases de diccionario ni checkpoints completos. Revisa derechos, contenido y secretos de cada archivo antes de incorporarlo. Los filtros de extensiones son sólo una defensa adicional, no una auditoría legal o de secretos.
 
-Una prueba de infraestructura o de compilador NO acredita compilación de B19, funcionamiento en emulador ni consola física. El workflow de recuperación no genera un instalador. Para una entrega hacen falta fuentes actuales verificadas, compilación de esas fuentes, datos emparejados, pruebas y recuperación del archivo final. La prueba de Nintendo DS física requiere a Jorge. No cierres el Hito B sin las evidencias correspondientes.
+Una prueba de infraestructura o de compilador NO acredita compilación de B19, funcionamiento en emulador ni consola física. La CI pública comprueba código, contratos y datos sintéticos; no dispone de los inputs privados para compilar B19. El constructor completo está probado localmente. El workflow público no genera un instalador. Para una entrega hacen falta fuentes actuales verificadas, compilación de esas fuentes, datos emparejados, pruebas y recuperación del archivo final. La prueba de Nintendo DS física requiere a Jorge. No cierres el Hito B sin las evidencias correspondientes.
 
 No crees servidores, Codespaces de pago, servicios nuevos ni gastos. No cambies el alcance de los cinco bloques para declarar terminado lo pendiente.

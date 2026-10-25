@@ -1,0 +1,2969 @@
+{
+  "schema": "kotogba.b19.private-build-inputs/1",
+  "archive": {
+    "name": "kotoGBA_B19_PRIVATE_BUILD_INPUTS_20261025.zip",
+    "bytes": 54993645,
+    "sha256": "73cf863d5beb9a1b4eed6c9b6f13341365db79a39d89fec4393a3e36c58b1e76"
+  },
+  "entries": {
+    "project/desarrollo/fuentes/code/Makefile": {
+      "bytes": 1233,
+      "sha256": "fbdfeb48a14758b4f30eea1ed582e3987658d200a5bbc13dd0849e9694e2f20f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/Makefile"
+    },
+    "project/desarrollo/fuentes/code/bootstrap/Makefile": {
+      "bytes": 2318,
+      "sha256": "d35ca9dfef03d580ed2a611d7f4a35c5bc147b369d0b92a58a78bc0f2e98fde8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/bootstrap/Makefile"
+    },
+    "project/desarrollo/fuentes/code/bootstrap/arm9/Makefile": {
+      "bytes": 6115,
+      "sha256": "75b9b9d02debc3891ed99e3ac6382329efbb2bf140f5cc26c71ec9c039a86ae5",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/bootstrap/arm9/Makefile"
+    },
+    "project/desarrollo/fuentes/code/bootstrap/arm9/source/dldi_stub.s": {
+      "bytes": 2636,
+      "sha256": "87e592c737ec5de922ff1873c66cabdd9ac870b33a60a2a458d012ac5fc28982",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/bootstrap/arm9/source/dldi_stub.s"
+    },
+    "project/desarrollo/fuentes/code/bootstrap/arm9/source/main.cpp": {
+      "bytes": 3225,
+      "sha256": "e735293fe2cd74c798783e85b115b3fa6cfe3d6cc2232965360142616551b16a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/bootstrap/arm9/source/main.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/Makefile": {
+      "bytes": 5233,
+      "sha256": "7e06e05062d1a285950f7353106c0a950d24d35189e4dd50b4e0796584373be7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/Makefile"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/gbarunner7.ld": {
+      "bytes": 6136,
+      "sha256": "a645d5ee16bd096a98dab86d3792aed0fcdfce891d7b6fd76de2837308e46143",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/gbarunner7.ld"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Arm7State.h": {
+      "bytes": 68,
+      "sha256": "519cffa33ddc9867e8553222de8ec902a1c6ec6fcfb4b692c5edfedcce0b8012",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Arm7State.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/ExitMode.h": {
+      "bytes": 63,
+      "sha256": "4ca4ee5c3e78228f49c7e371e565b29b124dd81e948aaa2c1e5bda91658a399a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/ExitMode.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/FramerateAdjustment.c": {
+      "bytes": 1855,
+      "sha256": "a38f741f2655a046347df6b48215819d056b394f087608cee923d2377fc218da",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/FramerateAdjustment.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/FramerateAdjustment.h": {
+      "bytes": 547,
+      "sha256": "57b85c5d6682dc151e76658681d97d48a0a58588e5e12990fd7cd4e066f19eed",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/FramerateAdjustment.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/FsIpcService.cpp": {
+      "bytes": 1960,
+      "sha256": "782477f7f5bba62baeabc6f66e908c6b64c7e2460cb72605ec1b0b3bd46c3a69",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/FsIpcService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/FsIpcService.h": {
+      "bytes": 641,
+      "sha256": "64eced9077a29212952c3a65fd84b2b58e64014a8df2e55540334b3c657ec43a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/FsIpcService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSaveIpcService.cpp": {
+      "bytes": 1986,
+      "sha256": "bbee3c46b8a7043e5e9cb098f2f0745d569d1789c6bdf8ba96402276d9559e69",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSaveIpcService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSaveIpcService.h": {
+      "bytes": 425,
+      "sha256": "30752fcc560d11e3c924b4424f59cb3decaf4670769f7c067dba758c3b19d8c4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSaveIpcService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSoundIpcService.cpp": {
+      "bytes": 1927,
+      "sha256": "de37e14ad0cc8ef07831a8f942b2d00744e28fcccfc020febeb24adee08dd03e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSoundIpcService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSoundIpcService.h": {
+      "bytes": 280,
+      "sha256": "d859f4c88e9589d57819a4af5fdb06d7f287f9d7a4994547530a02eeb463105d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/GbaSoundIpcService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/IpcService.cpp": {
+      "bytes": 273,
+      "sha256": "4d19b28624cbc2df78e52f11c2a41b84e7e9014ce83ab23d49be5a3520e8af8a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/IpcService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/IpcService.h": {
+      "bytes": 891,
+      "sha256": "50477226445da4e3c3e42795e3253ddf798d340c4e05f6f609b07904b07bf949",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/IpcService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/SystemIpcService.cpp": {
+      "bytes": 534,
+      "sha256": "8a10a28332018568268e3d81db1007ddf1712f0709c5f26b25455d8cc1b2036e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/SystemIpcService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/SystemIpcService.h": {
+      "bytes": 346,
+      "sha256": "3732c0ba80992f56e4872982521d5bee547dccf6d2f681fbda2429ebee7f2da0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/SystemIpcService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/ThreadIpcService.cpp": {
+      "bytes": 701,
+      "sha256": "614c5e4e8b9fbbc9efe93fe91d4d1e164bb069fc6d531b2e63615c193a1aff17",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/ThreadIpcService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/IpcServices/ThreadIpcService.h": {
+      "bytes": 1196,
+      "sha256": "fb3deb0f92645a7f50794ec08c8251797f752283989e45ba1058c9aaeb2710d4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/IpcServices/ThreadIpcService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbEnvelope.c": {
+      "bytes": 1365,
+      "sha256": "eb39b870774c39825e58aae51ec2ff4dda7af4f1e2d6508ccf025411f8e59bbe",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbEnvelope.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbEnvelope.h": {
+      "bytes": 404,
+      "sha256": "407adcb70cba67f0550929f111a87fcd7833582a83c9e8ebaabb676cc6d1698d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbEnvelope.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbSound.c": {
+      "bytes": 34242,
+      "sha256": "296eb79ef53ebf61f7753479d87adb7552bc4808ddb7d772415c7f738fa5c3bc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbSound.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbSound.h": {
+      "bytes": 140,
+      "sha256": "cb6ad6ce1665b82d1e9fd539781a50058fc061b616fdb07372b0d5d3d6751293",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbSound.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbSweep.c": {
+      "bytes": 1482,
+      "sha256": "2ef031da6bd78a72daab2ad49ca6b0173f4d43b0aca9b48d33398fe0644801e9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbSweep.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbSweep.h": {
+      "bytes": 393,
+      "sha256": "0bcbd89d660e78b2812bc50054346f3c8f022c141d0efb65d2c210202e2ae5b7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbSweep.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbaSound7.c": {
+      "bytes": 4521,
+      "sha256": "909997af93ba5381c86c79a0c141c539e0d0d5618f682af0a4bb2f194e0e45e8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbaSound7.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbaSound7.h": {
+      "bytes": 413,
+      "sha256": "9aa67db9353ea07a6c0b58c3c862972c4d885e63dce86af21079bda8e050d994",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbaSound7.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbaTimer.c": {
+      "bytes": 1370,
+      "sha256": "5037720033d33e45d5c27621deda2c412b03243c7d2dbf161d97859aec8d30ab",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbaTimer.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/GbaTimer.h": {
+      "bytes": 750,
+      "sha256": "615e44110093f86b99f9fbcb4217b78854716ee6ffb657f1fe3888ec074662bd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/GbaTimer.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/SoundThread.c": {
+      "bytes": 3891,
+      "sha256": "2d4a54738e2b151e74b43c95182c8bc58253ab2e9d68877045eb7f9120c014b3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/SoundThread.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/Sound/SoundThread.h": {
+      "bytes": 106,
+      "sha256": "1e05162d75fd326c6fc94f3377a35585a3429eea9a4de00d876c1f068fe907d1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/Sound/SoundThread.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/common.h": {
+      "bytes": 30,
+      "sha256": "0defbecf56fb3d1ad7df03ef686b158e7b76037bdffb5e5ad094c5b651e549f5",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/common.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/crt0.s": {
+      "bytes": 4907,
+      "sha256": "f9e0af6fbbcb419441d29a893f41619562f39d95dd0b9bfc3d230ac5b63d04ac",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/crt0.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/dldi.h": {
+      "bytes": 224,
+      "sha256": "018006308e7832c2d13c145239a28c65e9c4f2591ad77b834094b814b04decef",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/dldi.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/dldi.s": {
+      "bytes": 565,
+      "sha256": "e38704c012a3838f47cdcd475712891b708bc3f550ee214aae8e9ffea7b14852",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/dldi.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/main.cpp": {
+      "bytes": 5772,
+      "sha256": "1989efbad1697de7fd2c2c0d146b94476901a4a0fb52d73f34a969861450b7fb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/main.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/mmc/mmc_spec.h": {
+      "bytes": 19991,
+      "sha256": "82cf48a545c9a9b5932792217bc48f3410d9aa6a95a437152da6da0f547bb8bc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/mmc/mmc_spec.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/mmc/sd_spec.h": {
+      "bytes": 13819,
+      "sha256": "ccf9847264d790e74926c158f7e9fb67a8efd052731c5f1bb59f34c3418c879f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/mmc/sd_spec.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/mmc/sdmmc.c": {
+      "bytes": 25103,
+      "sha256": "d56af7021051749319af112e63efcda6ef4d818d3a57dc46db83fa98a849b779",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/mmc/sdmmc.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/mmc/sdmmc.h": {
+      "bytes": 8958,
+      "sha256": "fdc485604a28cd05cf6ab6b50343213a74ea9adbcfdbb027b9dc5fb178c6c122",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/mmc/sdmmc.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/mmc/tmio.c": {
+      "bytes": 8111,
+      "sha256": "ca702c75e1fcfec980281011aefb615608cbd73df1c4052adfe03b745bc00e02",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/mmc/tmio.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/source/mmc/tmio.h": {
+      "bytes": 18669,
+      "sha256": "73f49977f42736fee21c6df944ef525f0a5ebbd75c8c11c4a7bcff058d3e3761",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm7/source/mmc/tmio.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/Makefile": {
+      "bytes": 6697,
+      "sha256": "0999e191c0006b955e36f3f8f3f9eacb7d55b73d06305aba3c64ff63b4934967",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/Makefile"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/gbarunner9.ld": {
+      "bytes": 13578,
+      "sha256": "e98fbc62283c5432521fd738d632fbd55ac7a1c9cdbea328ddfda8bf301a8368",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/gbarunner9.ld"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/GbaBorderService.cpp": {
+      "bytes": 9222,
+      "sha256": "90422955326558378379eaaf06be63f45b4e3a729a7d4d4d5e05dd88f209bfa4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/GbaBorderService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/GbaBorderService.h": {
+      "bytes": 1094,
+      "sha256": "b7ead7d94bb31748d06486e883cbad0c21750052ac359968bd9151d8882f1a92",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/GbaBorderService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/GbaDisplayConfigurationService.cpp": {
+      "bytes": 5203,
+      "sha256": "74cbeb520f8511162965c5846c5af15431fea9ab18760dc54fae4082118a1db3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/GbaDisplayConfigurationService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/GbaDisplayConfigurationService.h": {
+      "bytes": 706,
+      "sha256": "856acc473022cf47e0bc2d6f15301fbf036c7e736d53dbebb03e425083f822f3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/GbaDisplayConfigurationService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaCards.generated.h": {
+      "bytes": 30359,
+      "sha256": "22967bfc1e0f55b2763e06518f09f354074e290c5b1d480173dcfb9fe6e20ff9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaCards.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaCards.generated.s": {
+      "bytes": 4782,
+      "sha256": "21ba8b169ad541519b2b9197b18897ac13cf4cd4ad3a79066dc1f83a2c5bc9fd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaCards.generated.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaLatinFont6x10.h": {
+      "bytes": 9697,
+      "sha256": "b41cdce19343d70dbed8c274184f1e7012d69d3035b1a2339fe35a12c22cb41f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaLatinFont6x10.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaNativeLabels.generated.h": {
+      "bytes": 1512,
+      "sha256": "dbb537d37bdee67a43a16e8cda5cdcd441ff1d56707282dd39fe0b91e6e2ce90",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaNativeLabels.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaPages.generated.h": {
+      "bytes": 8562,
+      "sha256": "de1ee1886aaf561b4262421a94fa565405cbe0685fac85336f73053667ef59de",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaPages.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaPatterns.generated.h": {
+      "bytes": 3433,
+      "sha256": "1965f137fa476cd17bb47c9359eff3b50d66f684f6a5c4cc778900c3a193a0c7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaPatterns.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSentences.generated.h": {
+      "bytes": 4734,
+      "sha256": "a5a78f0a728bb374bef10937cd7cdc827c70322572d1df74a3d1859cbc457526",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSentences.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaStudy.generated.h": {
+      "bytes": 1840,
+      "sha256": "ce61d4ce7bb2bc2c0f69c0ee8ed6237be5732bb21677ffee758f9fd63aae3516",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaStudy.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaStudyFont.generated.h": {
+      "bytes": 11442,
+      "sha256": "1e17e905f254e55c2f8542ef836b742a8a175bac461b9e117e2ff9751fd7348b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaStudyFont.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSupplementalGlyphsHitoA.generated.h": {
+      "bytes": 4603,
+      "sha256": "ea71ba5400495ed6493504400f73e436bd37e036625eb26d8330d7050c4e7666",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSupplementalGlyphsHitoA.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSupplementalGlyphsR29.generated.h": {
+      "bytes": 38099,
+      "sha256": "ee34445232b0d073c578a1825f9ab9a11e3142510fcc380b5dbccc9aca1b368c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSupplementalGlyphsR29.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSupplementalGlyphsR32.generated.h": {
+      "bytes": 2345,
+      "sha256": "0b3401b02bdec04f9f823eb9ec15c457f68302f6061c15878e83659356a828c8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaSupplementalGlyphsR32.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaTapMap.generated.cpp": {
+      "bytes": 2191,
+      "sha256": "d93fa7728833d7474f149d1e71e0d17390c009a8126ec758d3f81def60aac920",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaTapMap.generated.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaTapMap.generated.h": {
+      "bytes": 187,
+      "sha256": "e1657a4c1436b011d486b6ef89060f65b5fc096cacd737017a199899bcaceea1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/KotoGbaTapMap.generated.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/AppSettings.h": {
+      "bytes": 394,
+      "sha256": "e39fc84fa078a95946c9bebbad41193a89ca4747b2d62b49e6ae0e371aed1d09",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/AppSettings.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/AppSettingsService.cpp": {
+      "bytes": 378,
+      "sha256": "0ec5c07bd3e6e992ee9b83e8c1c602d66d9d6579d017502c188a52ffd6db8af2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/AppSettingsService.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/AppSettingsService.h": {
+      "bytes": 589,
+      "sha256": "e8b42c00444892e7690bff66f6bdd6e0772faf98b37dda9246c6787ccd891a66",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/AppSettingsService.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/DisplaySettings.h": {
+      "bytes": 1902,
+      "sha256": "c077f9df53179b77298c585637e3e6a96963ea94a764d24166ba7cbbfdf68a73",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/DisplaySettings.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaBorderImage.h": {
+      "bytes": 431,
+      "sha256": "d42b2eb1a2a996978fc83a7e1d8f88118e2b8e318e78f0a47081d81ee2dcaf4e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaBorderImage.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaColorCorrection.h": {
+      "bytes": 1288,
+      "sha256": "8f74d3a939222ccdc7a01b5d6d4803a97d122e10b9dcd1deb7b0215f094270e4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaColorCorrection.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaSaveType.h": {
+      "bytes": 61,
+      "sha256": "5edcc0093203704cf48c994211b2d74410141c7d7ec85449c99bb38e6009d591",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaSaveType.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaScreen.h": {
+      "bytes": 60,
+      "sha256": "8649a3eba0b873b3fac5b07bacaf67443e0c76daf337abf5fd5aabdea7a9eab9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/Enums/GbaScreen.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/GameSettings.h": {
+      "bytes": 170,
+      "sha256": "276a63a6b5d100501880955da1eeca76e71bfb2d485df890ea334acb0a1b0e7b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/GameSettings.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/Json/ArduinoJson.h": {
+      "bytes": 221286,
+      "sha256": "5bb6ca719015d04fac9effd71f5f71eb5c87644497d5a40448bfb892a1b8cccf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/Json/ArduinoJson.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/Json/JsonAppSettingsSerializer.cpp": {
+      "bytes": 12088,
+      "sha256": "0ec295c140ecf1623d8f299384864f44324b9963102f5358662a68241543b613",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/Json/JsonAppSettingsSerializer.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/Json/JsonAppSettingsSerializer.h": {
+      "bytes": 316,
+      "sha256": "b94634020c95d7a8fb45508c06b1581f2618e219358862795def68d6bf13d2fa",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/Json/JsonAppSettingsSerializer.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/Settings/RunSettings.h": {
+      "bytes": 1575,
+      "sha256": "15076347f10019185a3cddf12b6499d0e13e197055d1f06e71ab4407f4d2662c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/Settings/RunSettings.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/SplashScreen.cpp": {
+      "bytes": 2362,
+      "sha256": "415f850686efc084e0942837ccc265c0588ed4a91fe87ce375b01cb300188606",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/SplashScreen.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Application/SplashScreen.h": {
+      "bytes": 317,
+      "sha256": "1a9df71f509bb5178dda0682919e754ba0e05fdad828a3365a145d155086c02f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Application/SplashScreen.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Context.h": {
+      "bytes": 51,
+      "sha256": "e38671b3967976399255c7bb7f7262b1078b5e2e13e57a51ff7634a2dfff690d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Context.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Environment.cpp": {
+      "bytes": 1612,
+      "sha256": "809f6cc50943b90f3e5a59484b46e4ff07b43b3e02b23475fad190ffb36f191b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Environment.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Environment.h": {
+      "bytes": 1336,
+      "sha256": "10c004ea9c494d6aa44c0b2cc99c8ad75ac1a15a3e174c8c40106d4b308ea480",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Environment.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Heap/GlobalHeap.cpp": {
+      "bytes": 1912,
+      "sha256": "a1886af774844eeec706aedc6a76fc1a89b44485ca08ba40c4199107b2d15044",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Heap/GlobalHeap.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Heap/GlobalHeap.h": {
+      "bytes": 734,
+      "sha256": "76db222544650a89543b480231219474973245fad9094050f2935333474bf6e1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Heap/GlobalHeap.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Heap/tlsf.c": {
+      "bytes": 34058,
+      "sha256": "123f4fc8f163b6490fee1108863f6e9a4132c2d07ab7a3565fb802b5417d4d4c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Heap/tlsf.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Heap/tlsf.h": {
+      "bytes": 3433,
+      "sha256": "af5674205aab667ccf958bd22240949eed957118a18b408ca8961ab0d1874a00",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Heap/tlsf.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Math/Point.h": {
+      "bytes": 325,
+      "sha256": "1f20bbab4c591b9719d524e2750071983b0c42359e14475f04f2dfdfc2975eac",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Math/Point.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Core/Math/fixed.h": {
+      "bytes": 12339,
+      "sha256": "4cf1a74797bccc46995d48aeb3d219bb2f03f7723178a6dfa05f689f3b60c446",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Core/Math/fixed.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Cpsr.h": {
+      "bytes": 684,
+      "sha256": "ee5a48ab7e9461a49a71e6513e159ebc88e81743014f5cad4361f8f796cf7853",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Cpsr.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/DtcmStack.s": {
+      "bytes": 626,
+      "sha256": "f5f792f3e2265e225eab06e6fe05eda6676600019e5cf1fdd4ff2a78f5f812bf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/DtcmStack.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/DtcmStackDefs.inc": {
+      "bytes": 94,
+      "sha256": "9d343c10a38c981521c47fc25b148566cbad1ec19154c1105e962ba38861890e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/DtcmStackDefs.inc"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/Arm7Irq.s": {
+      "bytes": 758,
+      "sha256": "137e3a55a9e785b76472819f0ad1f4174fb8d82385bf9644645156e326bb7323",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/Arm7Irq.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/BootAnimationSkip.h": {
+      "bytes": 135,
+      "sha256": "e496cd8ce553959bbadfeae784265b47cfc2aa3f73150e82d2b8396c5dec59bd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/BootAnimationSkip.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/BootAnimationSkip.s": {
+      "bytes": 744,
+      "sha256": "a0ae3098a5d310ddb3abae41027855d998573d8d19cd2337f1c901f767e46370",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/BootAnimationSkip.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/EmuIrqs.s": {
+      "bytes": 1204,
+      "sha256": "a05e4c6aa5b32089d6e4add565b8044b0b2098fc092eecac8e9a80835e3922ed",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/EmuIrqs.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/HBlankIrq.s": {
+      "bytes": 1004,
+      "sha256": "18ad100f01e696a37754ba103f76206b0e114d8769eb9c8387a1f07881b8a658",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/HBlankIrq.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/IoFallback.s": {
+      "bytes": 577,
+      "sha256": "12f8cbbe61f14fded9936757a4ab1ca3b4027e524549e8c9bca43749f4419b62",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/IoFallback.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/IoRegisters.h": {
+      "bytes": 48,
+      "sha256": "9c17eb11fa425396cdc47fdad541e4978f44908a3db911a8fdfbe74afdb3c4c3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/IoRegisters.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/IoRegisters.s": {
+      "bytes": 82,
+      "sha256": "00b447335de24f2b7593d2f11f8d1d7e3d22a62a6df773382fc5d18acc56d92d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/IoRegisters.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Emulator/VBlankIrq.s": {
+      "bytes": 2342,
+      "sha256": "8042632603201a1f5948248dd06c58e7e2697f1116541c6164db9742dbff7f3b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Emulator/VBlankIrq.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/File.h": {
+      "bytes": 1301,
+      "sha256": "367a8eaf70bd398794c365593732c5a69e4995313edbb451dc2f219c09b43cfe",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/File.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/FsIpc.cpp": {
+      "bytes": 8548,
+      "sha256": "aaf227d2d7350ef713136a87298d5a44f637dab883d4aaf20b16a00a1c514113",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/FsIpc.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/FsIpc.h": {
+      "bytes": 1128,
+      "sha256": "0fe0ba3dd689f486d9ad822a1b36a8d1ccfb5603f9cbafd423b01f49a2209234",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/FsIpc.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/diskio.cpp": {
+      "bytes": 2718,
+      "sha256": "9f8d344f02d40487b6938e6a87259063dc9f3add31abd3328e54974c4dfb8978",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/diskio.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/diskio.h": {
+      "bytes": 2733,
+      "sha256": "01f2af1b3fe29b904bedd3ed1eb72ef508b096cd0146b0e06823c79ed093f723",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/diskio.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/ff.c": {
+      "bytes": 229168,
+      "sha256": "745e1a9c001eca2e09dfddd6e752ae81c6add6782d4ce3158ecf18366d760d55",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/ff.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/ff.h": {
+      "bytes": 15449,
+      "sha256": "c4f98d57fb1df2ae222442f32035f8b0ec74915fdf341978ee82d70859d6d09f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/ff.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/ffconf.h": {
+      "bytes": 11528,
+      "sha256": "d11cf11464e1b964625493b708aa7f17234bded3f8b29ab89985de695df301c0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/ffconf.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/ffsystem.c": {
+      "bytes": 4948,
+      "sha256": "dbba0ca7b6e171764999f41d2da66453dfef16ca3e84faf1cdda387700482fa3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/ffsystem.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Fat/ffunicode.c": {
+      "bytes": 1959443,
+      "sha256": "061fccd0f7c230df9fe7543408a149777e0c6091492ce4ac28fabd8cfdc5ea70",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Fat/ffunicode.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorLut.cpp": {
+      "bytes": 3187,
+      "sha256": "2efc7890aff82d6db41d374ae54d4ed2fd508bfb980a89ac16abbe98883bb9fe",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorLut.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorLut.h": {
+      "bytes": 230,
+      "sha256": "f5c4d2139e3143202d6ae6690fd2f308f9a59260e3874c2256a92936206754f5",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorLut.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorProfiles.cpp": {
+      "bytes": 3584,
+      "sha256": "c797bdfdd7d12a054dd2c194b7a11d66403df1ac01420dc4aa2656c2a0e2f3b3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorProfiles.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorProfiles.h": {
+      "bytes": 332,
+      "sha256": "5ad98d822e1b31f7ee7b39b06b303ea7c25d4bf8f64c260a66743aa615d7f1e6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/ColorProfiles.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/GammaLut.cpp": {
+      "bytes": 76,
+      "sha256": "f1b4a4cc47eb3778459e63243ce83412544c0cbd87e6789d0ef2d3d8a7c5b63d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/GammaLut.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/GammaLut.h": {
+      "bytes": 2222,
+      "sha256": "b7e42ac5df84de2058098b1805acd2e0fb8604b8f3c83a640eb496540aab884d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/GbaColorCorrection/GammaLut.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/GbaHeader.h": {
+      "bytes": 425,
+      "sha256": "20cfe4467522c9e39b0805e997539d2b637413053d692defabda5acfff945967",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/GbaHeader.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/Animation/Animator.cpp": {
+      "bytes": 342,
+      "sha256": "a352799ff78ff5f95d12ed30df71fec1f390139b6296aebf5edf53f4d054acce",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/Animation/Animator.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/Animation/Animator.h": {
+      "bytes": 1875,
+      "sha256": "49f43bceee9f4c8a7a0998a4e927d799e3b1dc0364fdbaab402888a646e61c67",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/Animation/Animator.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/Animation/Curve.h": {
+      "bytes": 121,
+      "sha256": "76ba9be17aee55582d0128b89f5090570f31f30129f0e339eef65b2e0d947943",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/Animation/Curve.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/Animation/LinearCurve.h": {
+      "bytes": 205,
+      "sha256": "9b52dd41ee1e509190d305e489bbb74e56a3c60de804c1f958f94911c5eeec54",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/Animation/LinearCurve.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/Animator.h": {
+      "bytes": 1875,
+      "sha256": "49f43bceee9f4c8a7a0998a4e927d799e3b1dc0364fdbaab402888a646e61c67",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/Animator.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/OamBuilder.h": {
+      "bytes": 7040,
+      "sha256": "d1f515ac7201fd2fea2a9108f7216696a70a0d9da124400aa6fa4de6f56def5d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/OamBuilder.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/OamManager.cpp": {
+      "bytes": 354,
+      "sha256": "b2ca0234f06cd256b61e775678b713f6c7438867cdc2276e3bacf3e86304512c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/OamManager.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Gui/OamManager.h": {
+      "bytes": 579,
+      "sha256": "b056943c012d8671216f75e8e6cb632a2167244e981857c703611f372cbfd546",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Gui/OamManager.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArm.c": {
+      "bytes": 12813,
+      "sha256": "57e2b615a92fab019038608724403dfa217f1e424dabb8c2b295b255a365ceee",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArm.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArm.h": {
+      "bytes": 522,
+      "sha256": "99e308bf7f31814f787393a846f955e3de717dfc4d50256c109453d3b073f5f2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArm.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedB.s": {
+      "bytes": 1008,
+      "sha256": "dae6eb786371942a05bbe4f9617768a8265f2b543f63637285162a0094d1bca2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedB.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedBL.s": {
+      "bytes": 1149,
+      "sha256": "d8b7e87e43d04e8cfe5ec39820bdb06c2be80525a269ceab5d5e3ea56b4bb4c2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedBL.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedBx.s": {
+      "bytes": 2349,
+      "sha256": "85c2fef674222ca7b81455291da52a1f7aba579a4c5db058fbba71863d748e16",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedBx.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedLdrPcImm.s": {
+      "bytes": 2087,
+      "sha256": "215cb82e5c59a2763eaeb2396f31af2dcb787856fd7ed8de1c11d3f26cb2ad25",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitArmUndefinedLdrPcImm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitCommon.c": {
+      "bytes": 4145,
+      "sha256": "fd093120213ecd8e46f071fbc136d18aa442a104cb2cd68e63278ef133e29053",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitCommon.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitCommon.h": {
+      "bytes": 3121,
+      "sha256": "32b8a3dd61abed0ecec40a113d4c7bb4cc9f8c7680c03962a11c18a5df53bc48",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitCommon.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumb.c": {
+      "bytes": 6497,
+      "sha256": "31f0fc01acf19d2930e195a813750a543c0948ffa6843f2ab913bfad71022f32",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumb.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumb.h": {
+      "bytes": 121,
+      "sha256": "829a0877aa35996c1c2d36e74c6e1de82452e6b07f2d18eb8e58e6240f5de5a3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumb.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbEnsureJitted.s": {
+      "bytes": 1043,
+      "sha256": "d0eaeeae3ab77e4c49901e4aadbc3b3f8bfd1f0ac5071b2e2974e40599c1c53f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbEnsureJitted.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedAddPc.s": {
+      "bytes": 787,
+      "sha256": "3d9549b8248ccb30d3a631e4ec566560b5ebfe378fb208f013c0cd3ba5c7b6fc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedAddPc.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedBCond.s": {
+      "bytes": 1966,
+      "sha256": "91566c9d1bd494862535811a720727b6f8266d504726d0558346b0c5dbe6b663",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedBCond.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedBx.s": {
+      "bytes": 561,
+      "sha256": "fb952f1ced7999842554bcff47010a5cdbba2f8476129d6a92d95267f7fb95fc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedBx.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedMovPc.s": {
+      "bytes": 584,
+      "sha256": "acfe8ac41b6af91f2ace8f5f1680c4ff24ffc5e7641261b2ac761c49367d269e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/JitPatcher/JitThumbUndefinedMovPc.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Logger/ILogger.h": {
+      "bytes": 448,
+      "sha256": "16ff6a511a6de48cdae801ad69a110d804258ee08eb015b02c3895c930bcfcbb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Logger/ILogger.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Logger/IOutputStream.h": {
+      "bytes": 155,
+      "sha256": "7b3bc38663eda45e3b02afd0ad71c68c9258e98d266e5958e89ab9c6cd5482a3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Logger/IOutputStream.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Logger/NitroEmulatorOutputStream.cpp": {
+      "bytes": 1873,
+      "sha256": "dcacba9c1a95a399530758d18d8a1223bf9d17620a701ba8f914d4def85f72bc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Logger/NitroEmulatorOutputStream.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Logger/NitroEmulatorOutputStream.h": {
+      "bytes": 218,
+      "sha256": "d1995d46fc147b2863eb12c30b85caef70e4ad9dc7de39f6789444dfa1fbbed2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Logger/NitroEmulatorOutputStream.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Logger/NullLogger.h": {
+      "bytes": 156,
+      "sha256": "70b724025f2b88b4834dfb614ebd3e1ffa1d6c41c5cc74906f2fff967fede100",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Logger/NullLogger.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Logger/NullOutputStream.h": {
+      "bytes": 156,
+      "sha256": "4c89ec6a18fb11786c2318e4e5d0a10870fb42a257b19913e838dcc7f4a819af",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Logger/NullOutputStream.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Logger/PlainLogger.h": {
+      "bytes": 722,
+      "sha256": "d8e642bd18fd4eb1953b91c08d9deeb58f50f373213d56dbbbe3023080bc2431",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Logger/PlainLogger.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemCopy.h": {
+      "bytes": 702,
+      "sha256": "eec0bcd922f7105d0e0a70910daefd466f5e51a7bb5c6e8ddeeba2f851bf7d65",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemCopy.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemCopy.s": {
+      "bytes": 2225,
+      "sha256": "23710003254014a3e2a56d47251656c47e3ba883bf52235d3f132c60fc31f0aa",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemCopy.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemFastSearch.h": {
+      "bytes": 630,
+      "sha256": "973d52b6a50e9787d5abe2e1947b5d82d581452454fc2f053ee23a64a4ea24c2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemFastSearch.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemFastSearch.s": {
+      "bytes": 2990,
+      "sha256": "cc9971a34f4b8629b3aaa23ad06b5a21b43c31f358aa32780f954dcb3d549ddf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemFastSearch.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmDispatch.s": {
+      "bytes": 1262,
+      "sha256": "21d7771f2d5e023be71b21660d15ceadce1ae606ddde767c0295fc00ef49f5be",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmDispatch.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmDispatchTable.cpp": {
+      "bytes": 7256,
+      "sha256": "63e808d7ee8c915c6662bcf690b274e81eb9d7cde1d9ec47cea72345279bf8a5",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmDispatchTable.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmDispatchTable.h": {
+      "bytes": 54,
+      "sha256": "a4ad722977f0a4098f103ecdf6bf66de51a3733ac37367718400b3b088cfbc4e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmDispatchTable.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLdmStmRd.s": {
+      "bytes": 5256,
+      "sha256": "9ab8d671fc9533b3f968335bf373c1847c4404c8fda26c5383562548e9878bc3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLdmStmRd.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLdmStmRm.s": {
+      "bytes": 2978,
+      "sha256": "7466bbadac1783869d72ba5959d6258317d96fc3af54f7722ecaf68d115d7d35",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLdmStmRm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLdmStmRn.s": {
+      "bytes": 1873,
+      "sha256": "42e951474a4f860da0d187d971ee458fbc30d3dc7ecdc103a4a21114ddd558a0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLdmStmRn.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreImm.s": {
+      "bytes": 702,
+      "sha256": "78def54222fad849e01ef2a16b9df2e12aeb1223010fa5ea064ce677e0395415",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreImm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreRd.s": {
+      "bytes": 7880,
+      "sha256": "19cafc0b25d900ec456867143ef3de54cc17416710e96123fea37fe30093c699",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreRd.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreRm.s": {
+      "bytes": 2862,
+      "sha256": "d96ab3a8a0b0f1f2541805cefdf59cd758decb41783a2b229259f44a6cd2b1ba",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreRm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreRn.s": {
+      "bytes": 14624,
+      "sha256": "61ccf944a912ba0f510974803b48b47c26b56ab4241054c4b4c2b7f2726e8a6f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreRn.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreShortImm.s": {
+      "bytes": 1213,
+      "sha256": "2263721269b9eb3a9fa8a295c2c4711b02ad51766772d04684e79d08d523e070",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreShortImm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreShortRd.s": {
+      "bytes": 7691,
+      "sha256": "7499575fe02fefaff96bc63f236c2777682085e5b0dcc0e08f39fab16943a748",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreShortRd.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreShortRm.s": {
+      "bytes": 2197,
+      "sha256": "d14006c8aeb55f4515c2d80fde01322d254f9dc86a67220ef7cea7f8d1e688be",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmLoadStoreShortRm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmMacros.inc": {
+      "bytes": 84,
+      "sha256": "88cfd83f0b4677938f549c2cd775854260ec49f272d3a61af5f412ad2b08e16b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmMacros.inc"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmSwpRd.s": {
+      "bytes": 2281,
+      "sha256": "25562ad03ae58759e4a2e239e5659c2102da16d412d8e435443513f0349edcea",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmSwpRd.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmSwpRn.s": {
+      "bytes": 1151,
+      "sha256": "6db2d02e223fd7a3da0a3f36514f3c2b19160b61fd4b4772dd8534d3875765b7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Arm/ArmSwpRn.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/HiCodeCacheMapping.h": {
+      "bytes": 156,
+      "sha256": "76eb72f22769691c0c3007f9c845ae891b53b73848c570b702981f1a2c6dac86",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/HiCodeCacheMapping.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/HiCodeCacheMapping.s": {
+      "bytes": 2012,
+      "sha256": "2718dae1118089f6b1b5d4803cc39e6576d6dd42e9c2884b08d7ae29611dab63",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/HiCodeCacheMapping.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad16.s": {
+      "bytes": 4053,
+      "sha256": "97d650d8f8b08af7fd0dec40c3d572c7768c0585377502d54b7fc0f0810a05d2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad16.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad16IoTable.s": {
+      "bytes": 5631,
+      "sha256": "697336317f3af3ac25bf1852c0e39c625ba7f266b8c4061cbd95d5af609f4ce3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad16IoTable.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad32.s": {
+      "bytes": 3988,
+      "sha256": "dc830e04a5bac6a56bae18471b9888eadce11a51869071bd2e08d7ed4fa8758e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad32.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad32IoTable.s": {
+      "bytes": 2880,
+      "sha256": "1a28012b1d0a7ae2e61d888eee00b6035591d5c375f9711512c43c859b12378d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad32IoTable.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad8.s": {
+      "bytes": 2735,
+      "sha256": "b60952c3a9f078e6cad807f86f909696bbb467011064c9dfa56b6d9e9f4cc5f2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoad8.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadRom.s": {
+      "bytes": 1444,
+      "sha256": "73eae08207eb1c1016bb2e23109fed0d592c01b211be39f827f5e6ae7bf7f5b8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadRom.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStore.h": {
+      "bytes": 3133,
+      "sha256": "ff2eeb3490eeda0f5fa71efebc81cfd3af873b2be91c980e06cc69a345a497fc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStore.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreRemapTable.s": {
+      "bytes": 514,
+      "sha256": "9730ec55ab411e831b52534c6f9a8ebfa4170ac0d56c1c55eabed896fb2b1a39",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreRemapTable.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreTableDefs.inc": {
+      "bytes": 861,
+      "sha256": "7623aa03c024b1d433e0d1f90fb77e33b74a6e3fec54770e90d04d6e697474ae",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreTableDefs.inc"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreTables.s": {
+      "bytes": 3628,
+      "sha256": "b827dce23209e1ba9ff86ac517a6b40172df9ff705ad1c828cc4ba454f9e7f18",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreTables.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreWordTables.s": {
+      "bytes": 3580,
+      "sha256": "6d152cdf5b341457c54325318095cbbc9422a6b9054a43e54555958d6a5c1fb1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryLoadStoreWordTables.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore16.s": {
+      "bytes": 3602,
+      "sha256": "9376275783b1252627e359b9ef8d2bd8646c4691e45a2ea4f36b0b7f40573f71",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore16.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore16IoTable.s": {
+      "bytes": 8218,
+      "sha256": "f508fb94c322464caa3ed4575c727fc7fe599757dd6bfb1e60b7637c10e6007a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore16IoTable.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore32.s": {
+      "bytes": 3718,
+      "sha256": "5b8591cddab88ef269507778fc2f1e86ed6f29e64ca3bcf355bcad3a74a73f6b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore32.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore32IoTable.s": {
+      "bytes": 5052,
+      "sha256": "43743b41ee056944ebac0a95f295bf9060c68b220be81428c1b8bb3cc489e0fc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore32IoTable.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore8.s": {
+      "bytes": 2846,
+      "sha256": "35b9a4ae47ca08e3d4a2910f4c49d12d09a24b6df438291d831c2e6ccbaf8e16",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/MemoryStore8.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/PrefetchAbort.s": {
+      "bytes": 793,
+      "sha256": "1528223fd566e87013d56dc7a99beddda4de33e985062d498c220bea5b77453f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/PrefetchAbort.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/RomDefs.h": {
+      "bytes": 332,
+      "sha256": "777ee1b71beb3bccaf07757bd6d26e766c561a7a55d4987d12f6b348385ca97d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/RomDefs.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbDispatch.s": {
+      "bytes": 1159,
+      "sha256": "c478c33ed1c489fd255cfc2593c018f1be1819f1b224ccbf7df351c3cf75b644",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbDispatch.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbDtcm.s": {
+      "bytes": 2434,
+      "sha256": "25cbe1c0411d16c10a38fe2340e284550fdba0c52e4defdd126cf913cca13d6e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbDtcm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbGetRn.s": {
+      "bytes": 304,
+      "sha256": "377abdb5d5333541dc58fdaac68a0fab17e8611d7abfca391c5e4af5e9fe9d42",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbGetRn.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbGetRnRm.s": {
+      "bytes": 317,
+      "sha256": "35735a41ad936ef0fc8682c45b9f219638f83c6f8279a393b251e7e8f37c8b56",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbGetRnRm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbLdmStm.s": {
+      "bytes": 3229,
+      "sha256": "d07de4df601a10033e2d0a15539ad51cce4593de3b5b0a31742be897a5938967",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbLdmStm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbLoad.s": {
+      "bytes": 2264,
+      "sha256": "0e1589b33c4d579efdebf5530811992c32070bd038401da933208d396975b1eb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbLoad.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbLoadPc.s": {
+      "bytes": 657,
+      "sha256": "fe3c16bd6276afe6bc73e5875401c69e70c9d150b84f14003a08715faee9db26",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbLoadPc.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbMacros.inc": {
+      "bytes": 86,
+      "sha256": "cd1a5772096689fa88dc444d21ea6874fd7266c6b5defa65eeaf1b8322cbf8a3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbMacros.inc"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbStore.s": {
+      "bytes": 1292,
+      "sha256": "8bae6d5d3b96ff27c498979f5c7a9fc1ca1415531b3ba86f64c3bf234d2f514d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryEmulator/Thumb/ThumbStore.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryProtectionConfiguration.cpp": {
+      "bytes": 2983,
+      "sha256": "9be125458e3fb0ad6dbfc4bf5b7bb9f9a494377984a69a94e89f26a849658b7d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryProtectionConfiguration.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryProtectionConfiguration.h": {
+      "bytes": 2908,
+      "sha256": "a0b6c96a78c96b199cb092e4450a708f7b0177b23c76228d2b774e9bd94faa2b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryProtectionConfiguration.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryProtectionUnit.h": {
+      "bytes": 1765,
+      "sha256": "ce0cb08e37ddd95611991b0f06d78fb4503942f42832f2fd7abcef501e9b5a39",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryProtectionUnit.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/MemoryProtectionUnit.s": {
+      "bytes": 1471,
+      "sha256": "9e7434170ebb44b9eaa223f9db14b3c079997e6fc2eef070efb2a4217cde29b9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/MemoryProtectionUnit.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/BadMixerPatch.cpp": {
+      "bytes": 1010,
+      "sha256": "4d4fece6fd75f3aae77137838f25ad053aaeffc4d769b998e22394b3242df725",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/BadMixerPatch.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/BadMixerPatch.h": {
+      "bytes": 276,
+      "sha256": "13c7f1f391527bb28905ceca7809149155f8b58cfd556b38831bf5958c57fd25",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/BadMixerPatch.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/HarvestMoonPatches.cpp": {
+      "bytes": 1438,
+      "sha256": "6968057d121ea07654387b73e526972ec5f6e1af554caa69b6d706b265216aaf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/HarvestMoonPatches.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/HarvestMoonPatches.h": {
+      "bytes": 92,
+      "sha256": "4934ccbc6e5aa34b63fbfddd3bbf7c675c7b843bef15761692b1423bc14327e2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/HarvestMoonPatches.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/PatchSwi.cpp": {
+      "bytes": 320,
+      "sha256": "1ead4d0a0b67b0fae8a649b72d2ea37ebb532f8c43e7c5eca45fd99a65be8f7f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/PatchSwi.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/PatchSwi.h": {
+      "bytes": 148,
+      "sha256": "0fe273336635e4f47f891e0aaaad35ad7ebde86604247f4a6c69043bca46b066",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/PatchSwi.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/PatchSwiAsm.s": {
+      "bytes": 255,
+      "sha256": "5a9c013ed5a14ee8287e362c26e0908f3641bd323aaabd6cd1f537c9a6a9f5d3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/PatchSwiAsm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/SelfModifyingPatches.cpp": {
+      "bytes": 3523,
+      "sha256": "a494612a9d9f56ab857816ae93a1f480b59cc5a0c6679c884e7c38d4eea25f5a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/SelfModifyingPatches.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Patches/SelfModifyingPatches.h": {
+      "bytes": 287,
+      "sha256": "40801c9b717e6b1ffb0331ab4b376d9fd00250c61fb4d5a0f8b51ba5b205daa4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Patches/SelfModifyingPatches.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Dma.s": {
+      "bytes": 3336,
+      "sha256": "e16837f3384d302170ae51de5edb9c80fb2ca450c94d2824896d4bf4b4257ee0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Dma.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/DmaTransfer.c": {
+      "bytes": 17872,
+      "sha256": "bddfd866da7a890b0e0fdbeb7f9dcc84db45365af9c32f288b7744a9a4e3c0e6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/DmaTransfer.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/DmaTransfer.h": {
+      "bytes": 769,
+      "sha256": "9a12973f300233b72d03cc8dc4d6be3b5b1667d82bec87cb7b3cd696efafbdfa",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/DmaTransfer.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/GbaViewport.c": {
+      "bytes": 1794,
+      "sha256": "47360ccd4568c44b3277b750f7555c0c7881c8aea883080acfa62dab68ec70f9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/GbaViewport.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/GbaViewportAsm.s": {
+      "bytes": 301,
+      "sha256": "f1fae85817657d77b3f8260e19048190f0ac7a6091fbb42d960e9e62a1ccc18b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/GbaViewportAsm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegBgCnt.s": {
+      "bytes": 1426,
+      "sha256": "bf868a76628acfae96966bfb00846f87a4227b4f0dde01252f66c228e6c57fe8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegBgCnt.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegBldCntBldAlpha.s": {
+      "bytes": 685,
+      "sha256": "8bc6fbed35d53a8ee988ccee198d4fa71179d47b3df75845ed2481020fb41d32",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegBldCntBldAlpha.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegDispCnt.c": {
+      "bytes": 4242,
+      "sha256": "114dfe738cfedaac917e81a38815a7f80e88c17069555c65f418607b092b84e3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegDispCnt.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegDispCntAsm.s": {
+      "bytes": 608,
+      "sha256": "8c5cab0e942b6efd524a7ee5e91d494f18aefeda9f7a9f7eeac0b6d117d3c99f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegDispCntAsm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegDispStat.s": {
+      "bytes": 1374,
+      "sha256": "00721f906ccbe5aa8d4994aafc603fc15cd23117e796b3e891f40c5fc358b90a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegDispStat.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegVCount.s": {
+      "bytes": 267,
+      "sha256": "b7451e7c28ed2ecd91821596e56ff046d660dc41840872bcfce5b710859fe626",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegVCount.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegWinInOut.s": {
+      "bytes": 556,
+      "sha256": "04ad0e87128c074fa025135e1428ffcb0cd5c4ceb46521ae52447d1a93b459fd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/RegWinInOut.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/ShadowPalette.c": {
+      "bytes": 211,
+      "sha256": "70f381ef8a4e39235a85051f2bd6fc7c38a232859e5b0348e31f77a0bd80b239",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Graphics/ShadowPalette.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Input.s": {
+      "bytes": 735,
+      "sha256": "c55a48628cabb92267e0acb99a774528fdcf4412807ac5b03241e678c952d1ad",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Input.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Interrupts/RegIeIf.s": {
+      "bytes": 2090,
+      "sha256": "3caa9dcf916c46e8d1ed60560df55b50c1d02ce8175eed1d2ab8bf8f3dd0c7bc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Interrupts/RegIeIf.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Interrupts/RegIme.s": {
+      "bytes": 354,
+      "sha256": "802e80aa13c715db21336676df9aa8722757a9802b4a63ed0d72687ff55c3778",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Interrupts/RegIme.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Sio.s": {
+      "bytes": 1099,
+      "sha256": "35821bc603df21f42db6b21cc5a5320c5ed278edcdbdee0051c156adce45e72d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Sio.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Sound/GbaSound9.c": {
+      "bytes": 5917,
+      "sha256": "ec456691a7fb049d268371e0a4872b44c76cf6cfd2f7c688bb5002122e6796f9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Sound/GbaSound9.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Sound/GbaSound9.h": {
+      "bytes": 232,
+      "sha256": "934d9281d4e5f6e0c4354835297731f53849f1ea2db62ba7153f7a532407b701",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Sound/GbaSound9.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Sound/GbaSoundAsm.s": {
+      "bytes": 1422,
+      "sha256": "e8dc8d3719006e85540eee3d259726e42ff17f098ac4471f48881ec48624518c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Sound/GbaSoundAsm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Peripherals/Timers.s": {
+      "bytes": 4185,
+      "sha256": "893774bf8e6cd02c18ef02aa693d7d26c31fcce33c2ab5d8a46299ed51f4bd29",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Peripherals/Timers.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/PopCountTable.cpp": {
+      "bytes": 114,
+      "sha256": "27675351783767e20f7471c8dc22412197c04da08396e66f05ba53815cf8227a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/PopCountTable.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/PopCountTable.h": {
+      "bytes": 575,
+      "sha256": "9327e506afe7940e098d42e274fef74e67b84cd2b36060d2f6d5b12422bf65f9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/PopCountTable.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/Save.cpp": {
+      "bytes": 5499,
+      "sha256": "d6d8668c541e7656bb2c14057963a074eb20f65927cddc1f50e533a280e3d78f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/Save.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/Save.h": {
+      "bytes": 827,
+      "sha256": "6539a0d71e6038fd7ec17aa75f90744b0a8523369dd9c5d755325a02f526cb34",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/Save.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveEeprom.cpp": {
+      "bytes": 2456,
+      "sha256": "8628bc034cca76c61722a2055dfe5ede2e8c0be08fce67dde5cb820fd1b6a136",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveEeprom.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveEeprom.h": {
+      "bytes": 464,
+      "sha256": "484ba5b2b53f83ec7f1cc9d36fec63b158054dac248eb09c16c7eb4b78312ef1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveEeprom.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveFlash.cpp": {
+      "bytes": 13228,
+      "sha256": "32024b049821d38df34e308cf0dfa6b9698327a70dfcb2d493d9677697fcb4f3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveFlash.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveFlash.h": {
+      "bytes": 677,
+      "sha256": "d9b2d1c69f325f97b0906a90cc6840ceccce5289c882a18e100ee93d0a595dd0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveFlash.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveFlashDefinitions.h": {
+      "bytes": 1557,
+      "sha256": "3c9cf8e32567b712abd8f1911f6dc2ce28dbc2c93a2e87a44f6a0a6ec17e6bf9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveFlashDefinitions.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveSram.cpp": {
+      "bytes": 1820,
+      "sha256": "46a4459c99f5385d454acce67ccf8b49157e299de20556ef054584963fc3a227",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveSram.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveSram.h": {
+      "bytes": 222,
+      "sha256": "7130db2403cbfa21a3c280c729a788906c36c997e13270fef8a178b7b95e93c6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveSram.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveSwi.h": {
+      "bytes": 891,
+      "sha256": "9297d0a77649140812498cc6a2fbfb0b4312e42b0bb8e30aedb180c24be68929",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveSwi.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveSwi.s": {
+      "bytes": 2198,
+      "sha256": "880f5807ecb3725d008248dbbb4631f8f50cd4f0f4e2d0c44ef283e05f656daa",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveSwi.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveTagScanner.cpp": {
+      "bytes": 5100,
+      "sha256": "939d050edbdfd364cfeadc8c80979cf13ae0dc3de11c4f47cec790e3809d4cbc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveTagScanner.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveTagScanner.h": {
+      "bytes": 806,
+      "sha256": "6893a5cd5579219d3e5473903c50d0ad479c0364fbc78bc895157d8f3d317bee",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveTagScanner.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveType.h": {
+      "bytes": 974,
+      "sha256": "45de7bed85628e87a057d386a5fae1b9d8d1ae3e991be9dbc5a0cf50007bf33a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveType.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/Save/SaveTypeInfo.h": {
+      "bytes": 257,
+      "sha256": "defb1ca615e714a5b939f7c560e84a543d9b8dbeb49e45475ac0c51d64ee3f37",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/Save/SaveTypeInfo.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/SdCache/SdCache.c": {
+      "bytes": 8251,
+      "sha256": "498b48671c7a7742239bc234bdea312493a3f5209d58a1658e21c2745831c25c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/SdCache/SdCache.c"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/SdCache/SdCache.h": {
+      "bytes": 2233,
+      "sha256": "a0899bf0812c5a6544f73c0dead809f50bcd345291b11dee7638a6b564c2e128",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/SdCache/SdCache.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/SdCache/SdCacheAsm.s": {
+      "bytes": 75,
+      "sha256": "332602430efbb98c54b3279c532f0345f5c9c9cbe76e238671b09072bc5c499d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/SdCache/SdCacheAsm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/SdCache/SdCacheDefs.h": {
+      "bytes": 482,
+      "sha256": "f53261b212cf54986998b8dec19f85aa675cff75118278c502739da020d55155",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/SdCache/SdCacheDefs.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/SdCache/SdCacheSpace.s": {
+      "bytes": 134,
+      "sha256": "b847f7aa2477e9dc29331915c49ad564f64ee69eaa6c32925bd5f15bd29db77d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/SdCache/SdCacheSpace.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/SystemIpc.cpp": {
+      "bytes": 772,
+      "sha256": "1266a69c7dac6ed4d2e5508ff02633c1fb43207d2027981a0e4c23dc9f26fbdf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/SystemIpc.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/SystemIpc.h": {
+      "bytes": 103,
+      "sha256": "abbd8409c6d4d3ce50e9df385719328ff25037a10cccb7616b4600d6222f1d73",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/SystemIpc.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMArmUndefinedNoAsmHandler.s": {
+      "bytes": 579,
+      "sha256": "4281cb9841a164dfcc054a9aecf3bdab9874cefc2ae58d1646af8737a6717287",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMArmUndefinedNoAsmHandler.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMDtcm.h": {
+      "bytes": 455,
+      "sha256": "d45c158a3cb0f257199cc95f346388d8d6ca52efae57c8bcc3d6d25da240ff0c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMDtcm.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMDtcm.s": {
+      "bytes": 1156,
+      "sha256": "c5e95aaddfbef08e30dcbd1622c04cda664f3722a218e4fa4cbc5fdc61ae890e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMDtcm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMDtcmDefs.inc": {
+      "bytes": 3232,
+      "sha256": "170015863ee7d0d1907c0a9b3d3b5e06de1012f0dad533f444b7f3fbf7db5d4b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMDtcmDefs.inc"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMIrq.h": {
+      "bytes": 151,
+      "sha256": "58f7cd26b61149346bd85194e29d6fe30a09621312c059d4bc163417f7035b64",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMIrq.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMIrq.s": {
+      "bytes": 4511,
+      "sha256": "0d2d6514200074060b1ac0b67114f437fed0b38129c878e53fa547571a3b9dc4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMIrq.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMMode.s": {
+      "bytes": 3996,
+      "sha256": "ff73b32b8547faace195f16b1fdfb5b99dd9b904d8175db4df89d5d49dd56cb7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMMode.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMNestedIrq.h": {
+      "bytes": 333,
+      "sha256": "7ae79ca040b3666bf1c8c521e6d622598fd23cc52b3109a16ec90a017e7364ff",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMNestedIrq.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMNestedIrq.s": {
+      "bytes": 2385,
+      "sha256": "ecacd0c450d8d6a6717a21186317f63e6e412e05c3f810fdce16661fb1790d15",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMNestedIrq.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMRun.s": {
+      "bytes": 945,
+      "sha256": "5bf078a92149c2256a284aa1d3227ddec87bdc3bb2aeefc20374875a1064f6eb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMRun.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMSwi.s": {
+      "bytes": 2824,
+      "sha256": "89e3943589b5e3db07a90407a687635068a53732eb6c6eaba6e4b597044499da",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMSwi.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefined.s": {
+      "bytes": 1408,
+      "sha256": "36600503e0f8b1c5e843c098572820e61579cfa81f0f50060801d868c25f81d0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefined.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedAluSPCImm.s": {
+      "bytes": 2951,
+      "sha256": "e0e2fc135776d1abc4da8cc3ad7d302ad264a47b6b19581f9b55576c8235e117",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedAluSPCImm.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedArmTable.cpp": {
+      "bytes": 2994,
+      "sha256": "6e21f20f8938a9b8ecf87d18ff468b53f4e6b49e180022f15a8f92038943c18b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedArmTable.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedArmTable.h": {
+      "bytes": 53,
+      "sha256": "6f1972c368a5215e6035810321a4ef0ef8db166c657426c8da550dedeaf6572f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedArmTable.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedInstructions.inc": {
+      "bytes": 1343,
+      "sha256": "0752b451032b70061821b1843edc7bd798effe20c2a09c50886bf942930dd7c4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedInstructions.inc"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedMrs.s": {
+      "bytes": 2720,
+      "sha256": "b3c550cb6461d499816bf64086bea88c47d28d139cdfcfbbdd096c88b0de0215",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedMrs.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedMsr.s": {
+      "bytes": 4506,
+      "sha256": "4f4b747cc38b644081cd763dfb5671787fad13a0e3e5cfde6c300794570ff7fa",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedMsr.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedThumbTable.s": {
+      "bytes": 1169,
+      "sha256": "fcb82c0b2913f7ddc84b286b14f3e80e2826cdba86a1eb68873d03eb58375128",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VMUndefinedThumbTable.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VirtualMachine.cpp": {
+      "bytes": 951,
+      "sha256": "ccbd513732a6391c050a2f4a1c83f2ec48c8abc131d306dfb8f49e3f0de5d2a6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VirtualMachine.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VirtualMachine.h": {
+      "bytes": 368,
+      "sha256": "347a55e06a9817d2d201da94609ff626c3ebe0c7e9fe6f1166d79c4b9d354c93",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/VirtualMachine/VirtualMachine.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/arm9Clock.h": {
+      "bytes": 142,
+      "sha256": "1836cb458ab60c9220af55af6c3d81d93b6ba57335b34403713f4781c3c81bad",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/arm9Clock.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/arm9Clock.s": {
+      "bytes": 599,
+      "sha256": "0be41f91454ee35344e468ed5b1cc839797e46ed89eec2746a808b0f291a44ca",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/arm9Clock.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/common.h": {
+      "bytes": 197,
+      "sha256": "05c2f3c1d04238fbcb70865c706f497242cd12797e407b10beb38553aee28cf0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/common.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/cp15.h": {
+      "bytes": 1521,
+      "sha256": "3fec321488331aa523859df652abef0dff9e14a1e6afa5c86396178f5517c889",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/cp15.h"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/cp15.s": {
+      "bytes": 435,
+      "sha256": "83babb1338082f1864a37d414e09a9c8a96e2e502a0c2a72cc247225773f0b33",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/cp15.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/crt0.s": {
+      "bytes": 2860,
+      "sha256": "62cb563898f6a30889a6302e94c6a151c751d64cef515f66bea8962273939847",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/crt0.s"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/main.cpp": {
+      "bytes": 21861,
+      "sha256": "b00062196d7b7faafe56efe87e6a2f9bfcee727ae288600e0a39eadc6daf5587",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/main.cpp"
+    },
+    "project/desarrollo/fuentes/code/core/arm9/source/vectors.s": {
+      "bytes": 304,
+      "sha256": "74c777bc46321fb3b2246d8b53dc42aa1b4c642810edac68f31d5fc5d1453442",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/arm9/source/vectors.s"
+    },
+    "project/desarrollo/fuentes/code/core/common/AsmMacros.inc": {
+      "bytes": 718,
+      "sha256": "ded148727cd102fa4ab2eb1edc554db622e97cf336b84d0d6663896b0ec0fb10",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/AsmMacros.inc"
+    },
+    "project/desarrollo/fuentes/code/core/common/DsDefinitions.h": {
+      "bytes": 528,
+      "sha256": "2b3ea3f61a341927c6e45ce011d1ea786e0a27f1a0fea75ee86b25bada0cf22b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/DsDefinitions.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/FsIpcCommand.h": {
+      "bytes": 321,
+      "sha256": "7cb838390719540d653c1be761dcc689365a888c80ecac8190af2fa154a09b21",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/FsIpcCommand.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaDefinitions.h": {
+      "bytes": 528,
+      "sha256": "0b0dffe780ee795b24c86f2defce79b0b556f3b25362ac7377e5ba681377f72b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaDefinitions.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaDma.h": {
+      "bytes": 1165,
+      "sha256": "05ebd535176921ae8ff350d6088c3ba561104a0f7f811febb845ec1b9823a2e1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaDma.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaIoRegOffsets.h": {
+      "bytes": 6135,
+      "sha256": "153729947cd02f1b2cd041a0a13cc74d3863b3ac9ebbf6f8542142811f3b4cef",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaIoRegOffsets.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaSaveIpcCommand.h": {
+      "bytes": 77,
+      "sha256": "7247d2e5210bc460a8ec53b21ebbc7c3797b9bc7337ae2319a5f576b45167735",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaSaveIpcCommand.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaSaveShared.h": {
+      "bytes": 256,
+      "sha256": "4ccff88cd58417e0abca86de42baab4ea0bea881bfc06d4119bc23ffaee3dcde",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaSaveShared.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaSound.h": {
+      "bytes": 427,
+      "sha256": "6a2537b9e10bda0d46abc9a2e8d940b2866bfae65bdcc7140cd840c15bffd885",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaSound.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaSoundDefinitions.h": {
+      "bytes": 1350,
+      "sha256": "86232d0152764210fd4208a537e5536058787ecc74e69124a30829dcb6beb94f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaSoundDefinitions.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/GbaSoundIpcCommand.h": {
+      "bytes": 238,
+      "sha256": "c03f83ba27407d20c34d354d1892638e9e4f1af78a11d9257f1e4528b3121a50",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/GbaSoundIpcCommand.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/IpcChannels.h": {
+      "bytes": 154,
+      "sha256": "7160aa393245769e6cfbb57c18824afba1e8d36f8cd1dd72fc0e8d7d0280e6f9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/IpcChannels.h"
+    },
+    "project/desarrollo/fuentes/code/core/common/SystemIpcCommand.h": {
+      "bytes": 127,
+      "sha256": "0b35d90c4f337fc821f4201572c999886d60db9f28cf4f1bd30b7fc0daea24b6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/core/common/SystemIpcCommand.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-actions.h": {
+      "bytes": 87946,
+      "sha256": "ba67150de5d135f1523787df5c43b56882c8505d80058d8e1ed975dbe380317b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-actions.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-cardinalities.h": {
+      "bytes": 6118,
+      "sha256": "a565787f3e15f81e1873d1ff9d97888ab1e37466165258cfffd6d4bafc086214",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-cardinalities.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-function-mocker.h": {
+      "bytes": 25756,
+      "sha256": "84a14b251a9257f24553e150075232668b7ff9b52076bda397e8b4035fce3036",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-function-mocker.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-matchers.h": {
+      "bytes": 210247,
+      "sha256": "25d165842439b11a6cdeebc18427964fffde97c69270708f33eb4c1774b3c4e4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-matchers.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-more-actions.h": {
+      "bytes": 38344,
+      "sha256": "38ce5dd7d723f088bd07e08fe64cb251d69a1347d7627bf9650ecac41aff1969",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-more-actions.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-more-matchers.h": {
+      "bytes": 4499,
+      "sha256": "b5dfa602f4f05a92000fffe06236cbbadb20bda8e1a4e55b1cddf27ba586232f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-more-matchers.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-nice-strict.h": {
+      "bytes": 10858,
+      "sha256": "75324d2f796da7d611fb5d1da610c905f53e74247b02982ca63f5dcb91f4c33c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-nice-strict.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-spec-builders.h": {
+      "bytes": 82067,
+      "sha256": "443dc5c5db218483514abcdbdb61c6d40cec81645d3d842fe23a1e7d6eeb8d8d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock-spec-builders.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock.h": {
+      "bytes": 3723,
+      "sha256": "a4cce830e85ce888f41b098e1b32fda744b21adc97f7abb1eea2e072a261fbdf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/gmock.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/custom/gmock-generated-actions.h": {
+      "bytes": 314,
+      "sha256": "8efd16064b3e19d98726a15f8bc40daa593576e4a190b2e8b95a6fee7242c36f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/custom/gmock-generated-actions.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/custom/gmock-matchers.h": {
+      "bytes": 1918,
+      "sha256": "b6d245e95f0649a85aa7e29457f437da4c2f1fbadb0402cfc40f680159de510f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/custom/gmock-matchers.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/custom/gmock-port.h": {
+      "bytes": 1953,
+      "sha256": "ee2cc87202e75759cfd98a5d657c69ee864e492a2c63584586938da81ab84995",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/custom/gmock-port.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/gmock-internal-utils.h": {
+      "bytes": 19372,
+      "sha256": "01ff320294320a50e834268aeaee161c15d6a9a92a0143033e3ccd494209765e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/gmock-internal-utils.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/gmock-port.h": {
+      "bytes": 6070,
+      "sha256": "36c98608b21019c3ef995a6be05d620c7f8e7ee593347f123a166aa0a375e9cf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/gmock-port.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/gmock-pp.h": {
+      "bytes": 13491,
+      "sha256": "5fcdad1707b172f8000d9f419f41d44318558600b00916785516eae49843bb4f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/include/gmock/internal/gmock-pp.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/src/gmock-cardinalities.cpp": {
+      "bytes": 5330,
+      "sha256": "3affa4115b7467dbe92c286399953cb39f6374d63ad7cbaa294983fa2f19a80e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/src/gmock-cardinalities.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/src/gmock-internal-utils.cpp": {
+      "bytes": 9428,
+      "sha256": "890d63bfa3d040d6afc27d9077de59cef817a7528a600210861b55ad1a0f255c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/src/gmock-internal-utils.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/src/gmock-matchers.cpp": {
+      "bytes": 18555,
+      "sha256": "5e621fa29f665d297049379c38bdf743a3f300435bb0badeb3f85325c8d3e488",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/src/gmock-matchers.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/src/gmock-spec-builders.cpp": {
+      "bytes": 29334,
+      "sha256": "428a1027d820bf47f803e5d89f88802b8886f28a48142fb7ccd178cfe1e95250",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/src/gmock-spec-builders.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googlemock/src/gmock.cpp": {
+      "bytes": 8547,
+      "sha256": "1376daf6387eac94b5afaf2dfbf2e3aac098b5f97985f3f5660ab3f7d4948452",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googlemock/src/gmock.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-assertion-result.h": {
+      "bytes": 8503,
+      "sha256": "d6562e22c316e831bfbc2cde3b158f06380a22e7e1c6c1e180689abee5c5b972",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-assertion-result.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-death-test.h": {
+      "bytes": 14910,
+      "sha256": "8decbb86ebbfa142fd78a83cfbeb4c5e73e98179058ce70fcc279935c497429a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-death-test.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-matchers.h": {
+      "bytes": 33067,
+      "sha256": "d637dd188944433c62d96a062f9b1adab851574c537d7021270c7a52a2759a90",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-matchers.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-message.h": {
+      "bytes": 8146,
+      "sha256": "a417441071dc0ca0158a3b07b30299ed69b22b883e62e042c046f42382a51e9c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-message.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-param-test.h": {
+      "bytes": 24008,
+      "sha256": "1adb46e17e47fc2f40dc5b8e9acec4f01efa389a19bbea25d32aea28b94e32e6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-param-test.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-printers.h": {
+      "bytes": 39697,
+      "sha256": "b422c0b94de432ec87cdf9086b899171f780d41d3195011bac2338efc34e7d80",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-printers.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-spi.h": {
+      "bytes": 12843,
+      "sha256": "fc0bbebaeb211b81a2ec3df388e5e5f25a7c22e90186839854d2e5b26ce226e6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-spi.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-test-part.h": {
+      "bytes": 7164,
+      "sha256": "2279b9bfd08aff7c0f764a2716bde0d3a61dc12573687a2cff91256b17681bf0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-test-part.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-typed-test.h": {
+      "bytes": 15889,
+      "sha256": "d56313830bf30d6271d7c1f8ca57dc52d95a10b97e4ace6efa0f085ae519303a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest-typed-test.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest.h": {
+      "bytes": 91496,
+      "sha256": "083d4d2d1090030f7fff2fd323ba0d10cb44b0344f90ca006a48b74555b7d8bd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest_pred_impl.h": {
+      "bytes": 12783,
+      "sha256": "85e850e735a42ebb5f9a01a018708c1c0b9b7d83c94b14b7d5d29512c00b6ffd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest_pred_impl.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/gtest_prod.h": {
+      "bytes": 2502,
+      "sha256": "3c6301ef533db8686e474dd5a0de4d98a31cbb630e2273f712472d1be25aa261",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/gtest_prod.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/custom/gtest-port.h": {
+      "bytes": 1873,
+      "sha256": "5e06747c9e8b86e9d841fabd61c2f045b2bb1133716f127be4a963ced1c44e01",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/custom/gtest-port.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/custom/gtest-printers.h": {
+      "bytes": 2094,
+      "sha256": "b95afda2426e8c4f09c11d3296d522fb336b248c0da7e078388db4bb072c2166",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/custom/gtest-printers.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/custom/gtest.h": {
+      "bytes": 1858,
+      "sha256": "21d20a1c64ea38c20c4b12337c261a1a18989d2a30710a83dfb5cd9a3bb3c55e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/custom/gtest.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-death-test-internal.h": {
+      "bytes": 13929,
+      "sha256": "a70d1174ef668639c7af21764442f8e487b0fc70c237a70f90e3161a8e8262d6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-death-test-internal.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-filepath.h": {
+      "bytes": 10339,
+      "sha256": "544ce95d2e1e4b7ae17ee170f482aaa09e17d0056999c4ce7e7a6097c3a755cf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-filepath.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-internal.h": {
+      "bytes": 63489,
+      "sha256": "0793a5cef60f28883546e9b5435d11dffce32582b26cbb0418181e7ddd3143a4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-internal.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-param-util.h": {
+      "bytes": 38172,
+      "sha256": "effa1b3e6a3554aae8fc82fbe88c1c3215f723bb3e2e444bf424f688c476a030",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-param-util.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-port-arch.h": {
+      "bytes": 4178,
+      "sha256": "fbb76e38297555877b35b1db28094c52487b87e511d344b53f2b1016b2335de3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-port-arch.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-port.h": {
+      "bytes": 91870,
+      "sha256": "822a8ba492716adb2738d43a4bea3eb6535c60b6f6980829a92664d30b3b3396",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-port.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-string.h": {
+      "bytes": 7323,
+      "sha256": "0cc08c746bceb2b101c61ffbc905c598eb62fee3c262c4585c21b10d8a3e6508",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-string.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-type-util.h": {
+      "bytes": 6309,
+      "sha256": "2d55695a6b43cd37fc9b367e2f5adfff6c90e07b32f60a6bbfa42eba73a37748",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/include/gtest/internal/gtest-type-util.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-assertion-result.cpp": {
+      "bytes": 3009,
+      "sha256": "dbd2235676dcc0ef6409108a4041e05442fc6895735a5561d71151e6a14296bb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-assertion-result.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-death-test.cpp": {
+      "bytes": 62694,
+      "sha256": "c71fe2553d3773a2a8b86b3a70ec172dbf845df4f86ab4885c978fbfca1c8099",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-death-test.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-filepath.cpp": {
+      "bytes": 15588,
+      "sha256": "09dbfe8d657705158059aa9d8c3eafc9ac025870e29419a27fa1fac25704ac7a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-filepath.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-internal-inl.h": {
+      "bytes": 47937,
+      "sha256": "54eaf808b96559fe6a5ca7685b10fbcf14ad97dbb1ce282abcc34a403b2cc437",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-internal-inl.h"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-matchers.cpp": {
+      "bytes": 3724,
+      "sha256": "e4ce9edf33493625353cc147a14caac14fdba7390d76166d101fa2fe9d16bbda",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-matchers.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-port.cpp": {
+      "bytes": 47941,
+      "sha256": "e2b864c9d4bb58761b455438b58cc524e1c7f6bcbc5a6af5a7c41ce4593b31c1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-port.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-printers.cpp": {
+      "bytes": 18535,
+      "sha256": "f67de9877966b49b6eb06b5c22b1fb4ffb05aab16d8a4596138531e8bc2691c7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-printers.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-test-part.cpp": {
+      "bytes": 4028,
+      "sha256": "b268314cbc718b485ff3e45fdeb5a1496bb8d87dadd5e824c558bf3b03e2dbf9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-test-part.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest-typed-test.cpp": {
+      "bytes": 3823,
+      "sha256": "b92e70b2d7ee3b86328162cbda269a28de4ce67f0e8d9beec5ec2c73a93ba006",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest-typed-test.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/googletest/src/gtest.cpp": {
+      "bytes": 258885,
+      "sha256": "058061a199607daf3a71511034e5acc0438ed56bb3c8322960ab1b8145ff45c3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/googletest/src/gtest.cpp"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/Makefile": {
+      "bytes": 1003,
+      "sha256": "6bca0e07ed227d8942c8e4cddeb5d293c6052c49c7ac753780254128f626f624",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/Makefile"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/begin_thumb.h": {
+      "bytes": 53,
+      "sha256": "6470c49a1010a44b9ab75b84fdfa17c4341cd7b437d0c8c067837cb5c7784153",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/begin_thumb.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/card/card.h": {
+      "bytes": 3094,
+      "sha256": "e8ddf3b630b48fa7b67d9e6c2df716761e03c42327eee9aeb6057de548b1d949",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/card/card.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/dma/dmaNitro.h": {
+      "bytes": 4159,
+      "sha256": "9a2b6660a9d31ea80b5b4722356227ebd88a8c89a9fa86b19e6f5e6b242d759f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/dma/dmaNitro.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/dma/dmaTwl.h": {
+      "bytes": 9011,
+      "sha256": "6fb99d9ce1d3cacb8679c3cbf22a705ba23208fd7aeebb4eca0e3ce7fda76d81",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/dma/dmaTwl.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/end_thumb.h": {
+      "bytes": 23,
+      "sha256": "4a5fe00eee1017ba894c246921ace9ea7aecd26e95e665b45be9c737f9d1dde7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/end_thumb.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/gfx/gfxStatus.h": {
+      "bytes": 2041,
+      "sha256": "86339e03da984d2e8184497ee9828cf40cd793abb178f131d3244ed74d376f42",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/gfx/gfxStatus.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/ipc/ipcFifo.h": {
+      "bytes": 2201,
+      "sha256": "ab4efefd78811670cd380c75084ff12b5730e1edd7389dad37d0dc8fec308724",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/ipc/ipcFifo.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/ipc/ipcFifoSystem.h": {
+      "bytes": 656,
+      "sha256": "1d5244d209bf1802a7459a0bd8361158dfef26f757e08b336f4a1c0b96d3013c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/ipc/ipcFifoSystem.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/ipc/ipcSync.h": {
+      "bytes": 1509,
+      "sha256": "2eb9a9f9320bd982c7971ce3379af808ac2da0bdcec52935489456d4de223d9b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/ipc/ipcSync.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/math/mathUtil.h": {
+      "bytes": 545,
+      "sha256": "f2f824bf4d982960b2dc155e3bb69c8ca8d3e47f460c978df711979ae4344885",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/math/mathUtil.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/mem/memExtern.h": {
+      "bytes": 2235,
+      "sha256": "2285f2aff57e9e13471bf980cb2adbcc3ad478ed7d7ee2bb2d49c5ca5ebd6324",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/mem/memExtern.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/mem/memSwap.h": {
+      "bytes": 569,
+      "sha256": "6d5700f9212fe9364cc88106e7a7590b80a73933779a9f8281c537b2bf96e1e7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/mem/memSwap.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/mem/memTwlWram.h": {
+      "bytes": 3509,
+      "sha256": "abaffbd9a7a26661a12bdebebe0308720a4feefa39b0e097673da2d8ce7dfe62",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/mem/memTwlWram.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosEvent.h": {
+      "bytes": 436,
+      "sha256": "0be7f9a28905805bbf359fdf652d3c49b7fbfc198cd4864c6d979f213c324f00",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosEvent.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosIrq.h": {
+      "bytes": 3381,
+      "sha256": "f098b7d8f36d25280dc3142e79072b9c0fc4da74f22e9d84bb4be634c132c1b8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosIrq.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosMutex.h": {
+      "bytes": 448,
+      "sha256": "40230cc305fe2c539d44f74f85447bf71926fade0157bbbec1db654bd40e1e1f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosMutex.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosObject.h": {
+      "bytes": 205,
+      "sha256": "28b882e60cd7dc265a6965d070ca411b3f29950f7df8e48d215cf9b2ae3be6a8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosObject.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosState.h": {
+      "bytes": 276,
+      "sha256": "eae7cba61257d2289af15aff75193528db9bb9ba59049fd520dd0c100dc7e02c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosState.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosThread.h": {
+      "bytes": 1538,
+      "sha256": "ababd7e9cad082d801feaa631dd91b562f0da8c2668c7b553969dba621a68848",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/rtos/rtosThread.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/timer/timer.h": {
+      "bytes": 1891,
+      "sha256": "ba0f8fa76a69ef715b5e37db52503a7f3e34318c2089d36593b070ee40cc1f39",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/include/libtwl/timer/timer.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/card/card.c": {
+      "bytes": 1653,
+      "sha256": "28f9ee0c4ff1fffa56cea710dce7a6aecda2f687c1adc6c3a4d57bb172781f26",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/card/card.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/ipc/ipcFifoSystem.c": {
+      "bytes": 2600,
+      "sha256": "bfe148a713f6957e7503cc951b7389d548871b44eeefe97837411e4a629cc709",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/ipc/ipcFifoSystem.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/mem/memSwap.s": {
+      "bytes": 206,
+      "sha256": "bea150ecdcd5596956c49efb9a47b95452097290574df2469a7ec68c4df43014",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/mem/memSwap.s"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosEvent.c": {
+      "bytes": 901,
+      "sha256": "910c635eb11ca9925d98c2916baafd345cfd5a77ad6ccf99d288f1870f8206d2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosEvent.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosIrq.c": {
+      "bytes": 1609,
+      "sha256": "dc423863c8f9f1a824acb6b99fabf16a94c35fa1b6c51046e3cbbbd4f460e172",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosIrq.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosIrqAsm.s": {
+      "bytes": 3383,
+      "sha256": "ba4b7a984cc8ebd6077f47a12684da5ef678367ee66af28e136e91071261f1bf",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosIrqAsm.s"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosMutex.c": {
+      "bytes": 2027,
+      "sha256": "5c2341b575ab5193850752b960b9e7e35c996d07f1599f9315c72158eb9fab1c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosMutex.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosState.c": {
+      "bytes": 164,
+      "sha256": "4aac6094b257572f014e9314768c366ec1dbe1b1a263cd21955c3eb962713a35",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosState.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosThread.c": {
+      "bytes": 5821,
+      "sha256": "36913d1be37dc4c3c547d3e418b9d34728a2562eea79020a9fae94ee701d0c28",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosThread.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosThreadAsm.s": {
+      "bytes": 878,
+      "sha256": "d28221c7c98d6e2df29e08ef794c9821c5ac344d33b5b0b9f1e2de14c9c47800",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/common/source/rtos/rtosThreadAsm.s"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/Makefile": {
+      "bytes": 5063,
+      "sha256": "3feb7081d2ee9c1ce1f60e7c36cf36d99b1bff714ba4e0dd9c666b9d0b5b83a5",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/Makefile"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/aes/aes.h": {
+      "bytes": 7215,
+      "sha256": "1a268674cb85bc2895b5dc7d7fea82110891d994b109a91a3e758e3cab9548f8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/aes/aes.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/i2c/i2c.h": {
+      "bytes": 1424,
+      "sha256": "f74b0bcd83f70125d81ead7505828ab34cfd559b23a6a6702525019d34d5baac",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/i2c/i2c.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/i2c/i2cMcu.h": {
+      "bytes": 1470,
+      "sha256": "f6e3002b3a844ef678cf88e52c516a6d89fbd7e43bb48656826b8a82f7d469a0",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/i2c/i2cMcu.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sio/sio.h": {
+      "bytes": 4006,
+      "sha256": "c4edbee6657406e9ff946a63a931926a876415f68e7f28a18b59a5dbf7de3deb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sio/sio.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sio/sioRtc.h": {
+      "bytes": 3949,
+      "sha256": "cc4104b4b96e66c0a26860539e2213b117721d9bce46045a6b61b57ae7883423",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sio/sioRtc.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sound/sound.h": {
+      "bytes": 1529,
+      "sha256": "3874b15ec742bc5604d05420ca9236c606763061725b8edfa19513f462c4a26a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sound/sound.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sound/soundCapture.h": {
+      "bytes": 852,
+      "sha256": "6a47709039165a1c24b17eab975717fe49a095f472b8c08a63850475194ac52d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sound/soundCapture.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sound/soundChannel.h": {
+      "bytes": 5680,
+      "sha256": "e92ac0c435ea0c774ed41a791dbfbfe51f4388e7e178b6f41457917d23154996",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sound/soundChannel.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spi.h": {
+      "bytes": 1257,
+      "sha256": "69827c00bb94057b2ef30f9b55810319f801bdcc60cae304480fe42164c7cdd6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spi.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spiCodec.h": {
+      "bytes": 10835,
+      "sha256": "54a28d417ed331e536bf3cfb38b181235c3859831eb6448ed28d474e1ba51e20",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spiCodec.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spiFlash.h": {
+      "bytes": 1293,
+      "sha256": "b847f78236f8186143ea69d6b578bf2b91340867fb97e3811f981b07aaa7808a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spiFlash.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spiPmic.h": {
+      "bytes": 4378,
+      "sha256": "2ba1b49cf3c2f82edff5c77c340c9a3b75d630a7763288f427e7b92c6500725e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/spi/spiPmic.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sys/swi.h": {
+      "bytes": 127,
+      "sha256": "e65b526420f2360452319ff38387a561e4ec9057d794dec27fbd6259b89603f9",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sys/swi.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sys/sysPower.h": {
+      "bytes": 566,
+      "sha256": "b320b9ccaa5bf41019850e80161a1481e8160acd94782cbb6968c643009c1d00",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/include/libtwl/sys/sysPower.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/source/i2c/i2cMcu.twl.c": {
+      "bytes": 1619,
+      "sha256": "34b02a87348dbc389ed0873c490201784d3c0f625e100f07106a44192270b4ee",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/source/i2c/i2cMcu.twl.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/source/sio/sioRtc.c": {
+      "bytes": 4307,
+      "sha256": "2ebfce6e1582bbe73ed3df26cee837613828319fb5a1dafcfebf42e8c985b80c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/source/sio/sioRtc.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/source/sio/sioRtcAsm.s": {
+      "bytes": 136,
+      "sha256": "4288f30042cd20c96cd764527d4480eb134514656c4bb0ab6c6c551e26d2cf54",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/source/sio/sioRtcAsm.s"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/source/spi/spiCodec.c": {
+      "bytes": 466,
+      "sha256": "c188ba3643feaa2b24598ee1cc8d41c81e33eb8840f6414cf99c402de6a2d677",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/source/spi/spiCodec.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/source/spi/spiFlash.c": {
+      "bytes": 1109,
+      "sha256": "92940a63f6fd428f94207d6c4303edc0d71e5dac1a4d9ff583807723cc724c0d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/source/spi/spiFlash.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/source/spi/spiPmic.c": {
+      "bytes": 454,
+      "sha256": "2a8e9856a5331bd81858205b0f8c1f850d70914251fbe08621776258b2f75c5c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/source/spi/spiPmic.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl7/source/sys/swi.s": {
+      "bytes": 106,
+      "sha256": "91b4f64b103fe760bcb82d025515ed0afdf60128a7e1bdb966c426c6e3a494b2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl7/source/sys/swi.s"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/Makefile": {
+      "bytes": 5107,
+      "sha256": "c6bc194fbfc59f98a7ea52556bc1d3fa30b8368dfddc3f3e6a0315b579564007",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/Makefile"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfx.h": {
+      "bytes": 759,
+      "sha256": "5b4f2290fb88b0cd5a4cc57b466e19bac193b58fa7c68c91b144d855d0d1f13e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfx.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfx3d.h": {
+      "bytes": 4120,
+      "sha256": "1373f5a1aac31f99ebb2473fa9e952cb7b6f3766e6a6df8ca73fbed6c131343a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfx3d.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfx3dCmd.h": {
+      "bytes": 10173,
+      "sha256": "73d409d1b267c9a082ef35f8fa549c3f4b9a54fb91215bf48c2ef8698472dbc6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfx3dCmd.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxBackground.h": {
+      "bytes": 3199,
+      "sha256": "be799444ca6a425c91e9de6a65c677064daa1b99652366fb6460ed5338fb624f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxBackground.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxOam.h": {
+      "bytes": 3425,
+      "sha256": "0a124ab6b0c86335cd243a91354132852503977313c6071c7094c3116f19e77a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxOam.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxPalette.h": {
+      "bytes": 313,
+      "sha256": "320114e51005bc2a45803238a447483e9a9a82a463e6051503ecd19c3d5fd905",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxPalette.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxWindow.h": {
+      "bytes": 1266,
+      "sha256": "52e543d30fa0cddc96fac03edaa2d39e802324f5b59cf6a4b49c609e03f5c7e4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/gfx/gfxWindow.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathDiv.h": {
+      "bytes": 3016,
+      "sha256": "82d1c66c37d412de5609dc67945ac1392be7a14397b136329d674b3ef06ab4f7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathDiv.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathFixed.h": {
+      "bytes": 277,
+      "sha256": "cc4c974e20833667cf798a42de028352ea765e8b8f80a0d4b36043c36ebc1fd7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathFixed.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathFixedMtx.h": {
+      "bytes": 258,
+      "sha256": "dcb5fbba806abfe1787a3c794dc3290e903ef5e76aaa5224cc64081fdae70a6a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathFixedMtx.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathSqrt.h": {
+      "bytes": 998,
+      "sha256": "e52b3f37e8dea4c2ea4e88bd7f91d904ab8e69287ad2c07a12790cfbd38042b5",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathSqrt.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathVec3.h": {
+      "bytes": 1128,
+      "sha256": "a61b2f66a3cde8c039c3c8e51b631676fb15f9368d57fa698e8791f388e3a958",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/math/mathVec3.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memCache.h": {
+      "bytes": 14,
+      "sha256": "36e9230ecfd5ad50be0570ed21e161390170ced61b0bd53cd140b3afe2868408",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memCache.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memNtrWram.h": {
+      "bytes": 845,
+      "sha256": "eb1ddf26a4f9a661fd0ada269343e5849344fb077598f999ba0ba2cb00851a27",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memNtrWram.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memProtection.h": {
+      "bytes": 14,
+      "sha256": "36e9230ecfd5ad50be0570ed21e161390170ced61b0bd53cd140b3afe2868408",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memProtection.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memTcm.h": {
+      "bytes": 14,
+      "sha256": "36e9230ecfd5ad50be0570ed21e161390170ced61b0bd53cd140b3afe2868408",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memTcm.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memVram.h": {
+      "bytes": 5080,
+      "sha256": "fae1a4b07711c066f7d48227e5f7efed690da3c93e34c893492e8ad7900daabc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/mem/memVram.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/sys/sysPower.h": {
+      "bytes": 1745,
+      "sha256": "616940e2d93c279e2e919d01d6a25f5a30705a45d3cf936a9b70c630b4b2c6cd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/include/libtwl/sys/sysPower.h"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/source/dma/dmaNitroAsm.s": {
+      "bytes": 875,
+      "sha256": "99eebf84f4e67a656636de63d7ff99d604903c4492646721b282a90fe8b8cca3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/source/dma/dmaNitroAsm.s"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/source/gfx/gfx3d.c": {
+      "bytes": 1464,
+      "sha256": "fe1aabaca6ab25bebfb664cc522932b7314054bc2cf253ad0eff2074f2dbc4ec",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/source/gfx/gfx3d.c"
+    },
+    "project/desarrollo/fuentes/code/libs/libtwl/libtwl9/source/gfx/gfx3dCmd.s": {
+      "bytes": 1006,
+      "sha256": "6ab862f999913332932309c15551cefb81bd75ad75cb008e720d66e6037983fd",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/libtwl/libtwl9/source/gfx/gfx3dCmd.s"
+    },
+    "project/desarrollo/fuentes/code/libs/mini-printf/mini-printf.c": {
+      "bytes": 7860,
+      "sha256": "90c070dfcb66f67aaa43ee58b0f7472f1a9612666cb0b4095182206bef28cd54",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/mini-printf/mini-printf.c"
+    },
+    "project/desarrollo/fuentes/code/libs/mini-printf/mini-printf.h": {
+      "bytes": 3129,
+      "sha256": "5848315085dae11f836a5cd51bc5f417798b507414857961b7b75ced4c2df092",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/libs/mini-printf/mini-printf.h"
+    },
+    "project/desarrollo/fuentes/code/test/Makefile": {
+      "bytes": 1870,
+      "sha256": "c36c18cb7ee300ab371c6b07574bea969a9994cebf0dfe26b793e729c107eac3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/Makefile"
+    },
+    "project/desarrollo/fuentes/code/test/arm7/Makefile": {
+      "bytes": 4909,
+      "sha256": "b86d02982b9b78e2277362109f9e5ea8c6029b1564157a56fb6dd180f6e24dcc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm7/Makefile"
+    },
+    "project/desarrollo/fuentes/code/test/arm7/source/main.c": {
+      "bytes": 598,
+      "sha256": "9f256257b54f93a06d960bffa1ff946e452625200e00ac5775d474a96a1e53c3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm7/source/main.c"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/Makefile": {
+      "bytes": 6501,
+      "sha256": "dc3246bbcbe4bc145af1adb279fc0cb560dd9de75c128fc8c5ef89dcfcf1c978",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/Makefile"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/MainMemStack.s": {
+      "bytes": 97,
+      "sha256": "09e6e8ece944e4ead0b8b49f1af57c82abcacb78a40c8745cb6419574b82f10f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/MainMemStack.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/MemoryLoadStoreTables.s": {
+      "bytes": 3161,
+      "sha256": "4aeec112ee759a0a9180e734d1321b578add2b386f29f3f1dc68bb83b29dba78",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/MemoryLoadStoreTables.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/MemoryLoadStoreWordTables.s": {
+      "bytes": 3113,
+      "sha256": "3c27a6678ea73d6a5d42effad6804310aff6e00fdcd9149cb774c7521747c394",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/MemoryLoadStoreWordTables.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/atomics.cpp": {
+      "bytes": 214,
+      "sha256": "02d36a11b0b8d3838dcd9cbd83e280cd399aad9a2221914ac841a7d534deb173",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/atomics.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/common.h": {
+      "bytes": 845,
+      "sha256": "ef4f6f270087c63f2aa8a01483f711a7591236e0cf974a319ccc44a65a257ebc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/common.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/core/Environment.cpp": {
+      "bytes": 1612,
+      "sha256": "809f6cc50943b90f3e5a59484b46e4ff07b43b3e02b23475fad190ffb36f191b",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/core/Environment.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/core/Environment.h": {
+      "bytes": 1336,
+      "sha256": "10c004ea9c494d6aa44c0b2cc99c8ad75ac1a15a3e174c8c40106d4b308ea480",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/core/Environment.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/envSetup.s": {
+      "bytes": 2210,
+      "sha256": "737efd775f5a9ce6ef514dec7fb06eb62b51578643eb13930ad086dad4a85327",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/envSetup.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/ILogger.h": {
+      "bytes": 448,
+      "sha256": "16ff6a511a6de48cdae801ad69a110d804258ee08eb015b02c3895c930bcfcbb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/ILogger.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/IOutputStream.h": {
+      "bytes": 155,
+      "sha256": "7b3bc38663eda45e3b02afd0ad71c68c9258e98d266e5958e89ab9c6cd5482a3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/IOutputStream.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/NitroEmulatorOutputStream.cpp": {
+      "bytes": 1899,
+      "sha256": "493055e17157164ca783997a6f6a58c4c8539f88ded3c54bb1adcadeef1853bc",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/NitroEmulatorOutputStream.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/NitroEmulatorOutputStream.h": {
+      "bytes": 218,
+      "sha256": "d1995d46fc147b2863eb12c30b85caef70e4ad9dc7de39f6789444dfa1fbbed2",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/NitroEmulatorOutputStream.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/NocashOutputStream.h": {
+      "bytes": 334,
+      "sha256": "f97a7a156ba0f83c910598bc06e9e9cd458b30fd029af4b7677bf72b4e538e45",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/NocashOutputStream.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/NullLogger.h": {
+      "bytes": 156,
+      "sha256": "70b724025f2b88b4834dfb614ebd3e1ffa1d6c41c5cc74906f2fff967fede100",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/NullLogger.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/NullOutputStream.h": {
+      "bytes": 156,
+      "sha256": "4c89ec6a18fb11786c2318e4e5d0a10870fb42a257b19913e838dcc7f4a819af",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/NullOutputStream.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/logger/PlainLogger.h": {
+      "bytes": 673,
+      "sha256": "64fc26c4b7820d1afb1c64d2942e617aeebd665eb270c7976d6dc82a0db51660",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/logger/PlainLogger.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/main.cpp": {
+      "bytes": 1374,
+      "sha256": "1763069235aa7fbeece4440ef90e74f0de9990d5e87ab77607f2b36b0819740d",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/main.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/ArmTest.h": {
+      "bytes": 308,
+      "sha256": "4dd420998a32826e7bd98e9f1d8d56917cbedcc49066e6d4c7699e568b57a38f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/ArmTest.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/ArmTest.s": {
+      "bytes": 1086,
+      "sha256": "d55706eca3597729d60789652a9e22bda79699669dd041b3f648b6e8d7e68cea",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/ArmTest.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/ContextTest.h": {
+      "bytes": 1377,
+      "sha256": "ce524493d4f94df22e33c98720378352e0d2c89fdf1c7fa6f272ef25c097c63f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/ContextTest.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemCopy16Tests.cpp": {
+      "bytes": 2675,
+      "sha256": "56b40ed7b55fa6cd353a91cfe65963e26d67eedfb7e914c711603fb5af5a8aa8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemCopy16Tests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmLdrImmTests.cpp": {
+      "bytes": 4140,
+      "sha256": "6472b7bb9430fce279bd67f2937b1e4940ac1eadbd5c0e96b53f39f62b74882e",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmLdrImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmLdrbImmTests.cpp": {
+      "bytes": 3660,
+      "sha256": "615907094369107d3d05e8765b06aea3322361885abf2d0295be3e4dbbc77dd8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmLdrbImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmStmTests.cpp": {
+      "bytes": 24228,
+      "sha256": "06ab6c3b7a21b902bc1f2d5cd91ef2fed1ed631ec1043a3c9b111beb30fb2604",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmStmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmStrImmTests.cpp": {
+      "bytes": 5014,
+      "sha256": "7f2e453c0daa8537c1c40930c9c6e2dbfa7482558aedc5d5b62e31f74ff52150",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmStrImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmStrbImmTests.cpp": {
+      "bytes": 3884,
+      "sha256": "e5457bb6a627bf2738c2b3e7432f6370fde6811c4adced315b157664f0afdf95",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Arm/ArmStrbImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/MemoryStub.h": {
+      "bytes": 526,
+      "sha256": "bb091123759f610d1b5896528c1079d106a977fcbb2ef6b42d220081346ea139",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/MemoryStub.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/MemoryStub.s": {
+      "bytes": 2052,
+      "sha256": "3e92e5737fc1df6512bf062358c183ec9e541c092192ce16c06e9c45f2c448de",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/MemoryStub.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbInstructions.h": {
+      "bytes": 2054,
+      "sha256": "8f355a9e4dea6a871f12341d322dcb9e59c0c4d09b5532c083ddeccfd4a2b909",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbInstructions.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrImmTests.cpp": {
+      "bytes": 3590,
+      "sha256": "1695878cdba3be846c01354decbb6b6cac5d09f4aac39f705f863f9eb1202809",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrRegTests.cpp": {
+      "bytes": 3705,
+      "sha256": "daac2ec1085b0ec9ea399bded63bfa13cc855249a3516aa3517708b4a6132ba1",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrRegTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrbImmTests.cpp": {
+      "bytes": 2921,
+      "sha256": "c5f4719c47ba5445d633583c6d8db48ea954309c005994935514c4679ca72a3f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrbImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrbRegTests.cpp": {
+      "bytes": 3054,
+      "sha256": "5894150d71f63cdaa232322e0b1de69d84b9ae313332ef75cfda6aba7edc45f4",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrbRegTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrhImmTests.cpp": {
+      "bytes": 3493,
+      "sha256": "615293723d40fe23c461c10891fe08728fb0e9845a4f4d4cfc9772e4f5ea482f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrhImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrhRegTests.cpp": {
+      "bytes": 3653,
+      "sha256": "c9512f4855f9de83991d892aecbeb0d333b97c266a2b8b3bcbfd116259d09a34",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/MemoryEmulator/Thumb/ThumbStrhRegTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/ThumbTest.h": {
+      "bytes": 263,
+      "sha256": "275edf43eeaa22fba3726e483c837a97a9b28ab8636b4d1351597df33e569cd3",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/ThumbTest.h"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/ThumbTest.s": {
+      "bytes": 1539,
+      "sha256": "2d9c961048dd108e08984d302ecd6a08dc738e1e493967fd1b1e41b5f9db6e11",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/ThumbTest.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/UndefinedInstructionTests.cpp": {
+      "bytes": 7392,
+      "sha256": "9030e36c5ad6e7a12ba2900a8618affa4d99bd095b39bcb9cfc42d6fb528f894",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/UndefinedInstructionTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMAluSPCImmTests.cpp": {
+      "bytes": 576,
+      "sha256": "eb53d34dabb17c726e67a0f8cb60f58008165fb79c87219a541e1124796474e7",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMAluSPCImmTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMAluSPCImmTestsAsm.s": {
+      "bytes": 237,
+      "sha256": "4b69cf5b94e7d33d326396f52384c17ece60d03338183a698ede60d48cac056f",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMAluSPCImmTestsAsm.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMIrqTests.cpp": {
+      "bytes": 920,
+      "sha256": "befe69ef5d2e299b07a00961514e7e278116c184cd16a4c35959c5cd9a2a18d6",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMIrqTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMIrqTestsAsm.s": {
+      "bytes": 689,
+      "sha256": "7b602e0c6d8ce9f6840cd5e8f3b6a5cfd436dfdfde1545ad1f479e873bba9470",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMIrqTestsAsm.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMModeTests.cpp": {
+      "bytes": 10830,
+      "sha256": "baf96be477f867d249d92e12aede2f03c274687f498d064463eebc9f4fcd170a",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMModeTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMModeTestsAsm.s": {
+      "bytes": 653,
+      "sha256": "1b55198dd908a3accce1339a5e55f8143b65796562ac0464651fe7056d5f2a81",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMModeTestsAsm.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMMsrRegCpsrTests.cpp": {
+      "bytes": 1785,
+      "sha256": "808fdc4f6e1c757329cc40bdf1a3e5f5fa494e6a1afe9e7578038dc4a368b340",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMMsrRegCpsrTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMMsrRegSpsrTests.cpp": {
+      "bytes": 3177,
+      "sha256": "5ee34b9f9384d9b44483350bcc3f9bfd1bd0b450b842e9a921e621cb72513e20",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMMsrRegSpsrTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMMsrTestsAsm.s": {
+      "bytes": 866,
+      "sha256": "be7ab2b892d14718eb1f0a780ae0901a910426eac7feb90607698aaa4ad2ceeb",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMMsrTestsAsm.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMRunTests.cpp": {
+      "bytes": 1413,
+      "sha256": "d10b3bdfc1fcec413a45c2c79dee13d63bb17d3cc8212fd2cdf6d539decdac17",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMRunTests.cpp"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMRunTestsAsm.s": {
+      "bytes": 149,
+      "sha256": "73daee97e0cd54cd031496d193efaaf669d21f0f2a7838b4d8d5ec045cfd7457",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/tests/VirtualMachine/VMRunTestsAsm.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/source/vectors.s": {
+      "bytes": 744,
+      "sha256": "6aec306782d953860bbff42ccc8d9a784fde924e5b057156bf29598521dac9a8",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/source/vectors.s"
+    },
+    "project/desarrollo/fuentes/code/test/arm9/test9.ld": {
+      "bytes": 9304,
+      "sha256": "227e66689801002af8089322452fd321bd7cc2accb80669b416dea4921f26a6c",
+      "source_role": "frozen_source",
+      "source_path": "desarrollo/fuentes/code/test/arm9/test9.ld"
+    },
+    "project/desarrollo/pruebas_R19/audit_legacy_variable_capacity.py": {
+      "bytes": 2597,
+      "sha256": "a3839d872ca619349e3b95b726898c011ac8a59638b651a5d741f495f9190bad",
+      "source_role": "project_prerequisite",
+      "source_path": "desarrollo/pruebas_R19/audit_legacy_variable_capacity.py"
+    },
+    "project/desarrollo/pruebas_R21/audit_legacy_variable_capacity.py": {
+      "bytes": 1400,
+      "sha256": "b2e173b45fc03973f5ce277dc48f1b128c9f4693b660ac8dad7ab784bb35e700",
+      "source_role": "project_prerequisite",
+      "source_path": "desarrollo/pruebas_R21/audit_legacy_variable_capacity.py"
+    },
+    "project/desarrollo/base_D19/kotoGBA_D19_Arranque_Kanjis.nds": {
+      "bytes": 243712,
+      "sha256": "48907f11887a0b62d0406c1339ecc46d6a45b1e2a84d7a0f3a4def79e6cab51c",
+      "source_role": "project_prerequisite",
+      "source_path": "desarrollo/base_D19/kotoGBA_D19_Arranque_Kanjis.nds"
+    },
+    "project/_gba/kotogba/packages/BPRJ_01.ks5": {
+      "bytes": 182736,
+      "sha256": "0166bd29b93cab1e09986ab57594cb28a6f9d8467a268bca4e29166f5f6a6727",
+      "source_role": "project_prerequisite",
+      "source_path": "_gba/kotogba/packages/BPRJ_01.ks5"
+    },
+    "project/_gba/kotogba/packages/BPRJ_01.kc15": {
+      "bytes": 6125568,
+      "sha256": "9ec7efa72c9c0385465ee3fd28df2e9044f010bdff272423233fd96671f907ca",
+      "source_role": "project_prerequisite",
+      "source_path": "_gba/kotogba/packages/BPRJ_01.kc15"
+    },
+    "project/_gba/kotogba/packages/BPRJ_01.km7": {
+      "bytes": 5760,
+      "sha256": "676dac1b4f886f20bdfc45685e422dfaa19a686bfacc515fc6611e9aeb75a855",
+      "source_role": "project_prerequisite",
+      "source_path": "_gba/kotogba/packages/BPRJ_01.km7"
+    },
+    "sdk/sdk_linux_R3_conservado.tar.gz": {
+      "bytes": 52710318,
+      "sha256": "ed3ee8ec7f8c0c088e8f1110715cef8aa4fdd3b998829d129f2bf614d901bb4f",
+      "source_role": "retained_sdk",
+      "source_path": "entorno/sdk_linux_R3_conservado.tar.gz"
+    },
+    "project/desarrollo/fuentes/code/core/arm7/gbarunner7.specs": {
+      "bytes": 152,
+      "sha256": "d8a761edb4078367d237eb0bf07e2b971e5414d93375f7d9f86fdcff8f509861",
+      "source_role": "project_prerequisite",
+      "source_path": "desarrollo/fuentes/code/core/arm7/gbarunner7.specs"
+    }
+  },
+  "expected_outputs": {
+    "kotoGBA_D23_Disquetes.nds": {
+      "bytes": 572416,
+      "sha256": "1cd6128200e6a08824202681868f500a085971ccbb16afae884d7e30774e22ad"
+    },
+    "arm9.bin": {
+      "bytes": 253704,
+      "sha256": "474512bc4d67c5cd2bfc9b4496d8254702fa2ea82ebea481cf071fc974cbfd4a"
+    }
+  },
+  "source_files": 526,
+  "sdk_unpacked_limit_bytes": 200000000,
+  "installable_claim": "Reproduces executable B19 only; paired SD data and Nintendo DS hardware validation are separate."
+}

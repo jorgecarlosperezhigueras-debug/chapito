@@ -1,0 +1,116 @@
+{
+  "schema": "kotogba.memory-and-b12-verification/1",
+  "verified_at": "2026-10-25T22:30:30.542778+00:00",
+  "read_only_originals": true,
+  "large_temporary_files_created": false,
+  "memories": {
+    "b11": {
+      "name": "kotogba_memory_b11.sqlite.gz",
+      "gzip_sha256": "a8af53ba2ad73c3914309a59d4a012ed38e167b8e7698a92a5b52d0bc306deba",
+      "gzip_bytes": 117397946,
+      "gzip_matches_sidecar": true,
+      "sqlite_sha256": "059d2fc2bc6e3b95ed34a9da3e58813570cebc7dbfc2322051f1d28838df661a",
+      "sqlite_bytes": 635039744,
+      "sqlite_matches_sidecar": true,
+      "header_valid": true,
+      "journal_header_bytes": [
+        1,
+        1
+      ],
+      "sqlite_integrity_check": [
+        "ok"
+      ],
+      "user_tables": 27,
+      "state_table": "koto_games",
+      "game_states": [
+        {
+          "game_id": "bprj1",
+          "base_sha256": "d3fbe3d59d3dd65dc0c9f6436fcd2c1851df375a74aba9a92c84f5a4571542d9",
+          "revision": 39,
+          "runtime_revision": 27
+        }
+      ],
+      "states_match_sidecar": true,
+      "passed": true
+    },
+    "b12": {
+      "name": "kotogba_memory_b12.sqlite.gz",
+      "gzip_sha256": "8587175131feb62b6b790bd1e442a76d20d3cd075d1c8bfc7f18b364f5f8eb45",
+      "gzip_bytes": 121692045,
+      "gzip_matches_sidecar": true,
+      "sqlite_sha256": "0aea9fbc2a73b83975afe69583d7bbfb891b9f63a50df1189201d66051763aab",
+      "sqlite_bytes": 672456704,
+      "sqlite_matches_sidecar": true,
+      "header_valid": true,
+      "journal_header_bytes": [
+        1,
+        1
+      ],
+      "sqlite_integrity_check": [
+        "ok"
+      ],
+      "user_tables": 27,
+      "state_table": "koto_games",
+      "game_states": [
+        {
+          "game_id": "bprj1",
+          "base_sha256": "d3fbe3d59d3dd65dc0c9f6436fcd2c1851df375a74aba9a92c84f5a4571542d9",
+          "revision": 50,
+          "runtime_revision": 36
+        }
+      ],
+      "states_match_sidecar": true,
+      "passed": true
+    }
+  },
+  "b12": {
+    "archive_name": "kotoGBA_B12_TANDA_000_007_ADOPTADA_NO_INSTALABLE_20261025.zip",
+    "archive_bytes": 513632421,
+    "archive_sha256": "9bac60c7a80ec2a0e9b6a800ae64e7dd67741ed9416a7d4fd75e8639a1d0c1bc",
+    "archive_matches_receipt": true,
+    "installable": false,
+    "block2_complete": false,
+    "members": 953,
+    "safe_paths_and_names": true,
+    "inventory_issues": [],
+    "uncompressed_bytes": 2009439903,
+    "crc_bad_member": null,
+    "all_crc_passed": true,
+    "runtime_pair": {
+      "kl29": {
+        "bytes": 38410240,
+        "sha256": "325468c7ca7f3c5c445e7e889fa349a23015a1c683156a48fc78caf70cb11a43",
+        "matches": true
+      },
+      "kc15": {
+        "bytes": 6125568,
+        "sha256": "9d9badd32b70104234a5ebc57dbbdc0b42af5b986842f6c56008a308d88fd9bc",
+        "matches": true
+      }
+    },
+    "code_seal": {
+      "sha256": "af101752f511d386df29ccc23de580f04f18d4508f6680f02b92459177e65d7e",
+      "schema": "kotogba.B12_export_seal/2",
+      "memory_revision": 50,
+      "runtime_revision": 36,
+      "installable": false,
+      "status": "DEVELOPMENT_NOT_INSTALLABLE"
+    },
+    "verified_sealed_files": {
+      "export_runtime_v4.py": {
+        "sha256": "bdacb08b8ce00dc5eeed8005309a504b5070782beda79c0734d5616f9218646b",
+        "matches": true
+      },
+      "publish_snapshot_v4.py": {
+        "sha256": "9022dc42594770b95e60379e4ac7473b0bec02c68c62de94702077447d215d9f",
+        "matches": true
+      },
+      "FINITE_EXPORT_CONTRACT_v2.json": {
+        "sha256": "beb882829aa60f2dfcc26fa4a070cd11ae571189a2eee7748c6117f50857fe3e",
+        "matches": true
+      }
+    },
+    "passed": true
+  },
+  "passed": true
+}

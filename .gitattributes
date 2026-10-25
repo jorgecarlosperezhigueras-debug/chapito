@@ -1,0 +1,3 @@
+# Preserve byte-identical recovered sources on every platform.
+current/** -text
+linguistic/** -text

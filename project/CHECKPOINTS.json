@@ -1,10 +1,32 @@
 {
   "schema": "kotogba.checkpoint-lock/1",
-  "provenance": "Transcribed from CIERRE_BLOQUE1_B11_20261025.json and ENTREGA_HITO_B19_B10_20261025.json. References only; bytes not verified during this migration.",
+  "provenance": "Archive hashes, CRCs and memory revisions verified again on 2026-10-25; evidence/migration-20261025 records exact scope.",
   "archives": {
-    "b11": {"name": "kotoGBA_B11_BLOQUE1_MEMORIA_ADOPTADA_NO_INSTALABLE_20261025.zip", "bytes": 414845069, "sha256": "6f96d4c3de466798ba4bc182d6dd39accdc9b6281e04c2412aca5c9d6eb132fd", "installable": false},
-    "b19_full": {"name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip", "bytes": 4486144272, "sha256": "65ec4d1508a22ca72d9b0b9fc09910d7deb3fe9105a6f873a5c3d665396b298f", "parts": 11},
-    "b19_sd": {"name": "kotoGBA_HITO_B_Actualizacion_SD_B19_B10_AVANCE_VALIDADO_20261025.zip", "bytes": 69228616, "sha256": "eb0854ea8a85f9528b42cd4bcc45132afea0e782439df17c9c51a7058912767b", "installable_in_previous_record": true}
+    "b11": {
+      "name": "kotoGBA_B11_BLOQUE1_MEMORIA_ADOPTADA_NO_INSTALABLE_20261025.zip",
+      "bytes": 414845069,
+      "sha256": "6f96d4c3de466798ba4bc182d6dd39accdc9b6281e04c2412aca5c9d6eb132fd",
+      "installable": false
+    },
+    "b19_full": {
+      "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip",
+      "bytes": 4486144272,
+      "sha256": "65ec4d1508a22ca72d9b0b9fc09910d7deb3fe9105a6f873a5c3d665396b298f",
+      "parts": 11
+    },
+    "b19_sd": {
+      "name": "kotoGBA_HITO_B_Actualizacion_SD_B19_B10_AVANCE_VALIDADO_20261025.zip",
+      "bytes": 69228616,
+      "sha256": "eb0854ea8a85f9528b42cd4bcc45132afea0e782439df17c9c51a7058912767b",
+      "installable_in_previous_record": true
+    },
+    "b12": {
+      "name": "kotoGBA_B12_TANDA_000_007_ADOPTADA_NO_INSTALABLE_20261025.zip",
+      "bytes": 513632421,
+      "sha256": "9bac60c7a80ec2a0e9b6a800ae64e7dd67741ed9416a7d4fd75e8639a1d0c1bc",
+      "installable": false,
+      "durable_copy_confirmed": false
+    }
   },
   "b11_memory": {
     "sqlite_sha256": "059d2fc2bc6e3b95ed34a9da3e58813570cebc7dbfc2322051f1d28838df661a",
@@ -14,5 +36,21 @@
     "kl29_sha256": "18fcaa83eccca1f4978fd9a18311be9c181ad8369a49185d7e63aeeef23492a3",
     "kc15_sha256": "9ec7efa72c9c0385465ee3fd28df2e9044f010bdff272423233fd96671f907ca",
     "pair_manifest_sha256": "0cdf36fbae1a368f2e7d12b6744bc62628212aa9a512f56d33cbee0aaed2be5c"
+  },
+  "b12_memory": {
+    "sqlite_sha256": "0aea9fbc2a73b83975afe69583d7bbfb891b9f63a50df1189201d66051763aab",
+    "gzip_sha256": "8587175131feb62b6b790bd1e442a76d20d3cd075d1c8bfc7f18b364f5f8eb45",
+    "memory_revision": 50,
+    "runtime_revision": 36,
+    "kl29_sha256": "325468c7ca7f3c5c445e7e889fa349a23015a1c683156a48fc78caf70cb11a43",
+    "kc15_sha256": "9d9badd32b70104234a5ebc57dbbdc0b42af5b986842f6c56008a308d88fd9bc",
+    "code_seal_sha256": "af101752f511d386df29ccc23de580f04f18d4508f6680f02b92459177e65d7e"
+  },
+  "private_build_inputs": {
+    "name": "kotoGBA_B19_PRIVATE_BUILD_INPUTS_20261025.zip",
+    "bytes": 54993645,
+    "sha256": "73cf863d5beb9a1b4eed6c9b6f13341365db79a39d89fec4393a3e36c58b1e76",
+    "durable_copy_confirmed": false,
+    "source_archive": "b19_full"
   }
 }

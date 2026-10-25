@@ -1,0 +1,417 @@
+{
+  "schema": "kotogba.linguistic-private-inputs/1",
+  "source_archive": {
+    "name": "kotoGBA_B12_TANDA_000_007_ADOPTADA_NO_INSTALABLE_20261025.zip",
+    "bytes": 513632421,
+    "sha256": "9bac60c7a80ec2a0e9b6a800ae64e7dd67741ed9416a7d4fd75e8639a1d0c1bc"
+  },
+  "public_metadata_only": true,
+  "files": [
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/candidate_b12/BPRJ_01.kc15",
+      "bytes": 6125568,
+      "sha256": "9d9badd32b70104234a5ebc57dbbdc0b42af5b986842f6c56008a308d88fd9bc",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/candidate_b12/BPRJ_01.kl29",
+      "bytes": 38410240,
+      "sha256": "325468c7ca7f3c5c445e7e889fa349a23015a1c683156a48fc78caf70cb11a43",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/candidate_b12/BPRJ_01.kl29.pair.json",
+      "bytes": 1078,
+      "sha256": "55b2296e10ab88f7cb175ab0cf7235ba2ead40a303160200cab7cf11d2ca5a47",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b10/assembly/ROLE_REGISTRY_B10_v2.json",
+      "bytes": 3419,
+      "sha256": "ec23ce8c8819b9ce9f78680def6d065a85959dfe442f9824c8107345979b0aa9",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b10/unsupported_audit/VALIDATION_MARKER_MAPPING_V2.json",
+      "bytes": 4212,
+      "sha256": "197f9a0de36f60b64fbb4bf3e9872398eecdd45b5187ea1a86d30b84f33b1692",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/ADOPTION_LEDGER.json",
+      "bytes": 87119,
+      "sha256": "4415b6580983200e648c20ea0c93902f0f0f01b3d85b7377ab71d21c7d88f2be",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/FINAL_CODE_SEAL.json",
+      "bytes": 1244,
+      "sha256": "af101752f511d386df29ccc23de580f04f18d4508f6680f02b92459177e65d7e",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/FINITE_EXPORT_CONTRACT_v2.json",
+      "bytes": 26833,
+      "sha256": "beb882829aa60f2dfcc26fa4a070cd11ae571189a2eee7748c6117f50857fe3e",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/HEADER_DISPATCH_48_35_DIAGNOSIS.json",
+      "bytes": 11400,
+      "sha256": "dc6ca3ff1c3a8a239fdd468fdf6648545e91b0a44c4fb514d786dffcb477f622",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/HEADER_DISPATCH_B12_BASELINE_PROOF.json",
+      "bytes": 6063,
+      "sha256": "002c8d2cd8c83d0e7e64dddc1e8f6f663d1cbe98933995a4576a4bd7bd38c152",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/HEADER_DISPATCH_B12_CONTRACT.json",
+      "bytes": 128186,
+      "sha256": "509d0c96f46f336f27495772806b4eabddef4f028bb0fcad32ae1d0588d2de11",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/HEADER_DISPATCH_B12_REBIND_50_36_QA.json",
+      "bytes": 7104,
+      "sha256": "011c1c93f456fa730e3edd9abf1afa30c481f6759707e7ff8cbcc252047851e7",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/KC15_B12_TRANSLATION_CONTRACT.json",
+      "bytes": 17709,
+      "sha256": "a0c8458f4b9c0d43aded8a11f334325392d49474ba7506449b420115acd02ce3",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/assembly/ALL_512_FINDINGS_APPROVED.json",
+      "bytes": 4344838,
+      "sha256": "545f96caed0ab69eaf13bd0ce3827f37e01be92cff50f188103a66f9d2bd7801",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/assembly/CONTEXT_ASSEMBLY_MANIFEST.json",
+      "bytes": 985138,
+      "sha256": "04d094da4d46bb02b12a1c3469613c123413e4958a78abc10829bb92aa40432e",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/assembly/CONTEXT_REVIEW_B12_APPROVED.json",
+      "bytes": 23686770,
+      "sha256": "1f1ca0137746ed12e1fe3f6fbcf1a7801c378eb3d3f44ca3e06816a029cbfc11",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/assembly/EXACT_UNIONS_B12_PREPARED.json",
+      "bytes": 834550,
+      "sha256": "8f1d089c4fddb4d631f71e4bed8ae15edfc03c69f4d52726ad91288857b0d060",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/assembly/FINDINGS_ASSEMBLY_MANIFEST.json",
+      "bytes": 1114,
+      "sha256": "8752fabe647d1d95eb7abdd35b499b0419ec9b5536ea0d579141700420051cfb",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/CONTINUITY_ELEVEN_SECOND_READ_APPROVED_NOT_IMPORTED.json",
+      "bytes": 113210,
+      "sha256": "3d362f4c1f71ecd8de63e870e4b938e1136693a93a8f6d89564b0d4611ca982a",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/CONTINUITY_ELEVEN_SECOND_READ_ASSESSMENT.json",
+      "bytes": 36773,
+      "sha256": "5f75dde596c74cbf5306ce1ed3966431bffe1f64ca22e5d1ca208f6b203ff6fe",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/CONTINUITY_TWO_SECOND_READ_v2_APPROVED_NOT_IMPORTED.json",
+      "bytes": 13117,
+      "sha256": "e9b0851aa614b3cbf7026038da8710517a2d35bfaa1fd5189f0eeaa815c5b7e1",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/CONTINUITY_TWO_SECOND_READ_v2_ASSESSMENT.json",
+      "bytes": 4590,
+      "sha256": "367906a4e37278a18d77cd5968ff0c2c08ee5e9e3eca1d1856c0c3c76c182e60",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/FIVE_TRANSLATIONS_STANDARD_REVIEWED_NOT_IMPORTED.json",
+      "bytes": 358727,
+      "sha256": "d2bdcfded56de5a09a00bf2c26496ae2556ae0b024081941a5a193fffb7cda5f",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/KIKA_3BE976_RAW_BOUNDARY_PROVEN.json",
+      "bytes": 27036,
+      "sha256": "cdad1f7baf2a3e07792715977fa19fa77d96eff64882527fc17b01249f6b51ac",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/RAW_TWO_FINITE_REFINEMENTS_APPROVED.json",
+      "bytes": 113602,
+      "sha256": "553c1d140be452da76b99652def1284adf880e4c9a78cfe6069b160762f6db46",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/WATAKUSHI_16E64C_RAW_BOUNDARY_PROVEN.json",
+      "bytes": 24351,
+      "sha256": "070d301e7dd8bce45aef1bfa8eccb70671cae10fbf55c9e30b2a67e6ee0c1fdb",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/binary_qa_b12_reader.py",
+      "bytes": 54414,
+      "sha256": "2be74fff5a1ab52d03f93c735ef4d2eb354ecad8d541362074a9fcf4aaf674cd",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/second_read/finite_raw_refinement_b12_v1.py",
+      "bytes": 24201,
+      "sha256": "e15852821653a2c4857c9be6fbc63ab7a9970f81e84d43b0d1d371d1a203ffdf",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/KL29_HEADER_SOURCE_EVIDENCE.json",
+      "bytes": 767,
+      "sha256": "ce55a2fac1719b1bb06959339ebb4a2eec9622356a5e906b3a3974737e23c408",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/KotoGbaCorpus.inc",
+      "bytes": 35092,
+      "sha256": "2c19e060c59e51efcfbd6d39dc4a4de1bfd31efcd79d3b418fc417e0aadff0a1",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/KotoGbaGrammar.inc",
+      "bytes": 1337,
+      "sha256": "1129ba25d27c78cbc98ace71beddadde900bd8ef88ac51fb2506dc943fbc409e",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/KotoGbaLegacyVariables.inc",
+      "bytes": 5441,
+      "sha256": "8829905441e956e5f507cfedde91b0b3adb97ae2d3a947eca39748dffc8cebb5",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/KotoGbaLinguistic.inc",
+      "bytes": 25098,
+      "sha256": "943681dbecec41417eb0406ab78c1779befae4ec38d05e52b16579b6d95ba561",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/KotoGbaOrthography.inc",
+      "bytes": 32772,
+      "sha256": "1d37473e31e45761ba1bad4d58cb6b59df3ddc7885c73fe1dbcf09a8e0901814",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/KotoGbaSentenceLegacy.inc",
+      "bytes": 11368,
+      "sha256": "e42240710355e9a3c72b8d1ae4d9caa6b7986a2419e565a8e72ed0805667296c",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/source_evidence/preparar_corpus_r15.py",
+      "bytes": 12292,
+      "sha256": "3d0d2cecd14fdd43f3a07fb7591fdfb7c391e61e1194367f0cce05b26a1e0fb1",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/HEADER_DISPATCH_5DOCS_INDEPENDENT_REVIEW_B12.json",
+      "bytes": 27698,
+      "sha256": "08408e7192e9f34941cfccc02db8694e1856eddd60700a487b37d0e4a8905c75",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/MARKER97_FINAL_BLOCK3_ROUTES_B12_v2.json",
+      "bytes": 115261,
+      "sha256": "5c0f0ebcb7c1d471111caeb7a6306f5f43c8e5876fd41b895dceb3c2b459ba14",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/MARKER97_FINAL_MANIFEST_B12_v2.json",
+      "bytes": 1135,
+      "sha256": "c574b228433f1eb756fa511871348a52122aec76c579f6e88031d536c863e76e",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/MARKER97_FINAL_SEMANTIC_ADDENDUM_B12_v2.json",
+      "bytes": 246904,
+      "sha256": "1108c9b54cf7217b7849b1b9159709cf313b6ef933c0e44a4e1c0d00be322a19",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/ROLE_REGISTRY_B12_v3_APPROVED.json",
+      "bytes": 5429,
+      "sha256": "7c42363505d0e8c7fc2ff55a3b5bd687266c50517744532e98ee45fdbbdb04a4",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/ROOT_REPRODUCED_CANDIDATE238.json",
+      "bytes": 5937,
+      "sha256": "1c2a2e077343d7492e5e3659cedd369313581e6d2a6758b391311c490660dffe",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/ROOT_REPRODUCED_ORIGINAL_JP_PROBES.json",
+      "bytes": 31878,
+      "sha256": "4470a0e2ae05f0e6449b362ce61ca7e8acec0ab1d7ef3b866f815a191d743108",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/VARIABLE_BALLS_REFINEMENT_B12_APPROVED.json",
+      "bytes": 4602,
+      "sha256": "a161f14b380e6d0e6b043d26bbcd7cedc8771e8f1398c0d08a4d6da8d0759a2c",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/VARIABLE_LINKS_B12_12_v3_APPROVED.json",
+      "bytes": 19999,
+      "sha256": "1d97f44fd662a476044a47b2a10b99a903d8e896a05905c99837728779c512e5",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/VARIABLE_LINKS_B12_238_ABILITY_v2_APPROVED.json",
+      "bytes": 2698,
+      "sha256": "f708b1fb74aeeb9d2668489924af8d9038fca6a1206429cf144f0b5956c092f3",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/VARIABLE_LINKS_B12_36_SECOND_READ_APPROVED.json",
+      "bytes": 63551,
+      "sha256": "6ea1bb8240b9166407ec7ee6852ae5bed3022d8cb88ee7694a212408f0808dfa",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/finding_continuity_11/FINDING_CONTINUITY_11_AUTHORED_SEMANTIC_LEDGER.json",
+      "bytes": 18107,
+      "sha256": "2def9fa57ed86fd02b41dfdd9973075d8bdb343237787973a7a561bca6b11314",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/multispan_000_007/HISTORICAL_68_CONTEXTUAL_VERDICTS_B12.json",
+      "bytes": 234792,
+      "sha256": "d8542862b0b4a759f71ba1566cfd4f85ddb13c8f4f7c8bceede7c78d028c11d7",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/multispan_000_007/MULTISPAN_500_SEMANTIC_DECISIONS_B12.json",
+      "bytes": 4463308,
+      "sha256": "c49258f9766c3268c374e5d54103415c251056a6de8f8b7aa8d1308241062c4c",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/multispan_000_007/PREVIOUS_917_REVIEW_COVERAGE_B12.json",
+      "bytes": 3634851,
+      "sha256": "845071fb2b4f7890e844fa33e6abc8d97b9172ca681b784593e83b1201485ea2",
+      "role": "sealed_B12_dependency"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/continuation_b12/variables/variable_card_refinement_b12_v1.py",
+      "bytes": 13138,
+      "sha256": "287940284a03c250c5b0bc7391284a6b416c9c3d58e083a5cd4d1b65697e98b9",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/data/kotogba_memory_b11.sqlite.gz",
+      "bytes": 117397946,
+      "sha256": "a8af53ba2ad73c3914309a59d4a012ed38e167b8e7698a92a5b52d0bc306deba",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/data/kotogba_memory_b11.sqlite.gz.json",
+      "bytes": 2408,
+      "sha256": "e4120075675706854b1c69cc5f2d33d380848ac174885431a86b59c1d53b9ffc",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/data/kotogba_memory_b12.sqlite.gz",
+      "bytes": 121692045,
+      "sha256": "8587175131feb62b6b790bd1e442a76d20d3cd075d1c8bfc7f18b364f5f8eb45",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/data/kotogba_memory_b12.sqlite.gz.json",
+      "bytes": 2605,
+      "sha256": "0382f5944723c36049cad756e01e1b3798d3b94cf1642c4e25a13387a8f7746a",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_HITO_B/memory/data/runtime_base/BPRJ_01.kc15",
+      "bytes": 6125568,
+      "sha256": "df4a3e7cde5eadfd927c4ebc208b9c4c4934c276369d55251df66d9d66f634c3",
+      "role": "private_recovery_input"
+    },
+    {
+      "root": "project",
+      "path": "desarrollo/pruebas_R37/save_supplement.py",
+      "bytes": 23636,
+      "sha256": "2d10de7430fee70e1059b4409bc57a5d79a64f29b16d040c7a3428bafb30786b",
+      "role": "sealed_B12_dependency"
+    }
+  ]
+}

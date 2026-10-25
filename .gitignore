@@ -26,3 +26,15 @@ __pycache__/
 *.pem
 *.key
 # Los archivos ya versionados no se eliminan con estas reglas.
+
+# Outputs and private runtime inputs.
+*.elf
+*.bin
+*.kl29
+*.kc15
+*.ks5
+*.km7
+*.k20
+*.K20
+*.tar.gz
+.venv/

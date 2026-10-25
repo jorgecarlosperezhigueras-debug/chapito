@@ -1,0 +1,165 @@
+{
+  "schema": "kotogba.independent-byte-verification/1",
+  "verified_at": "2026-10-25T22:29:17.157972+00:00",
+  "scope": "read_only_local_checkpoint_bytes",
+  "archives": {
+    "b19_full": {
+      "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip",
+      "bytes": 4486144272,
+      "sha256": "65ec4d1508a22ca72d9b0b9fc09910d7deb3fe9105a6f873a5c3d665396b298f",
+      "sha256_matches": true,
+      "size_matches": true,
+      "parts": [
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.001",
+          "bytes": 419430400,
+          "sha256": "e27b66b465d60dcec3f686b2893192aba4df9e307c8cb3c87fd1d1e8426aff48",
+          "expected_bytes": 419430400,
+          "expected_sha256": "e27b66b465d60dcec3f686b2893192aba4df9e307c8cb3c87fd1d1e8426aff48",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.002",
+          "bytes": 419430400,
+          "sha256": "3d1a7ac15a2d93d1b2d4338d6026b9972cfe4840ef29297120144bda4a7b2848",
+          "expected_bytes": 419430400,
+          "expected_sha256": "3d1a7ac15a2d93d1b2d4338d6026b9972cfe4840ef29297120144bda4a7b2848",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.003",
+          "bytes": 419430400,
+          "sha256": "a0767c27e24c598fbeb0412523c9de3c7c94b9a9a7bc67861b71c1029da66d72",
+          "expected_bytes": 419430400,
+          "expected_sha256": "a0767c27e24c598fbeb0412523c9de3c7c94b9a9a7bc67861b71c1029da66d72",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.004",
+          "bytes": 419430400,
+          "sha256": "d97691c3a087311b40fb8ee8fdb87225fc3cb6ea9da693adcfd6230c5906ef4a",
+          "expected_bytes": 419430400,
+          "expected_sha256": "d97691c3a087311b40fb8ee8fdb87225fc3cb6ea9da693adcfd6230c5906ef4a",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.005",
+          "bytes": 419430400,
+          "sha256": "49d8a6bfca35e371ce698b233a68422ae7d0cf6d95e88c902a8e9440babf3f3d",
+          "expected_bytes": 419430400,
+          "expected_sha256": "49d8a6bfca35e371ce698b233a68422ae7d0cf6d95e88c902a8e9440babf3f3d",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.006",
+          "bytes": 419430400,
+          "sha256": "245dbd70002c0bf15b356d53532fa087d6578a9659954ab558165baa81eed608",
+          "expected_bytes": 419430400,
+          "expected_sha256": "245dbd70002c0bf15b356d53532fa087d6578a9659954ab558165baa81eed608",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.007",
+          "bytes": 419430400,
+          "sha256": "cf0275aef510fb5aa8e169f8d9018da5f2b18f20fd1140d1c871f7d862e653f8",
+          "expected_bytes": 419430400,
+          "expected_sha256": "cf0275aef510fb5aa8e169f8d9018da5f2b18f20fd1140d1c871f7d862e653f8",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.008",
+          "bytes": 419430400,
+          "sha256": "ab3fe8e3c9eb6787ccc27dcba455ac9f668a05dc4c0fed78387bb3a431985466",
+          "expected_bytes": 419430400,
+          "expected_sha256": "ab3fe8e3c9eb6787ccc27dcba455ac9f668a05dc4c0fed78387bb3a431985466",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.009",
+          "bytes": 419430400,
+          "sha256": "fcd5c98e6271ef9fb740e7e178b683c10c961615cd2a03cb52628e82423bef0b",
+          "expected_bytes": 419430400,
+          "expected_sha256": "fcd5c98e6271ef9fb740e7e178b683c10c961615cd2a03cb52628e82423bef0b",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.010",
+          "bytes": 419430400,
+          "sha256": "0fb69d6944cf98863c20eecce1dea74e425d5f7872705113329b753ba1140cad",
+          "expected_bytes": 419430400,
+          "expected_sha256": "0fb69d6944cf98863c20eecce1dea74e425d5f7872705113329b753ba1140cad",
+          "passed": true
+        },
+        {
+          "name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip.011",
+          "bytes": 291840272,
+          "sha256": "931eaf2ae0f6352b684d44f21d675a267899571f5ec434f2855587e45e6816a2",
+          "expected_bytes": 291840272,
+          "expected_sha256": "931eaf2ae0f6352b684d44f21d675a267899571f5ec434f2855587e45e6816a2",
+          "passed": true
+        }
+      ],
+      "reconstructed_in_memory_stream_only": true,
+      "members": 37418,
+      "uncompressed_bytes": 12141597132,
+      "crc_members_verified": 37418,
+      "crc_bytes_read": 12141597132,
+      "safe_paths_and_names": true,
+      "inventory_issues": [],
+      "all_crc_passed": true
+    },
+    "b11": {
+      "name": "kotoGBA_B11_BLOQUE1_MEMORIA_ADOPTADA_NO_INSTALABLE_20261025.zip",
+      "bytes": 414845069,
+      "sha256": "6f96d4c3de466798ba4bc182d6dd39accdc9b6281e04c2412aca5c9d6eb132fd",
+      "sha256_matches": true,
+      "size_matches": true,
+      "members": 334,
+      "uncompressed_bytes": 782594217,
+      "crc_members_verified": 334,
+      "crc_bytes_read": 782594217,
+      "safe_paths_and_names": true,
+      "inventory_issues": [],
+      "all_crc_passed": true
+    },
+    "b19_sd": {
+      "name": "kotoGBA_HITO_B_Actualizacion_SD_B19_B10_AVANCE_VALIDADO_20261025.zip",
+      "bytes": 69228616,
+      "sha256": "eb0854ea8a85f9528b42cd4bcc45132afea0e782439df17c9c51a7058912767b",
+      "sha256_matches": true,
+      "size_matches": true,
+      "members": 29,
+      "uncompressed_bytes": 363803781,
+      "crc_members_verified": 29,
+      "crc_bytes_read": 363803781,
+      "safe_paths_and_names": true,
+      "inventory_issues": [],
+      "all_crc_passed": true
+    }
+  },
+  "memory_b11": {
+    "name": "kotogba_memory_b11.sqlite.gz",
+    "gzip_bytes": 117397946,
+    "gzip_sha256": "a8af53ba2ad73c3914309a59d4a012ed38e167b8e7698a92a5b52d0bc306deba",
+    "gzip_matches": true,
+    "sqlite_bytes": 635039744,
+    "sqlite_sha256": "059d2fc2bc6e3b95ed34a9da3e58813570cebc7dbfc2322051f1d28838df661a",
+    "sqlite_matches": true,
+    "sqlite_header_valid": true,
+    "metadata_provenance": "sidecar_tied_to_verified_compressed_and_uncompressed_hashes",
+    "metadata_game_states": [
+      {
+        "game_id": "bprj1",
+        "base_sha256": "d3fbe3d59d3dd65dc0c9f6436fcd2c1851df375a74aba9a92c84f5a4571542d9",
+        "revision": 39,
+        "runtime_revision": 27
+      }
+    ],
+    "metadata_source_hash_matches": true,
+    "metadata_compressed_hash_matches": true,
+    "sqlite_integrity_query_executed": false
+  },
+  "passed": true,
+  "no_archives_extracted": true,
+  "no_databases_modified": true
+}

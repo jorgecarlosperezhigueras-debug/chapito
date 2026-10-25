@@ -1,0 +1,56 @@
+{
+  "schema": "kotogba.infrastructure-audit/1",
+  "scope": "Infrastructure only; no runtime, ROM or remote update",
+  "source_commit": "0b71b725614271c150c51ba6c86d555ac9d5353e",
+  "baseline_tests": 25,
+  "baseline_passed": true,
+  "regression_tests_added": 5,
+  "regression_failures_before_fix": 6,
+  "final_tests": 30,
+  "final_passed": true,
+  "git_initialized": false,
+  "remote_writes": false,
+  "changed_files": [
+    {
+      "path": "tools/recovery/checkpoint.py",
+      "sha256": "a8e24338227ecb8a2684735f699f4098339e489085b60cc8368f7dd2977a092a"
+    },
+    {
+      "path": "tests/recovery/test_checkpoint.py",
+      "sha256": "9554c3bedf77d440f4dc8db299b0bb77a42e475c9d87fdd75fc44bdfde83e61b"
+    },
+    {
+      "path": "docs/RECUPERACION.md",
+      "sha256": "e7aae5f5d8d243f6b47ea5dd2f06e6427bce7c9834740d4d6432543952db4db1"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/recovery",
+        "-v"
+      ],
+      "exit_code": 0,
+      "output_file": "/workspace/scratch/a30e2b95deb0/kotogba/.local/evidence/recovery-audit/unit-tests.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/recovery/checkpoint.py",
+        "release-gate"
+      ],
+      "exit_code": 2,
+      "output_file": "/workspace/scratch/a30e2b95deb0/kotogba/.local/evidence/recovery-audit/release-gate.txt"
+    }
+  ],
+  "fixed_defects": [
+    "Idempotent retry skipped corrupt and overlapping existing journal receipts",
+    "ZIP file/directory namespace collision passed verification",
+    "Path replacement between hash and CRC could attribute old hash to new archive"
+  ]
+}
