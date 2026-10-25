@@ -1,0 +1,28 @@
+# Material privado y resultados locales: nunca se publican automáticamente.
+.local/
+private/
+__pycache__/
+*.py[cod]
+*.gba
+*.nds
+*.bios
+*.sav
+*.srm
+*.state
+*.sqlite
+*.sqlite-*
+*.sqlite.gz
+*.db
+*.pdf
+*.rar
+*.zip
+*.zip.[0-9][0-9][0-9]
+*.tar.xz
+*.ttf
+*.otf
+*.woff*
+.env
+.env.*
+*.pem
+*.key
+# Los archivos ya versionados no se eliminan con estas reglas.

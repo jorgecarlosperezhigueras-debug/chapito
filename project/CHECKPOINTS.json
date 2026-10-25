@@ -1,0 +1,18 @@
+{
+  "schema": "kotogba.checkpoint-lock/1",
+  "provenance": "Transcribed from CIERRE_BLOQUE1_B11_20261025.json and ENTREGA_HITO_B19_B10_20261025.json. References only; bytes not verified during this migration.",
+  "archives": {
+    "b11": {"name": "kotoGBA_B11_BLOQUE1_MEMORIA_ADOPTADA_NO_INSTALABLE_20261025.zip", "bytes": 414845069, "sha256": "6f96d4c3de466798ba4bc182d6dd39accdc9b6281e04c2412aca5c9d6eb132fd", "installable": false},
+    "b19_full": {"name": "kotoGBA_HITO_B_CHECKPOINT_B19_B10_AVANCE_VALIDADO_20261025.zip", "bytes": 4486144272, "sha256": "65ec4d1508a22ca72d9b0b9fc09910d7deb3fe9105a6f873a5c3d665396b298f", "parts": 11},
+    "b19_sd": {"name": "kotoGBA_HITO_B_Actualizacion_SD_B19_B10_AVANCE_VALIDADO_20261025.zip", "bytes": 69228616, "sha256": "eb0854ea8a85f9528b42cd4bcc45132afea0e782439df17c9c51a7058912767b", "installable_in_previous_record": true}
+  },
+  "b11_memory": {
+    "sqlite_sha256": "059d2fc2bc6e3b95ed34a9da3e58813570cebc7dbfc2322051f1d28838df661a",
+    "gzip_sha256": "a8af53ba2ad73c3914309a59d4a012ed38e167b8e7698a92a5b52d0bc306deba",
+    "memory_revision": 39,
+    "runtime_revision": 27,
+    "kl29_sha256": "18fcaa83eccca1f4978fd9a18311be9c181ad8369a49185d7e63aeeef23492a3",
+    "kc15_sha256": "9ec7efa72c9c0385465ee3fd28df2e9044f010bdff272423233fd96671f907ca",
+    "pair_manifest_sha256": "0cdf36fbae1a368f2e7d12b6744bc62628212aa9a512f56d33cbee0aaed2be5c"
+  }
+}
