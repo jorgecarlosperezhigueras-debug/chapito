@@ -1,0 +1,42 @@
+{
+  "schema": "kotogba.b19.build-verification/1",
+  "candidate": "B19",
+  "source_files": {
+    "public": 43,
+    "private": 483
+  },
+  "private_bundle": {
+    "name": "kotoGBA_B19_PRIVATE_BUILD_INPUTS_20261025.zip",
+    "bytes": 54993645,
+    "sha256": "73cf863d5beb9a1b4eed6c9b6f13341365db79a39d89fec4393a3e36c58b1e76"
+  },
+  "inputs_verified_before_execution": true,
+  "passed": true,
+  "emulator_tested": false,
+  "physical_console_tested": false,
+  "sd_data_updated": false,
+  "build_returncode": 0,
+  "outputs": {
+    "kotoGBA_D23_Disquetes.nds": {
+      "bytes": 572416,
+      "sha256": "1cd6128200e6a08824202681868f500a085971ccbb16afae884d7e30774e22ad",
+      "matches_frozen_B19": true
+    },
+    "arm9.bin": {
+      "bytes": 253704,
+      "sha256": "474512bc4d67c5cd2bfc9b4496d8254702fa2ea82ebea481cf071fc974cbfd4a",
+      "matches_frozen_B19": true
+    },
+    "arm9.elf": {
+      "bytes": 1928776,
+      "sha256": "5f9cc4ad83020ae538dc936d709bd1a83ceb514321569c489eb7cfffd409cc35",
+      "debug_paths_may_differ": true
+    },
+    "arm7.elf": {
+      "bytes": 278280,
+      "sha256": "391a92b41cd9b4d7bee5da1286c228a6f936914d0fdaf3f34d083b5376a490f7",
+      "debug_paths_may_differ": true
+    }
+  },
+  "seconds": 8.715
+}

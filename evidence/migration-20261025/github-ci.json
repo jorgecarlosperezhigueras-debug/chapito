@@ -1,0 +1,93 @@
+{
+  "schema": "kotogba.github-ci-evidence/1",
+  "commit": "c2df5950ee1a97f5e5cb4d129ebe4760c330f163",
+  "branch": "kotogba-persistencia-20261025",
+  "run_id": 40242576090,
+  "url": "https://github.com/jorgecarlosperezhigueras-debug/chapito/actions/runs/40242576090",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "id": 121317350250,
+      "name": "Fuentes B19, memoria B12 y recuperacion",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40242576090,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Pruebas de recuperacion",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Pruebas del constructor B19",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Pruebas y fuentes de memoria B12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Contrato y separacion de la entrega instalable",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Identificar exactamente el resultado",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Conservar resultados incluso tras un fallo",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12617785751,
+      "name": "kotogba-verification-40242576090-1",
+      "digest": "sha256:aca8f7ba3616845e7f8c749a1f0c042b980bd893074fac283c0b078b57e0e90b",
+      "bytes": 4654,
+      "expired": false,
+      "expires_at": "2027-01-23T22:57:49Z"
+    }
+  ],
+  "scope": "public_source_and_recovery_tests",
+  "full_B19_compiled_in_GitHub": false
+}
